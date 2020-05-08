@@ -365,18 +365,18 @@ summary {
 </div>
 
 
-<div id="predicting-habitat-suitability-curve-through-functional-data-analysis" class="section level2">
-<h2>Predicting habitat suitability curve through functional data analysis 🏞</h2>
+<div id="habitat-suitability-curves-through-functional-data-analysis" class="section level2">
+<h2>Habitat suitability curves through functional data analysis 🏞</h2>
 <ul>
 <li>A scientific research by <strong>Jeremie Boudreault</strong>, André St-Hilaire, Normand Bergeron and Fateh Chebana</li>
-<li>This project was completed after my <strong>master degree</strong> in water sciences at <a href="http://inrs.ca"><strong>Institut National de la Recherche Scientifique</strong></a> (INRS)</li>
+<li>This is a <strong>side project</strong> completed after my master degree at <a href="http://inrs.ca"><strong>Institut National de la Recherche Scientifique</strong></a> (INRS)</li>
 <li>All <strong>codes</strong> and <strong>data</strong> are freely available here under the <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><strong>Creative Common License</strong> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAABGdBTUEAANbY1E9YMgAAAJZQTFRF////7u7u3d3dys7KzMzMyMzIxsrGxcbFur+6u7u7s7iyq7GqqqqqmZmZlJmTj5CPiIiIh4eHhoaGgICAfYJ9d3d3cnZxZ2tnZmZmW15bVVVVS0xLREREQ0NDQkJCQUJBOz07OTs5MzMzMTMxLjAuJygnJCUjIiIiISEhICAgGRkZERERDxAPDg4ODQ4NDQ0NDQ0MAAAADbeuvgAAAOJJREFUeNqtk21PAjEQhKdyKjpwFrGIWN8QOPE8cP7/n/PD9YolmhivmzRpJ9un090WyhwQsoYgkCRvZYPkm5IcfPzbXwssGxsP8WtyOO0JfH47uC50R57e9wPuLIpK3nhVBfwrObiSJAAS1A7FKXAAhDYcAW90gWoB52ozHsHtyOF5yEebFfK71W9CB5ypMLLAYgkAriEvz6LD4KPb2+FTAT869PPauDHcPnWo7zdE6vBIiDXcW4xqzY3X8gQPq6SGKfBvNeTLNnOXy89JBD5uMrxDznQdeE/vfX9K7r+cOb4AY2+UGwcd6o0AAAAASUVORK5CYII=" /></a></li>
 <li>Questions regarding the code or the data should be sent to <strong><a href="mailto:Jeremie.Boudreault@ete.inrs.ca" class="email">Jeremie.Boudreault@ete.inrs.ca</a></strong></li>
 </ul>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
-<p>Data are from <strong>field survey</strong> that have been conducted during summer 2017 on the <strong>Sainte-Marguerite river</strong> (SMR) and <strong>Petite-Cascapedia river</strong> (PCR):</p>
+<p>Data are from <strong>field survey</strong> that have been conducted during summer 2017 on the <strong>Sainte-Marguerite River</strong> (SMR) and <strong>Petite-Cascapedia River</strong> (PCR):</p>
 <ul>
 <li><code>data/field/*</code> : contains the two raw .xlsx file filled after each day of field work</li>
 <li><code>data/*</code> : contains the cleaned and transformed datasets</li>
@@ -388,7 +388,6 @@ summary {
 <ul>
 <li><code>R/Data_initial_cleaning.R</code> : code to clean the field data spreadsheets and produce more adapted datasets</li>
 <li><code>R/Data_salmons_lengths.R</code>: code to convert the salmon lengths to number of fry and parr</li>
-<li><code>R/Data_per_site.R</code> : code to produce the observations at each site (mean value or functional observations)</li>
 </ul>
 </div>
 <div id="out" class="section level2">
@@ -396,7 +395,7 @@ summary {
 <p>A folder for the <strong>results</strong> at each part of the coding process :</p>
 <ul>
 <li><code>out/data visualisation/*</code> : raw data visualisation and tables</li>
-<li><code>out/fda_models/*</code> : fitted final models</li>
+<li><code>out/fda models/*</code> : fitted final models</li>
 <li><code>out/coefficients/*</code> : coefficients of the models</li>
 <li><code>out/predictions/*</code> : leave-one-out predictions and goodness-of-fit</li>
 </ul>
