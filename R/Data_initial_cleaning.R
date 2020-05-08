@@ -54,7 +54,7 @@ SMR.raw[is.na(nParr),   nParr := 0]
 SMR.raw[is.na(nSalmon), nSalmon := 0]
 
 # Save the file in the data folder
-saveRDS(SMR.raw, 'data/SMR_2017_field_data_clean.Rds')
+saveRDS(SMR.raw, "data/SMR_2017_field_data_clean.Rds", compress = "xz")
 
 ##### Part 2 : Importation of field data for the Petite Cascapedia River
 
@@ -97,4 +97,4 @@ PCR.raw[is.na(nParr), nParr := 0]
 PCR.raw[is.na(nSalmon), nSalmon := 0]
 
 # Save the file in the data folder
-saveRDS(PCR.raw, 'data/PCR_2017_field_data_clean.Rds')
+saveRDS(PCR.raw, "data/PCR_2017_field_data_clean.Rds", compress="xz")
