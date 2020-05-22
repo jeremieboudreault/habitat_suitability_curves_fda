@@ -1,4 +1,4 @@
-## Predicting habitat suitability curves with functional data analysis 🏞
+## Predicting habitat suitability curves through functional data analysis 🏞
 
 * A scientific research by **Jeremie Boudreault**, André St-Hilaire, Normand Bergeron and Fateh Chebana
 * This is a **side project** completed after my master degree at [**Institut National de la Recherche Scientifique**](http://inrs.ca) (INRS)
