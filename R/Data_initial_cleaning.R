@@ -5,19 +5,21 @@
 #    Aim :            Clean the field data and produce nice files to use       #
 ################################################################################
 
-##### Part 0 : Libraries, functions and variable definition
+# Part 0 : Libraries, functions and variable definition ------------------------
 
 # Import library
 library("readxl")        # Importing Excel files (Field data)
 library("data.table")    # Working with data.table
 
-##### Part 1 : Importation of field data for the Sainte-Marguerite River
+# Part 1 : Importation of field data for the Sainte-Marguerite River -----------
 
 # Importation of SMR data
-SMR.raw <- read_xlsx(path      =  "data/field data/Field_data_summer_2017_SMR.xlsx",
-                     sheet     =  1,
-                     skip      =  2,
-                     col_names =  T)
+SMR.raw <- read_xlsx(
+    path      =  "data/field data/Field_data_summer_2017_SMR.xlsx",
+    sheet     =  1,
+    skip      =  2,
+    col_names =  T
+)
 
 # Convert to a data.table
 setDT(SMR.raw)
@@ -56,13 +58,15 @@ SMR.raw[is.na(nSalmon), nSalmon := 0]
 # Save the file in the data folder
 saveRDS(SMR.raw, "data/SMR_2017_field_data_clean.Rds", compress = "xz")
 
-##### Part 2 : Importation of field data for the Petite Cascapedia River
+# Part 2 : Importation of field data for the Petite Cascapedia River -----------
 
 # Importation of PCR data
-PCR.raw <- read_xlsx(path      =  "data/field data/Field_data_summer_2017_PCR.xlsx",
-                     sheet     =  1,
-                     skip      =  2,
-                     col_names =  T)
+PCR.raw <- read_xlsx(
+    path      =  "data/field data/Field_data_summer_2017_PCR.xlsx",
+    sheet     =  1,
+    skip      =  2,
+    col_names =  T
+)
 
 # Convert to a data.table
 setDT(PCR.raw)
