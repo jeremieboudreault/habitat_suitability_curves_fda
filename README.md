@@ -17,7 +17,8 @@ Data are from **field survey** that have been conducted during summer 2017 on th
 Codes are all from Jeremie Boudreault. They make the use of the R package `FDboost` for fitting **functional regression models** (FRM) :
 
 * `R/Data_initial_cleaning.R` : code to clean the field data spreadsheets and produce more adapted datasets
-* `R/Data_salmons_lengths.R`: code to convert the salmon lengths to number of fry and parr
+* `R/Data_salmons_numbers.R`: code to convert the salmon lengths to number of fry and parr
+* `R/Data_fun_obs.R`: code to obtain functional observations of HSC curves
 
 ## Out
 
