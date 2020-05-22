@@ -107,6 +107,8 @@ which(is.na(COMB.clean), arr.ind=T)
 sapply(COMB.clean, class)
 
 # Save the dataset
-saveRDS(COMB.clean, 'data/SMR_PCR_COMB_2017_field_data_clean_nsalmon.Rda')
+saveRDS(object   = COMB.clean,
+        file     = "data/SMR_PCR_COMB_2017_field_data_clean_nsalmon.Rds",
+        compress = "xz")
 
 
