@@ -60,3 +60,53 @@ print(ggplot(data=All.lengths, aes(x=Length)) +
 )
 dev.off()
 
+# Part 2 : Create a new variable to convert lengths to number of salmon --------
+
+# First dcast the above data.frame into a more convenient way
+Lengths.lim.dcast <- dcast(Lengths.lim, River~Limit, value.var = "Value")
+
+# Merge two data.table
+SMR.raw$River <- "SMR"
+PCR.raw$River <- "PCR"
+COMB.raw <- rbind(SMR.raw, PCR.raw, fill=T)
+
+# Merge the lengths limit and the data
+COMB.raw <- COMB.raw[Lengths.lim.dcast, , on="River"]
+
+# Calculate number of Fry, Parr 1+ and Parr 2+ from lengths at SMR
+COMB.raw$nFry_M <- sapply(1:nrow(COMB.raw), function(w) sum(COMB.raw[w, paste0('Length', 1:11)] < COMB.raw$Parr1Min[w], na.rm=T))
+COMB.raw$nParr1_M <- sapply(1:nrow(COMB.raw), function(w) sum(COMB.raw[w, paste0('Length', 1:11)] >= COMB.raw$Parr1Min[w] & COMB.raw[w, paste0('Length', 1:11)] < COMB.raw$Parr2Min[w], na.rm=T))
+COMB.raw$nParr2_M <- sapply(1:nrow(COMB.raw), function(w) sum(COMB.raw[w, paste0('Length', 1:11)] >= COMB.raw$Parr2Min[w] & COMB.raw[w, paste0('Length', 1:11)] < COMB.raw$Parr2Max[w], na.rm=T))
+COMB.raw$nParr3_M <- sapply(1:nrow(COMB.raw), function(w) sum(COMB.raw[w, paste0('Length', 1:11)] >= COMB.raw$Parr2Max[w], na.rm=T))
+
+# Validation
+COMB.raw[, list(nFry = sum(nFry_M),
+                nParr1 = sum(nParr1_M),
+                nParr2 = sum(nParr2_M),
+                nParr3 = sum(nParr3_M)), by = list(River, Site)]
+
+# Calculate the total number of fish
+COMB.raw[ , nFry_tot    := as.integer(nFry + nFry_M) ]
+COMB.raw[ , nParr_M     := as.integer(nParr1_M + nParr2_M + nParr3_M) ]
+COMB.raw[ , nParr1_tot  := as.integer(nParr1_M) ]
+COMB.raw[ , nParr2_tot  := as.integer(nParr2_M) ]
+COMB.raw[ , nParr_tot   := as.integer(nParr + nParr_M) ]
+COMB.raw[ , nSalmon_M   := as.integer(nFry_M + nParr_M) ]
+COMB.raw[ , nSalmon_tot := as.integer(nFry_tot + nParr_tot + nSalmon) ]
+
+# Here, we will only keep the variable of interest and reorganise the data.frame
+names(COMB.raw)
+
+# Cleaning of the dataset
+COMB.clean <- COMB.raw[, list(River, Site, Parcelle, nFry_M, nFry_tot, nParr1_M, nParr1_tot, nParr2_M, nParr2_tot, nParr_M, nParr_tot, nSalmon_M, nSalmon_tot, Velocity, Depth, Temp, D50, D84)]
+
+# Verify is there is any NAs
+which(is.na(COMB.clean), arr.ind=T)
+
+# Verify the class of the variables
+sapply(COMB.clean, class)
+
+# Save the dataset
+saveRDS(COMB.clean, 'data/SMR_PCR_COMB_2017_field_data_clean_nsalmon.Rda')
+
+
