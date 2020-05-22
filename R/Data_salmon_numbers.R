@@ -1,9 +1,9 @@
-################################################################################
+#  --------------------------------------------------------------------------- #
 #    Predicting habitat suitability curves through FDA 🏞                      #
 #    Created by :     Jeremie Boudreault (Jeremie.Boudreault@ete.inrs.ca)      #
 #    Current file :   Data_salmon_numbers.R                                    #
 #    Aim :            Convert salmon lengths into number of fish (0+, 1+, 2+)  #
-################################################################################
+#  --------------------------------------------------------------------------- #
 
 # Part 0 : Libraries, functions and variable definition ------------------------
 
