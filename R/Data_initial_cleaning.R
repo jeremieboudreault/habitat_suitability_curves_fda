@@ -74,6 +74,9 @@ setDT(PCR.raw)
 # Check the class of the variables
 sapply(PCR.raw, unique)
 
+# Remove parcels where D50 was bedrock (D50=10000), not fish found anyway
+PCR.raw <- PCR.raw[D50 != 10000, ]
+
 # Change some class of the variables and delete some
 PCR.raw[, `:=`(Site         = as.integer(SiteNew),
                Transect     = as.integer(Transect),
