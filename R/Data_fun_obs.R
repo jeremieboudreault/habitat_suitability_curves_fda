@@ -1,9 +1,9 @@
-################################################################################
+#  --------------------------------------------------------------------------- #
 #    Predicting habitat suitability curves through FDA 🏞                      #
 #    Created by :     Jeremie Boudreault (Jeremie.Boudreault@ete.inrs.ca)      #
 #    Current file :   Data_fun_obs.R                                           #
-#    Aim :            Generate functional observations of HSC curves           #
-################################################################################
+#    Aim :            Generate functional habitat suitability curve            #
+#  --------------------------------------------------------------------------- #
 
 # Part 0 : Libraries, functions and variable definition ------------------------
 
@@ -11,8 +11,8 @@
 library("data.table")    # Working with data.table
 library("ggplot2")        # Plotting in ggplot
 
-# Import clean data of SMR and PCR
-RIVERDATA <- readRDS("data/SMR_PCR_COMB_2017_field_data_clean_nsalmon.Rds")
+# Import final dataset of the used sites
+RIVERDATA <- readRDS("data/River_data_combined_final.Rds")
 
 # Variable - nKnots :: the number of knots for the density estimate
 nKnots <- 2^9
@@ -33,8 +33,3 @@ curve01 <- function(data, adjust=2) {
 
 # Variable - Vars :: the variable we are dealing with
 Vars <- c('Velocity', 'Depth', 'D50')
-
-# Manual correction - Remove D50 flagged at 10000 (bedrock)
-RIVERDATA <- RIVERDATA[D50 != 10000, ]
-
-# Part 1 - Generate some very low level statistics -----------------------------
