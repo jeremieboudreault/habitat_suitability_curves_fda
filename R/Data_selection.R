@@ -32,3 +32,12 @@ nObs.min <- 4
 RIVERDATA_SITE[, list(nSites_Fry = sum(nObs_Fry >= eval(nObs.min)),
                       nSites_Parr = sum(nObs_Parr >= eval(nObs.min)))]
 
+# Seeing the above results, the maximim will be to have at least 4 observations
+# of used of  parr habitat per site, resulting in n=36 sites
+
+# Part 2 - Generate the file of the retained data ------------------------------
+
+# Chosen parameter
+nObs.min <- 4
+Fish.var <- 'nObs_Parr'
+
