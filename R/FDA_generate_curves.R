@@ -37,8 +37,8 @@ Vars <- c('Velocity', 'Depth', 'D50')
 # Part 1 : Generate a data.table of availability and selection  ----------------
 
 # Create a data.table of available and used characteristics
-RIVERDATA_AVAIL <- melt(RIVERDATA, measure.vars = c("Velocity", "Depth", "D50"))
-RIVERDATA_USED <- melt(RIVERDATA[Y > 0, ], measure.vars = c("Velocity", "Depth", "D50"))
+RIVERDATA_AVAIL <- melt(RIVERDATA, measure.vars = Vars)
+RIVERDATA_USED <- melt(RIVERDATA[Y > 0, ], measure.vars = Vars)
 
 # Add an indicator
 RIVERDATA_AVAIL$TYPE <- "Availability"
@@ -46,3 +46,19 @@ RIVERDATA_USED$TYPE <- "Selection"
 
 # Merge back the two data.table
 RIVERDATA_MELT <- rbind(RIVERDATA_AVAIL, RIVERDATA_USED)
+
+# Plotting availability of each HC versus selection
+pdf("out/data visualisation/Available_versus_selected_habitat.pdf", width=8, height=4)
+print(
+    ggplot(RIVERDATA_MELT, aes(x = value)) +
+        geom_histogram(aes(fill=TYPE, y = ..density..), color="grey90", lwd=0.5, position = "dodge", bins=8) +
+        facet_wrap(~variable, nrow=2, ncol=3, scales="free") +
+        labs(fill="") +
+        theme(legend.position="bottom")  +
+        ylab("Probability density function (PDF)") +
+        xlab("Velocity (m/s)                                            Depth (cm)                                           D50 (mm)") +
+        scale_fill_manual(values = c("#9B9B93", "#63B0CD"))
+)
+dev.off()
+
+
