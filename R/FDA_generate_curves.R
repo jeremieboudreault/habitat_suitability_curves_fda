@@ -1,8 +1,8 @@
 #  --------------------------------------------------------------------------- #
 #    Predicting habitat suitability curves through FDA 🏞                      #
 #    Created by :     Jeremie Boudreault (Jeremie.Boudreault@ete.inrs.ca)      #
-#    Current file :   Data_fun_obs.R                                           #
-#    Aim :            Generate functional habitat suitability curve            #
+#    Current file :   FDA_generate_curves.R                                    #
+#    Aim :            Generate functional habitat suitability curves           #
 #  --------------------------------------------------------------------------- #
 
 # Part 0 : Libraries, functions and variable definition ------------------------
