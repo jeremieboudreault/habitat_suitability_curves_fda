@@ -14,7 +14,6 @@ library("ggplot2")        # Plotting in ggplot
 # Import clean data of SMR and PCR
 RIVERDATA <- readRDS("data/River_data_combined_with_fish_numbers.Rds")
 
-
 # Part 1 - Generate some very low level statistics -----------------------------
 
 # Calculate some basic statistics about per site data
