@@ -43,7 +43,7 @@ All.lengths[, list(min.length=min(Length), max.length=max(Length)), by=River]
 Lengths.lim <- data.table(
     River    = rep(c('SMR', 'PCR'), each=4),
     Limit    = rep(c("FryMin", "Parr1Min", "Parr2Min", "Parr2Max"), length.out=8),
-    Value    = c(30, 55, 88, 125, 43, 65, 106, 132)
+    Value    = c(30, 55, 88, 125, 43, 63, 93, 132)
 )
 
 # Producing the graph of the lengths + Limits
@@ -108,7 +108,7 @@ sapply(COMB.clean, class)
 
 # Save the dataset
 saveRDS(object   = COMB.clean,
-        file     = "data/SMR_PCR_COMB_2017_field_data_clean_nsalmon.Rds",
+        file     = "data/River_data_combined_2017_with_nsalmon.Rds",
         compress = "xz")
 
 
