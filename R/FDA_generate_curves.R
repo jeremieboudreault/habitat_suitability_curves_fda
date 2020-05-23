@@ -67,14 +67,13 @@ RANGE_TBL[2, 3] <- 2
 RANGE_TBL[2, 4] <- 300
 
 # Save the RANGE.TBL as a temporary output
-saveRDS(RANGE.TBL, "out/RANGE_TBL.rds", compress="xz")
+saveRDS(RANGE.TBL, "otmpRANGE_TBL.rds", compress="xz")
 
 # Part 3 : Generate curves of availability and selection  ----------------------
 
 # Generate availability curves at each site
 SITES <- unique(RIVERDATA$NewSite)
 NSITES <- length(SITES) 
-
 # Function to fit a curve, scale it to 0 - 1 and adjust kernel estimate
 curve01 <- function(data, range, npoints = 2^7, adjust=1) {
     a <- density(x = unlist(data),
