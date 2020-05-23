@@ -52,3 +52,11 @@ findRange <- function(x, liminf="yes", factor=1) {
         liminf = min(x, na.rm=T)/factor
     return(c(liminf, max(x, na.rm=TRUE) * factor))
 }
+
+# Get the range of the three habitat characteristics
+RANGE_TBL <- data.table(
+    Limit     = c("lower", "upper"),
+    Depth     = findRange(RIVERDATA$Depth, liminf = 0),
+    Velocity  = findRange(RIVERDATA$Velocity, liminf = 0),
+    D50       = findRange(RIVERDATA$D50, liminf = 0)
+)
