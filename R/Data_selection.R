@@ -25,3 +25,10 @@ RIVERDATA_SITE <- RIVERDATA[,
                                  nObs_Parr = sum(nParr_tot > 0)),
                             by=c('River', 'Site')]
 
+# Minimum number of observed fish at each site to be used
+nObs.min <- 4
+
+# Summary of the usable sites
+RIVERDATA_SITE[, list(nSites_Fry = sum(nObs_Fry >= eval(nObs.min)),
+                      nSites_Parr = sum(nObs_Parr >= eval(nObs.min)))]
+
