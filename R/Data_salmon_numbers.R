@@ -108,7 +108,7 @@ sapply(COMB.clean, class)
 
 # Save the dataset
 saveRDS(object   = COMB.clean,
-        file     = "data/River_data_combined_2017_with_nsalmon.Rds",
+        file     = "data/River_data_combined_with_fish_numbers.Rds",
         compress = "xz")
 
 
