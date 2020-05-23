@@ -80,10 +80,10 @@ SITES <- unique(RIVERDATA$NewSite)
 NSITES <- length(SITES)
 
 # Function to fit a curve, scale it to 0 - 1 and adjust kernel estimate
-curve01 <- function(data, range, npoints = 2^8, adjust=2) {
+curve01 <- function(data, range, npoints = 2^8, adjust=4) {
     a <- density(x = unlist(data),
                  bw = 'nrd0',
-                 adjust = 1,
+                 adjust = adjust,
                  kernel = "gaussian",
                  n = npoints,
                  from = unlist(range)[1],
@@ -95,50 +95,52 @@ curve01 <- function(data, range, npoints = 2^8, adjust=2) {
 # Generate curve01 of availability for all sites
 CalcCurves <- function(w) {
 
-    # Create an empty list
-    CURVES <- list()
-
     # Generate an initial data.table to get the s values of the x(s) curve
-    CURVES$sx<- curve01(RIVERDATA_AVAIL[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])$
-    CURVES$y <- curve01(RIVERDATA_AVAIL[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
-    # Run on the NSITES availability curves x(s)
-    CURVES$x <- scbind(CURVES$x, apply(12NSITES, function(z) curve01(RIVERDATA_AVAIL[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)
-)
-    # Run on the NSITES selection curves y(s)
-    CURVES$y <- scbind(CURVES$y, apply(12NSITES, function(z) curve01(RIVERDATA_USED[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)
-)
-    # Return
-    Ccolnames(CURVES$x) <- c("s", paste0("p", 1:NSITES))
-    colnames(CURVES$y) <- c("s", paste0("p", 1:NSITES))
+    x <- curve01(RIVERDATA_AVAIL[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
+    y <- curve01(RIVERDATA_AVAIL[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
 
-    CURVES}
+    # Run on the NSITES availability curves x(s)
+    x <- data.table(cbind(x, sapply(2:NSITES, function(z) curve01(RIVERDATA_AVAIL[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
+
+    # Run on the NSITES selection curves y(s)
+    y <- data.table(cbind(y, sapply(2:NSITES, function(z) curve01(RIVERDATA_USED[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
+
+    # Convert to data.table
+    x$TYPE <- "Availability"
+    y$TYPE <- "Selection"
+
+    # Return
+    colnames(x) <- c("s", paste0("Site ", 1:NSITES), "TYPE")
+    colnames(y) <- c("s", paste0("Site ", 1:NSITES), "TYPE")
+    rbind(x, y)
+}
+
 
 # Generate curves
 CURVES_LIST <- lapply(Vars, CalcCurves)
 names(CURVES_LIST) <- Vars
 
-## Melting the element of the list for graphing purpose#melt(CURVES_LIST[[1]]$x, id.vars="s")
+# Melting the element of the list for graphing purpose
+CURVES_MELT <- lapply(CURVES_LIST, melt, id.vars=c("s", "TYPE"))
 
- Plot the resulting curves
+# Plot the resulting curves
 # Plotting availability versus selection at each site
-pdf("out/data visualisation/Availability_selection_per_site.pdf")
+pdf("out/data visualisation/Availability_selection_curves_per_site.pdf")
 for (var in Vars) {
-    for (page.i in 1:2) {
+for (page.i in 1:2) {
         print(
-            ggplot(CURVES_LIST[[1]]$s, aes(x = value)) +
-                geom_density(aes(fill=TYPE), color="grey90", lwd=0.1, alpha=0.3, adjust =2) +
-                #   geom_histogram(aes(fill=TYPE, y = ..density..), color="grey90", lwd=0.5, position = "dodge", bins=6) +
-                facet_wrap_paginate(~NewSite, nrow=5, ncol=4, scales="free_y", page=page.i) +
-                labs(fill="") +
+            ggplot(CURVES_MELT[[var]], aes(x = s)) +
+                geom_line(aes(y=value, color=TYPE), lwd=1, alpha=1) +
+                facet_wrap_paginate(~variable, nrow=5, ncol=4, scales="free_y", page=page.i) +
+                labs(color="") +
                 theme(legend.position="bottom")  +
                 ylab("Probability density function (PDF)") +
                 xlab("Value") +
                 ggtitle(paste0("Habitat availability / selection for ", var)) +
-                scale_fill_manual(values = c("#9B9B93", "#63B0CD"))
+                scale_color_manual(values = c("#9B9B93", "#63B0CD"))
         )
     }
 }
 dev.off()
 
 
-CURVES <- CalcCurves("Depth")
