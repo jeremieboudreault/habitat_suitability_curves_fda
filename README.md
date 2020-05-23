@@ -18,7 +18,10 @@ Codes are all from Jeremie Boudreault. They make the use of the R package `FDboo
 
 * `R/Data_initial_cleaning.R` : code to clean the field data spreadsheets and produce more adapted datasets
 * `R/Data_salmons_numbers.R`: code to convert the salmon lengths to number of fry and parr
-* `R/Data_fun_obs.R`: code to obtain functional observations of HSC curves
+* `R/Data_selection.R`: code to select optimal data subset for this project
+* `R/FDA_generate_cruves.R`: code to generate curves of availability and selection
+* `R/FDA_fit_models.R`: code to fit functional regression models to curves
+
 
 ## Out
 
