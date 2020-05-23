@@ -66,4 +66,7 @@ RANGE_TBL[2, 2] <- 100
 RANGE_TBL[2, 3] <- 2
 RANGE_TBL[2, 4] <- 300
 
+# Save the RANGE.TBL as a temporary output
+saveRDS(RANGE.TBL, "out/RANGE_TBL.rds", compress="xz")
+
 
