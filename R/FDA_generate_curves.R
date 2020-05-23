@@ -44,4 +44,11 @@ print(
 )
 dev.off()
 
+# Part 2 : Get the range of each habitat characteristics -----------------------
 
+# Function - findRange :: to find the range of a vector c(xmin, xmax)
+findRange <- function(x, liminf="yes", factor=1) {
+    if (liminf == "yes")
+        liminf = min(x, na.rm=T)/factor
+    return(c(liminf, max(x, na.rm=TRUE) * factor))
+}
