@@ -69,4 +69,31 @@ RANGE_TBL[2, 4] <- 300
 # Save the RANGE.TBL as a temporary output
 saveRDS(RANGE.TBL, "out/RANGE_TBL.rds", compress="xz")
 
+# Part 3 : Generate curves of availability and selection  ----------------------
+
+# Generate availability curves at each site
+SITES <- unique(RIVERDATA$NewSite)
+NSITES <- length(SITES) 
+
+# Function to fit a curve, scale it to 0 - 1 and adjust kernel estimate
+curve01 <- function(data, range, npoints = 2^7, adjust=1) {
+    a <- density(x = unlist(data),
+                 bw = "SJ",
+                 adjust = 1,
+                 kernel = "gaussian",
+                 n = npoints,
+                 from = unlist(range)[1],
+                 to = unlist(range)[2],)
+    a$y <- a$y/max(a$y)
+    data.table(x=a$x, y=a$y)
+}
+
+# Generate curve01 of availability for all sites
+CURVES_DEPTH <- curve01(RIVERDATA_AVAIL[Site == 1 & variable == "Depth", value], RANGE_TBL[, "Depth"])
+CURVES_DEPTH <- cbind(CURVES_DEPTH,
+                      sapply(2:NSITES, function(w) curve01(RIVERDATA_AVAIL[NewSite == eval(w) & variable == "Depth", value], RANGE_TBL[, "Depth"])$y))
+CURVES_DEPTH <- cbind(CURVES_DEPTH,
+                      sapply(1:NSITES, function(w) curve01(RIVERDATA_USED[NewSite == eval(w) & variable == "Depth", value], RANGE_TBL[, "Depth"])$y))
+c
+olnames(CURVES_DEPTH) <- c("s", paste0("x_", SITES)), paste0("y_", SITES)
 
