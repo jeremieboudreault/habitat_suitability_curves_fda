@@ -60,3 +60,10 @@ RANGE_TBL <- data.table(
     Velocity  = findRange(RIVERDATA$Velocity, liminf = 0),
     D50       = findRange(RIVERDATA$D50, liminf = 0)
 )
+
+# Manual adjustment for this specific dataset
+RANGE_TBL[2, 2] <- 100
+RANGE_TBL[2, 3] <- 2
+RANGE_TBL[2, 4] <- 300
+
+
