@@ -1,7 +1,7 @@
-# s1_initial_data_cleaning.R
+# s1_clean_field_data.R
 
 
-# Clean the field data and produce nice files to use.
+# Import and clean the field data and produce nice ready-to-use files.
 
 
 # Project : habitat_suitability_curves_fsa
