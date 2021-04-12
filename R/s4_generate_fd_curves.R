@@ -35,7 +35,7 @@ data <- qs::qread(
 # Melt "data" for all variables.
 hab_avail <- data.table::melt.data.table(
     data          = data,
-    measure.var   = names(var_list),
+    measure.var   = names(var_names),
     variable.name = "VARIABLE",
     value.name    = "VALUE"
 )
@@ -50,7 +50,7 @@ hab_avail[, TYPE := "Available"]
 # Melt "data" when Y > 0 for all variables.
 hab_select <- data.table::melt.data.table(
     data          = data[Y > 0],
-    measure.var   = names(var_list),
+    measure.var   = names(var_names),
     variable.name = "VARIABLE",
     value.name    = "VALUE"
 )
@@ -137,9 +137,9 @@ hab_var_range <- data.table::data.table(
 hab_var_range
 
 # Manual adjustment for this specific dataset
-hab_var_range[2L, 2L] <- 100
-hab_var_range[2L, 3L] <- 2
-hab_var_range[2L, 4L] <- 300
+hab_var_range[2L, 2L] <- 100L
+hab_var_range[2L, 3L] <- 2L
+hab_var_range[2L, 4L] <- 300L
 
 # Check final result.
 hab_var_range
@@ -154,72 +154,72 @@ qs::qsave(
 # Generate functional curves ---------------------------------------------------
 
 
-# Generate availability curves at each site
-SITES <- unique(data$NewSite)
-NSITES <- length(SITES)
+# Create a canvas table.
+tbl <- data.table::setDT(expand.grid(
+    SITENEW  = unique(hab$SITENEW),
+    VARIABLE = names(var_names),
+    TYPE     = unlist(hab_names, use.names = FALSE)
+))
 
-# Function to fit a curve, scale it to 0 - 1 and adjust kernel estimate
-curve01 <- function(data, range, npoints = 2^8, adjust=4) {
-    a <- density(x = unlist(data),
-                 bw = 'nrd0',
-                 adjust = adjust,
-                 kernel = "gaussian",
-                 n = npoints,
-                 from = unlist(range)[1],
-                 to = unlist(range)[2],)
-    a$y <- a$y/max(a$y)
-    data.table(x=a$x, y=a$y)
-}
+# Loop over all possible values.
+fd_curves <- dtlapply(
+    X   = seq.int(1L, nrow(tbl)),
+    FUN = function(w) {
 
-# Generate curve01 of availability for all sites
-CalcCurves <- function(w) {
+        # Extract information from the canvas tbl.
+        site <- tbl$SITENEW[w]
+        var  <- tbl$VARIABLE[w]
+        type <- tbl$TYPE[w]
 
-    # Generate an initial data.table to get the s values of the x(s) curve
-    x <- curve01(hab_avail[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
-    y <- curve01(hab_avail[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
+        # Fit curves
+        fit <- fit_curve_01(
+            x     = hab[SITENEW  == site &
+                        VARIABLE == var  &
+                        TYPE     == type, VALUE],
+            range = hab_var_range[, var, with = FALSE]
+        )
 
-    # Run on the NSITES availability curves x(s)
-    x <- data.table(cbind(x, sapply(2:NSITES, function(z) curve01(hab_avail[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
+        # Add relevant information.
+        fit[, `:=`(SITENEW = site, VARIABLE = var, TYPE = type)]
 
-    # Run on the NSITES selection curves y(s)
-    y <- data.table(cbind(y, sapply(2:NSITES, function(z) curve01(hab_select[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
+        # Return fitted function.
+        return(fit)
 
-    # Convert to data.table
-    x$TYPE <- "Availability"
-    y$TYPE <- "Selection"
-
-    # Return
-    colnames(x) <- c("s", paste0("Site ", 1:NSITES), "TYPE")
-    colnames(y) <- c("s", paste0("Site ", 1:NSITES), "TYPE")
-    rbind(x, y)
-}
+    }
+)
 
 
-# Generate curves
-CURVES_LIST <- lapply(var_list, CalcCurves)
-names(CURVES_LIST) <- var_list
+# Plot curves ------------------------------------------------------------------
 
-# Melting the element of the list for graphing purpose
-CURVES_MELT <- lapply(CURVES_LIST, melt, id.var_list=c("s", "TYPE"))
 
-# Plot the resulting curves
-# Plotting availability versus selection at each site
-pdf("out/data visualisation/Availability_selection_curves_per_site.pdf")
-for (var in var_list) {
-for (page.i in 1:2) {
-        print(
-            ggplot(CURVES_MELT[[var]], aes(x = s)) +
-                geom_line(aes(y=value, color=TYPE), lwd=1, alpha=1) +
-                facet_wrap_paginate(~variable, nrow=5, ncol=4, scales="free_y", page=page.i) +
+# Save as a pdf for future use.
+pdf(
+    file   = file.path("out", "plots", "fig_4_habitat_fd_curves.pdf"),
+    width  = 8L,
+    height = 8L
+)
+
+# Plot all curves.
+for (var in names(var_names)) {
+    for (page.i in 1:2) {
+        p <- ggplot(
+            data = fd_curves[VARIABLE == var, ],
+            aes(x = X)) +
+                geom_line(aes(y= Y, color=TYPE), lwd=1, alpha=1) +
+                facet_wrap_paginate(~SITENEW, nrow=5, ncol=4, scales="free_y", page=page.i) +
                 labs(color="") +
                 theme(legend.position="bottom")  +
                 ylab("Probability density function (PDF)") +
-                xlab("Value") +
+                xlab(var_names[var]) +
                 ggtitle(paste0("Habitat availability / selection for ", var)) +
                 scale_color_manual(values = c("#9B9B93", "#63B0CD"))
-        )
+
+        print(p)
+
     }
 }
+
+# Saving plot.
 dev.off()
 
 
