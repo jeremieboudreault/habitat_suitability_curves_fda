@@ -24,55 +24,138 @@ library(ggplot2)
 
 # Cleaned data of SMR and PCR.
 data <- qs::qread(
-    file.path("out", "final", "smr_pcr_cleaned_final.qs")
+    file.path("out", "tmp", "smr_pcr_cleaned_s2.qs")
 )
 
 
-# Part 1 - Generate some very low level statistics -----------------------------
+# Calculate summary per site ---------------------------------------------------
 
-# Calculate some basic statistics about per site data
-data_SITE <- data[,
-                            list(nFry = sum(nFry_tot),
-                                 nObs_Fry = sum(nFry_tot > 0),
-                                 nParr = sum(nParr_tot),
-                                 nObs_Parr = sum(nParr_tot > 0)),
-                            by=c('River', 'Site')]
 
-# Minimum number of observed fish at each site to be used
-nObs.min <- 4
+data_per_site <- data[, list(
+    N_FRY_T        = sum(N_FRY_T),
+    N_OBS_FRY_T    = sum(N_FRY_T > 0L),
+    N_FRY_M        = sum(N_FRY_M),
+    N_OBS_FRY_M    = sum(N_FRY_M > 0L),
+    N_PARR1_M      = sum(N_PARR1_M),
+    N_OBS_PARR1_M  = sum(N_PARR1_M > 0L),
+    N_PARR_2_M     = sum(N_PARR2_M),
+    N_OBS_PARR2_M  = sum(N_PARR2_M > 0L),
+    N_PARR_M       = sum(N_PARR_M),
+    N_OBS_PARR_M   = sum(N_PARR_M > 0L),
+    N_PARR_T       = sum(N_PARR_T),
+    N_OBS_PARR_T   = sum(N_PARR_T > 0L)
+), by = c("RIVER", "SITE")]
 
-# Summary of the usable sites
-data_SITE[, list(nSites_Fry = sum(nObs_Fry >= eval(nObs.min)),
-                      nSites_Parr = sum(nObs_Parr >= eval(nObs.min)))]
 
-# Seeing the above results, the maximim will be to have at least 4 observations
-# of used of  parr habitat per site, resulting in n=36 sites
+# Calculate number of observations ---------------------------------------------
 
-# Part 2 - Generate the file of the retained data ------------------------------
 
-# Chosen parameter
-nObs.min <- 4
-Fish.var <- 'nObs_Parr'
+# Extract columns names starting with N_OBS.
+cnames <- names(data_per_site)
+cnames <- cnames[substr(cnames, 1L, 5L) == "N_OBS"]
 
-# Retain the selected sites only - Parr with 4+ observations
-SELECTED_SITES <- data_SITE[get(Fish.var) >= eval(nObs.min), list(River, Site)]
-SELECTED_SITES <- SELECTED_SITES[order(River, decreasing=T), ]
-SELECTED_SITES$NewSite <- 1:nrow(SELECTED_SITES)
+# Summary of the number of observation
+res <- dtlapply(
+    X    = seq.int(3L, 7L),
+    FUN  = function(n_obs_threshold) {
+        data_per_site[, list(
+            VAR       = cnames,
+            N_SITES   = lapply(.SD, function(w) sum(w >= n_obs_threshold)),
+            THRESHOLD = n_obs_threshold
+            ),
+        .SDcols = cnames]
+    }
+)
 
-# Left-join data
-data_CLEAN <- data[SELECTED_SITES, , on=c('River', 'Site')]
 
-# Rearrange the data frame
-data_CLEAN <- data_CLEAN[, list(River,
-                                          Site,
-                                          NewSite,
-                                          Parcelle,
-                                          Y = nParr_tot,
-                                          Velocity,
-                                          Depth,
-                                          D50)]
+# Plot results -----------------------------------------------------------------
 
-# Save the output
-saveRDS(object   = data_CLEAN,
+
+# Save as a pdf for future use.
+pdf(
+    file   = file.path("out", "plots", "fig_2_study_case_selection.pdf"),
+    width  = 6L,
+    height = 5L
+)
+
+# Plot.
+ggplot(
+    data    = res,
+    mapping = aes(
+        x     = THRESHOLD,
+        y     = VAR,
+        fill  = as.numeric(N_SITES),
+        label = N_SITES
+    )
+) +
+geom_raster(
+    show.legend = FALSE
+) +
+geom_text(
+    col     = "white",
+) +
+scale_fill_gradient(
+    low  = "darkred",
+    high = "darkgreen"
+) +
+labs(
+    title = "Number of observations for our study",
+    y     = "Selected variable",
+    x     = "Minimum number of observations required"
+)
+
+# Save the plot.
+dev.off()
+
+
+# Optimal selected study case --------------------------------------------------
+
+
+# Minimum number of observations.
+threshold <- 4L
+
+# Selected variable.
+var_selected <- "N_PARR_T"
+
+
+# Subset the study case --------------------------------------------------------
+
+
+# Extract the selected sites that fit the criteria.
+sites_selected <- data_per_site[get(var_selected) >= n_obs_threshold, .(RIVER, SITE)]
+
+# Add a new definition of the site.
+sites_selected[, SITENEW := 1:.N]
+
+# Add an indicator.
+sites_selected[, SELECTED := TRUE]
+
+# Extract selected data.
+data_selected <- data.table::merge.data.table(
+    x     = data,
+    y     = sites_selected,
+    by    = c("RIVER", "SITE"),
+    all.x =  TRUE
+)[SELECTED == TRUE, ]
+
+# Rearrange the table.
+data_clean <- data_selected[, .(
+    RIVER,
+    SITE,
+    SITENEW,
+    PARCEL,
+    Y = get(var_selected),
+    VELOCITY,
+    DEPTH,
+    D50)
+]
+
+
+# Export -----------------------------------------------------------------------
+
+
+qs::qsave(
+    x    = data_clean,
+    file = file.path("out", "final")
         file     = "data/River_data_combined_final.Rds",
         compress = "xz")
