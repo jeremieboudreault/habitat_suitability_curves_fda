@@ -1,5 +1,5 @@
-_Habitat suitability curves_ through _functional data analysis_ 📉
---------------------------------------------------------------------------------
+(A new look to) Habitat suitability curves through FDA 👓
+================================================================================
 
 
 + A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
