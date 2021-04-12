@@ -156,6 +156,5 @@ data_clean <- data_selected[, .(
 
 qs::qsave(
     x    = data_clean,
-    file = file.path("out", "final")
-        file     = "data/River_data_combined_final.Rds",
-        compress = "xz")
+    file = file.path("out", "final", "smr_pcr_subset_to_model.qs")
+)
