@@ -1,5 +1,6 @@
-Habitat suitability curves through functional data analysis 🏞
-================================================================================
+_Habitat suitability curves_ through _functional data analysis_ 📉
+--------------------------------------------------------------------------------
+
 
 + A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
 + This is a __side project__ completed after my master degree at [__Institut National de la Recherche Scientifique__](http://inrs.ca) (INRS)
