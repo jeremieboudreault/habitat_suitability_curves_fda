@@ -40,3 +40,10 @@ rotate_x_axis <- ggplot2::theme(
         hjust = 1L
     )
 )
+
+# get_range : Get the range of a given variable.
+get_range <- function(x, liminf = TRUE, factor = 1L) {
+    if (liminf == TRUE) liminf <- min(x, na.rm = TRUE) / factor
+    return(c(liminf, max(x, na.rm = TRUE) * factor))
+}
+
