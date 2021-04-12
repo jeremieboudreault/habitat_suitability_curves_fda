@@ -252,5 +252,5 @@ sapply(data, class)
 
 qs::qsave(
     x    = data,
-    file = file.path("out", "final", "smr_pcr_cleaned_final.qs")
+    file = file.path("out", "tmp", "smr_pcr_cleaned_s2.qs")
 )
