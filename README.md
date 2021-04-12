@@ -1,4 +1,4 @@
-(A new look to) Habitat suitability curves through FDA 👓
+A new look at habitat suitability curves through FDA 👓
 ================================================================================
 
 
