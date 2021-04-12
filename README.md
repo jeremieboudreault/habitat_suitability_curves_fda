@@ -1,33 +1,35 @@
-## Predicting habitat suitability curves through functional data analysis 🏞
+Habitat suitability curves through functional data analysis 🏞
+================================================================================
 
-* A scientific research by **Jeremie Boudreault**, André St-Hilaire, Normand Bergeron and Fateh Chebana
-* This is a **side project** completed after my master degree at [**Institut National de la Recherche Scientifique**](http://inrs.ca) (INRS)
-* All **codes** and **data** are freely available here under the [**Creative Common License** ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-* Questions regarding the code or the data should be sent to **Jeremie.Boudreault@ete.inrs.ca**
-
-## Data
-
-Data are from **field survey** that have been conducted during summer 2017 on the  **Sainte-Marguerite River** (SMR) and **Petite-Cascapedia River** (PCR):
-
-* `data/field/*` : contains the two raw .xlsx file filled after each day of field work 
-* `data/*` : contains the cleaned and transformed datasets 
-
-## R codes
-
-Codes are all from Jeremie Boudreault. They make the use of the R package `FDboost` for fitting **functional regression models** (FRM) :
-
-* `R/Data_initial_cleaning.R` : code to clean the field data spreadsheets and produce more adapted datasets
-* `R/Data_salmons_numbers.R`: code to convert the salmon lengths to number of fry and parr
-* `R/Data_selection.R`: code to select optimal data subset for this project
-* `R/FDA_generate_curves.R`: code to generate curves of availability and selection
-* `R/FDA_fit_models.R`: code to fit functional regression models to curves
++ A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
++ This is a __side project__ completed after my master degree at [__Institut National de la Recherche Scientifique__](http://inrs.ca) (INRS)
++ All __codes__ and __data__ are freely available here under the [__Creative Common License__ ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
++ Questions regarding the code or the data should be sent to __Jeremie.Boudreault@ete.inrs.ca__
 
 
-## Out
+Data
+--------------------------------------------------------------------------------
 
-A folder for the **results** at each part of the coding process :
 
-* `out/data visualisation/*` : raw data visualisation and tables
-* `out/fda models/*` : fitted final models
-* `out/coefficients/*` : coefficients of the models
-* `out/predictions/*` : leave-one-out predictions and goodness-of-fit
+Data consists of a __field survey__ that have been conducted during summer 2017 on the  __Sainte-Marguerite River__ (SMR) and __Petite-Cascapedia River__ (PCR) :
+
++ `data/field/*` : contains the two raw `xlsx` files filled after each day of field work 
+
+
+R scripts
+--------------------------------------------------------------------------------
+
+
+Scripts  are all from Jeremie Boudreault. They make the use of the R package `FDboost` for fitting __functional regression models__ (FRM) :
+
++ `R/s1_clean_field_data.R` : clean the field data spreadsheets and produced cleaned datasets.
++ `R/s2_compute_salmon_numbers.R`: convert measured salmon fork-lengths to number of fry and parr.
++ `R/s3_select_study_case.R`: select optimal data subset for this project.
++ `R/s4_generate_fcurves.R`: generate (functional) curves of availability and selection/preference.
++ `R/s5_fit_function_models.R`: code to fit functional regression models to curves
+
+
+Results
+--------------------------------------------------------------------------------
+
+
