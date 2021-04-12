@@ -25,67 +25,134 @@ library(ggforce)
 
 # Subsetted data for the analysis.
 data <- qs::qread(
-    x    = data_clean,
     file = file.path("out", "final", "smr_pcr_subset_to_model.qs")
 )
 
 
-# Part 1 : Generate a data.table of availability and selection  ----------------
+# Generate availablity habitat data --------------------------------------------
 
-# Create a data.table of available and used characteristics
-data_AVAIL <- melt(data, measure.var_list = var_list)
-data_USED <- melt(data[Y > 0, ], measure.var_list = var_list)
 
-# Add an indicator
-data_AVAIL$TYPE <- "Availability"
-data_USED$TYPE <- "Selection"
-
-# Merge back the two data.table
-data_MELT <- rbind(data_AVAIL, data_USED)
-
-# Plotting availability of each HC versus selection
-pdf("out/data visualisation/Availability_selection_overall.pdf", width=8, height=4)
-print(
-    ggplot(data_MELT, aes(x = value)) +
-        geom_histogram(aes(fill=TYPE, y = ..density..), color="grey90", lwd=0.5, position = "dodge", bins=8) +
-        facet_wrap(~variable, nrow=2, ncol=3, scales="free") +
-        labs(fill="") +
-        theme(legend.position="bottom")  +
-        ylab("Probability density function (PDF)") +
-        xlab("Velocity (m/s)                                            Depth (cm)                                           D50 (mm)") +
-        scale_fill_manual(values = c("#9B9B93", "#63B0CD"))
+# Melt "data" for all variables.
+hab_avail <- data.table::melt.data.table(
+    data          = data,
+    measure.var   = names(var_list),
+    variable.name = "VARIABLE",
+    value.name    = "VALUE"
 )
+
+# Add the <TYPE>.
+hab_avail[, TYPE := "Available"]
+
+
+# Generate selected habitat data -----------------------------------------------
+
+
+# Melt "data" when Y > 0 for all variables.
+hab_select <- data.table::melt.data.table(
+    data          = data[Y > 0],
+    measure.var   = names(var_list),
+    variable.name = "VARIABLE",
+    value.name    = "VALUE"
+)
+
+# Duplicate values when multiple fishes were observed.
+irows <- unlist(lapply(
+    X   = 1:nrow(hab_select),
+    FUN = function(w) rep(w, times = hab_select$Y[w])
+))
+hab_select <- hab_select[irows, ]
+
+# Add the <TYPE>.
+hab_select[, TYPE := "Selected"]
+
+
+# Merge two tables -------------------------------------------------------------
+
+
+hab <- data.table::rbindlist(list(hab_avail, hab_select))
+
+
+# Plot global histograms of availability / selection ---------------------------
+
+
+# Save as a pdf for future use.
+pdf(
+    file   = file.path("out", "plots", "fig_3_histograms_global.pdf"),
+    width  = 8L,
+    height = 4L
+)
+
+# Plot.
+ggplot(
+    data    = hab,
+    mapping = aes(
+        x = VALUE
+    )
+) +
+geom_histogram(
+    mapping = aes(
+        fill = TYPE,
+        y    = ..density..
+    ),
+    color="grey90",
+    lwd=0.5,
+    position = "dodge",
+    bins=8
+) +
+facet_wrap(
+    facets = ~ VARIABLE,
+    nrow   = 2L,
+    ncol   = 3L,
+    scales = "free"
+) +
+labs(
+    title = "",
+    y     = "Probability density function (PDF)",
+    x     = "Velocity (m/s)                                            Depth (cm)                                           D50 (mm)",
+    fill  = ""
+) +
+theme(
+    legend.position = "bottom"
+)  +
+scale_fill_manual(
+    values = c("#9B9B93", "#63B0CD")
+)
+
+# Save plot.
 dev.off()
 
-# Part 3 : Get the range of each habitat characteristics -----------------------
 
-# Function - findRange :: to find the range of a vector c(xmin, xmax)
-findRange <- function(x, liminf="yes", factor=1) {
-    if (liminf == "yes")
-        liminf = min(x, na.rm=T)/factor
-    return(c(liminf, max(x, na.rm=TRUE) * factor))
-}
+# Range of the habitat variables  ----------------------------------------------
 
-# Get the range of the three habitat characteristics
-RANGE_TBL <- data.table(
-    Limit     = c("lower", "upper"),
-    Depth     = findRange(data$Depth, liminf = 0),
-    Velocity  = findRange(data$Velocity, liminf = 0),
-    D50       = findRange(data$D50, liminf = 0)
+
+# Get the range of the three habitat characteristics.
+hab_var_range <- data.table::data.table(
+    LIMITTYPE = c("lower", "upper"),
+    DEPTH     = get_range(data$DEPTH,    liminf = 0L, factor = 1L),
+    VELOCITY  = get_range(data$VELOCITY, liminf = 0L, factor = 1L),
+    D50       = get_range(data$D50,      liminf = 0L, factor = 1L)
 )
 
+# Check results.
+hab_var_range
+
 # Manual adjustment for this specific dataset
-RANGE_TBL[2, 2] <- 100
-RANGE_TBL[2, 3] <- 2
-RANGE_TBL[2, 4] <- 300
+hab_var_range[2L, 2L] <- 100
+hab_var_range[2L, 3L] <- 2
+hab_var_range[2L, 4L] <- 300
 
-# See the final result
-RANGE_TBL
+# Check final result.
+hab_var_range
 
-# Save the RANGE_TBL as a temporary output
-saveRDS(RANGE_TBL, "out/tmp/RANGE_TBL.rds", compress="xz")
+# Save for traceability.
+qs::qsave(
+    x    = hab_var_range,
+    file = file.path("out", "tmp", "hab_var_range.qs")
+)
 
-# Part 4 : Generate curves of availability and selection  ----------------------
+
+# Generate functional curves ---------------------------------------------------
+
 
 # Generate availability curves at each site
 SITES <- unique(data$NewSite)
@@ -108,14 +175,14 @@ curve01 <- function(data, range, npoints = 2^8, adjust=4) {
 CalcCurves <- function(w) {
 
     # Generate an initial data.table to get the s values of the x(s) curve
-    x <- curve01(data_AVAIL[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
-    y <- curve01(data_AVAIL[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
+    x <- curve01(hab_avail[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
+    y <- curve01(hab_avail[NewSite == 1 & variable == w, value], RANGE_TBL[, get(w)])
 
     # Run on the NSITES availability curves x(s)
-    x <- data.table(cbind(x, sapply(2:NSITES, function(z) curve01(data_AVAIL[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
+    x <- data.table(cbind(x, sapply(2:NSITES, function(z) curve01(hab_avail[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
 
     # Run on the NSITES selection curves y(s)
-    y <- data.table(cbind(y, sapply(2:NSITES, function(z) curve01(data_USED[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
+    y <- data.table(cbind(y, sapply(2:NSITES, function(z) curve01(hab_select[NewSite == z & variable == w, value], RANGE_TBL[, get(w)])$y)))
 
     # Convert to data.table
     x$TYPE <- "Availability"
