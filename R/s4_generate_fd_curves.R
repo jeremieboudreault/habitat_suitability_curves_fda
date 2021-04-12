@@ -78,7 +78,7 @@ hab <- data.table::rbindlist(list(hab_avail, hab_select))
 # Save as a pdf for future use.
 pdf(
     file   = file.path("out", "plots", "fig_3_histograms_global.pdf"),
-    width  = 8L,
+    width  = 9L,
     height = 4L
 )
 
