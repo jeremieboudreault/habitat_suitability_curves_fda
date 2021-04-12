@@ -12,6 +12,17 @@
 
 
 
+# Globals ----------------------------------------------------------------------
+
+
+# List of variables for this projecté
+var_list <- list(
+    VELOCITY = "Velocity (m/s)",
+    DEPTH    = "Depth (cm)",
+    D50      = "D50 (mm)"
+)
+
+
 # Functions --------------------------------------------------------------------
 
 
