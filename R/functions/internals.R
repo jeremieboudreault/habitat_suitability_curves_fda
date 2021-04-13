@@ -22,6 +22,7 @@ var_names <- list(
     D50      = "D50 (mm)"
 )
 
+
 # List of the names for available / selected.
 hab_names <- list(
     AVAILABLE = "Available",
@@ -29,7 +30,7 @@ hab_names <- list(
 )
 
 
-# Functions --------------------------------------------------------------------
+# Data functions ---------------------------------------------------------------
 
 
 # dtlapply : apply a function and return the data.table.
@@ -38,20 +39,12 @@ dtlapply <- function(X, FUN, ...) {
 }
 
 
-# rotate_x_axis : Rotate the ticks of the x axis on a ggplot2 graph.
-rotate_x_axis <- ggplot2::theme(
-    axis.text.x = element_text(
-        angle = 90L,
-        vjust = 0.5,
-        hjust = 1L
-    )
-)
-
 # get_range : Get the range of a given variable.
 get_range <- function(x, liminf = TRUE, factor = 1L) {
     if (liminf == TRUE) liminf <- min(x, na.rm = TRUE) / factor
     return(c(liminf, max(x, na.rm = TRUE) * factor))
 }
+
 
 # fit_kde : Fit a KDE and scale it to 0 - 1.
 fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
@@ -74,3 +67,23 @@ fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
     return(data.table::data.table(X = fit$x, Y = fit$y))
 
 }
+
+
+# ggplot helpers ---------------------------------------------------------------
+
+
+# rotate_x_axis : Rotate the ticks of the x axis on a ggplot2 graph.
+rotate_x_axis <- ggplot2::theme(
+    axis.text.x = element_text(
+        angle = 90L,
+        vjust = 0.5,
+        hjust = 1L
+    )
+)
+
+
+# legend_bottom : Bring legend to the bottom of the plot.
+legend_bottom <- ggplot2::theme(
+    legend.position = "bottom"
+)
+
