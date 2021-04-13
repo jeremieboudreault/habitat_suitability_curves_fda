@@ -114,7 +114,7 @@ facet_wrap(
 labs(
     title = "",
     y     = "Probability density function (PDF)",
-    x     = "Velocity (m/s)                                            Depth (cm)                                           D50 (mm)",
+    x     = "Velocity (m/s)                                                   Depth (cm)                                                    D50 (mm)",
     fill  = ""
 ) +
 theme(
