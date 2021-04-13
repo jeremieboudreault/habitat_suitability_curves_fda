@@ -19,6 +19,12 @@ library(readxl)
 library(data.table)
 
 
+# Functions --------------------------------------------------------------------
+
+
+source(file.path("R", "functions", "internals.R"))
+
+
 # Import Sainte-Marguerite data ------------------------------------------------
 
 

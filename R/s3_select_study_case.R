@@ -19,6 +19,12 @@ library(data.table)
 library(ggplot2)
 
 
+# Functions --------------------------------------------------------------------
+
+
+source(file.path("R", "functions", "internals.R"))
+
+
 # Imports ----------------------------------------------------------------------
 
 
