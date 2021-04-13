@@ -178,7 +178,7 @@ fd_curves <- dtlapply(
         type <- tbl$TYPE[w]
 
         # Fit curves
-        fit <- fit_curve_01(
+        fit <- fit_kde(
             x     = hab[SITENEW  == site &
                         VARIABLE == var  &
                         TYPE     == type, VALUE],
@@ -205,27 +205,57 @@ pdf(
     height = 8L
 )
 
-# Plot all curves.
+# Loop over all variables.
 for (var in names(var_names)) {
-    for (page.i in 1:2) {
+
+    # Loop over two pages.
+    for (page.i in c(1L, 2L)) {
+
+        # Generate plot.
         p <- ggplot(
-            data = fd_curves[VARIABLE == var, ],
-            aes(x = X)) +
-                geom_line(aes(y= Y, color=TYPE), lwd=1, alpha=1) +
-                facet_wrap_paginate(~SITENEW, nrow=5, ncol=4, scales="free_y", page=page.i) +
-                labs(color="") +
-                theme(legend.position="bottom")  +
-                ylab("Probability density function (PDF)") +
-                xlab(var_names[var]) +
-                ggtitle(paste0("Habitat availability / selection for ", var)) +
-                scale_color_manual(values = c("#9B9B93", "#63B0CD"))
+            data    = fd_curves[VARIABLE == var, ],
+            mapping = aes(x = X)) +
+        geom_line(
+            mapping = aes(
+                y     = Y,
+                color = TYPE),
+            lwd     = 1L
+        ) +
+        facet_wrap_paginate(
+            facets = ~ SITENEW,
+            nrow   = 5L,
+            ncol   = 4L,
+            scales = "free_y",
+            page   = page.i
+        ) +
+        labs(
+            title = paste0(
+                "Habitat availability / selection for ", tolower(var)
+            ),
+            color = "",
+            x     = var_names[var],
+            y     = "Probability density function (PDF)"
+        ) +
+        scale_color_manual(
+            values = c("#9B9B93", "#63B0CD")
+        ) +
+        legend_bottom
 
+        # Print plot.
         print(p)
-
     }
 }
 
 # Saving plot.
 dev.off()
+
+
+# Exports ----------------------------------------------------------------------
+
+
+qs::qsave(
+    x    = fd_curves,
+    file = file.path("out", "final", "fd_curves.qs")
+)
 
 
