@@ -29,7 +29,7 @@ source(file.path("R", "functions", "internals.R"))
 
 # Functional observations.
 fd_curves <- qs::qread(
-    file.path("out", "final", "fd_curves.qs")
+    file.path("out", "final", "fd_curves_dt.qs")
 )
 
 
