@@ -178,6 +178,6 @@ data <- data.table::rbindlist(
 
 qs::qsave(
     x    = data,
-    file = file.path("out", "tmp", "smr_pcr_cleaned_s1.qs")
+    file = file.path("out", "tmp", "s1_smr_pcr_cleaned.qs")
 )
 

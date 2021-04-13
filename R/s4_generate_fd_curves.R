@@ -31,7 +31,7 @@ source(file.path("R", "functions", "internals.R"))
 
 # Subsetted data for the analysis.
 data <- qs::qread(
-    file = file.path("out", "final", "smr_pcr_subset_to_model.qs")
+    file = file.path("out", "tmp", "s3_smr_pcr_subset_to_model.qs")
 )
 
 
@@ -153,7 +153,7 @@ hab_var_range
 # Save for traceability.
 qs::qsave(
     x    = hab_var_range,
-    file = file.path("out", "tmp", "hab_var_range.qs")
+    file = file.path("out", "tmp", "s4_hab_var_range.qs")
 )
 
 
@@ -255,6 +255,6 @@ dev.off()
 
 qs::qsave(
     x    = fd_curves,
-    file = file.path("out", "final", "fd_curves_dt.qs")
+    file = file.path("out", "tmp", "s4_fd_curves_dt.qs")
 )
 

@@ -28,9 +28,9 @@ source(file.path("R", "functions", "internals.R"))
 # Imports ----------------------------------------------------------------------
 
 
-# Cleaned data of SMR and PCR.
+# Cleaned data of SMR and PCR with salmon numbers.
 data <- qs::qread(
-    file.path("out", "tmp", "smr_pcr_cleaned_s2.qs")
+    file.path("out", "tmp", "s2_smr_pcr_salmon_number.qs")
 )
 
 
@@ -162,5 +162,5 @@ data_clean <- data_selected[, .(
 
 qs::qsave(
     x    = data_clean,
-    file = file.path("out", "final", "smr_pcr_subset_to_model.qs")
+    file = file.path("out", "tmp", "s3_smr_pcr_subset_to_model.qs")
 )

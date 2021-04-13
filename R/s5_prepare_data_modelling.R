@@ -29,7 +29,7 @@ source(file.path("R", "functions", "internals.R"))
 
 # Functional observations.
 fd_curves <- qs::qread(
-    file.path("out", "final", "fd_curves_dt.qs")
+    file.path("out", "tmp", "s4_fd_curves_dt.qs")
 )
 
 
@@ -76,6 +76,6 @@ names(fd_curves_list) <- names(var_names)
 
 qs::qsave(
     x = fd_curves_list,
-    file = file.path("out", "final", "fd_curves_list.qs")
+    file = file.path("out", "tmp", "s5_fd_curves_list.qs")
 )
 
