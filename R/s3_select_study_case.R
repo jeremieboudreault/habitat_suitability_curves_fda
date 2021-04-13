@@ -4,9 +4,9 @@
 # Select optimal study case to be modelled (0+, 1+, 2+).
 
 
-# Project : habitat_suitability_curves_fsa
+# Project : habitat_suitability_curves_fda
 # Author  : Jeremie Boudreault
-# Email   : JeremieBoudreault11@gmail.com
+# Email   : Jeremie.Boudreault [at] ete.inrs [dot] ca
 # Depends : R (v3.6.3)
 # License : CC BY-NC-ND 4.0
 
