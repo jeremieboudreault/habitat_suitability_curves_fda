@@ -53,8 +53,8 @@ get_range <- function(x, liminf = TRUE, factor = 1L) {
     return(c(liminf, max(x, na.rm = TRUE) * factor))
 }
 
-# fit_curve_01 : Fit a KDE and scale it to 0 - 1.
-fit_curve_01 <- function(x, range, npoints = 2^7, adjust = 4L) {
+# fit_kde : Fit a KDE and scale it to 0 - 1.
+fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
 
     # Calculate fit.
     fit <- stats::density(
@@ -67,8 +67,8 @@ fit_curve_01 <- function(x, range, npoints = 2^7, adjust = 4L) {
         to     = unlist(range)[2],
     )
 
-    # Scale y variable.
-    fit$y <- fit$y / max(fit$y)
+    # Scale y variable if asked.
+    if (scale) fit$y <- fit$y / max(fit$y)
 
     # Return result as a data.table.
     return(data.table::data.table(X = fit$x, Y = fit$y))
