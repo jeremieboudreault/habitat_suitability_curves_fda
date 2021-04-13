@@ -1,4 +1,4 @@
-# s5_fit_functional_model.R
+# s6_fit_functional_model.R
 
 
 # Fit functional regression model to curves.
@@ -30,8 +30,7 @@ source(file.path("R", "functions", "internals.R"))
 
 
 # Functional observations.
-fd_curves <- qs::qread(
-    file.path("out", "final", "fd_curves.qs")
+fd_curves_list <- qs::qread(
+    file = file.path("out", "tmp", "fd_curves_list_s5.qs")
 )
-
 
