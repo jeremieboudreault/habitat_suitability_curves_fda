@@ -11,7 +11,8 @@
 # License : CC BY-NC-ND 4.0
 
 
-# Generate folds for cross-validaiton ------------------------------------------
+
+# Generate folds for cross-validation ------------------------------------------
 
 
 generate_folds <- function(n_obs, n_folds) {
@@ -38,3 +39,40 @@ generate_folds <- function(n_obs, n_folds) {
     return(folds)
 
 }
+
+
+# Calculate metrics on functional predictions ----------------------------------
+
+
+calc_fun_metric <- function(y_hat, y_obs, metric = "frmse") {
+
+    # Tradiditonal R square (R2).
+    if (metric == "R2") {
+        return(
+            1 - sum((y_obs - y_hat)^2) / sum((y_obs - mean(y_obs))^2)
+        )
+    }
+
+    # Functional R square (fR2).
+    if (metric == "fR2") {
+        return(
+            1 - sum((y_obs - y_hat)^2) / sum((y_obs - colMeans(y_obs))^2)
+        )
+    }
+
+    # Functional Root Mean Square Error (fRMSE).
+    if (metric == "frmse") {
+        return(
+            sqrt(mean((y_obs - y_hat)^2))
+        )
+    }
+
+    # Functional Mean Absoluation Error (fMAE).
+    if (metric == "fmae") {
+        return(
+            mean(abs(y_obs - y_hat))
+        )
+    }
+
+}
+
