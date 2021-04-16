@@ -26,8 +26,9 @@ Scripts  are all from Jeremie Boudreault. They make the use of the R package `FD
 + `R/s1_clean_field_data.R` : clean the field data spreadsheets and produced cleaned datasets.
 + `R/s2_compute_salmon_numbers.R`: convert measured salmon fork-lengths to number of fry and parr.
 + `R/s3_select_study_case.R`: select optimal data subset for this project.
-+ `R/s4_generate_fcurves.R`: generate (functional) curves of availability and selection/preference.
-+ `R/s5_fit_function_models.R`: code to fit functional regression models to curves
++ `R/s4_generate_fd_curves.R`: generate (functional) curves of availability and selection/preference.
++ `R/s5_prepare_data_modelling.R`: prepare data prior to fit function regression models.
++ `R/s6_fit_function_models.R`: fit functional regression models to curves using a parallelized k-fold cross-validation implementation of `FDboost::FDboost`. 
 
 
 Results
