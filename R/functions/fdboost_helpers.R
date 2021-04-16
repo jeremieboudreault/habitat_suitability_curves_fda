@@ -133,8 +133,10 @@ FDboost_kfold <- function(
     results <- array(NA, dim = c(n_obs, n_s, fdboost_opts$mstop_max))
 
     # Rearrange results to the current position in the array.
-    for (i in seq_len(length(res))) {
-        results[i, , ] <- t(res[[i]])
+    for (mstop in seq_len(fdboost_opts$mstop_max)) {
+        for (fold_k in seq_len(n_folds)) {
+            results[which(fold_k == folds), , mstop] <- res[[fold_k]][[mstop]]
+        }
     }
 
     # Calculate the chosen metric.
@@ -153,5 +155,62 @@ FDboost_kfold <- function(
     return(structure(results,
         mstop_best = mstop_best
     ))
+
+}
+
+
+# Internal function to fit a FDboost on kth fold -------------------------------
+
+
+.FDboost_kfold_k <- function(
+    fold_k,
+    data,
+    folds,
+    fdboost_opts
+) {
+
+    # Create train dataset.
+    data_train <- list(s = data$s, r = data$r)
+    data_train$Y <- data$Y[which(folds != fold_k), ]
+    data_train$X <- data$X[which(folds != fold_k), ]
+
+    # Create valid dataset.
+    data_train <- list(s = data$s, r = data$r)
+    data_valid$Y <- rbind(data$Y[which(folds == fold_k), ])
+    data_valid$X <- rbind(data$X[which(folds == fold_k), ])
+
+    # Fit model.
+    fit <- FDboost::FDboost(
+        formula     = Y ~ 1L + bsignal(x = X, s = r),
+        timeformula = ~ bbs(s),
+        data        = data_train,
+        control     = mboost::boost_control(
+            mstop = fdboost_opts$mstop_max,
+            nu    = fdboost_opts$learning_rate
+        )
+    )
+
+    # Calculate prediction error for all mstop in a list.
+    results <- lapply(
+        X   = seq.int(fdboost_opts$mstop_max, 1L),
+        FUN = function(mstop) {
+
+            # Update the model.
+            fit_mstop <- fit[mstop]
+
+            # Predict on "valid" dataset.
+            predict(
+                object  = fit_mstop,
+                newdata = data_valid,
+                type    = "response"
+            )
+        }
+    )
+
+    # Output file when completed.
+    write.table("", file.path("cache", sprintf("Fold_%s_completed.txt", fold_k)))
+
+    # Return results.
+    return(results)
 
 }
