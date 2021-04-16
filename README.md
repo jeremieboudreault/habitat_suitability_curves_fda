@@ -3,9 +3,9 @@ A new look at habitat suitability curves through FDA 👓
 
 
 + A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
-+ This is a __side project__ completed after my master degree at [__Institut National de la Recherche Scientifique__](http://inrs.ca) (INRS)
-+ All __codes__ and __data__ are freely available here under the [__Creative Common License__ ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-+ Questions regarding the code or the data should be sent to __Jeremie.Boudreault@ete.inrs.ca__
++ This project is part of my master studies at [Institut National de la Recherche Scientifique](http://inrs.ca)
++ All scripts and data are made freely available here under the [_Creative Common License_ ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
++ Any questions should be sent to _Jeremie.Boudreault [at] ete.inrs [dot] ca_
 
 
 Data
