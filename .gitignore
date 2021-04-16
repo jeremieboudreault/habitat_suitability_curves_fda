@@ -5,3 +5,4 @@
 README.html
 out/tmp/*
 out/plots/*
+cache/*
