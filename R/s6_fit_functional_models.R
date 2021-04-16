@@ -40,33 +40,54 @@ fd_curves_list <- qs::qread(
 
 
 fdboost_opts <- list(
-    mstop_max     = 1000L,
+    mstop_max     = 2000L,
     learning_rate = 0.1,
-    metric        = "frmse"
+    metric        = "frmse",
+    n_folds       = "loo"
 )
 
 
-# FDboost fit ------------------------------------------------------------------
+# Depth model ------------------------------------------------------------------
 
 
-# Depth model.
+# Fit FDboost with k-fold cross validation using the options above.
 res_depth <- FDboost_kfold(
-    data    = fd_curves_list$DEPTH,
-    n_folds = nrow(fd_curves_list$DEPTH$Y),
-    fdboost_opts
+    data         = fd_curves_list$DEPTH,
+    fdboost_opts = fdboost_opts
 )
 
-# D50 model.
+# Save results for traceability.
+qs::qsave(res_depth, file.path("out", "tmp", "s6_depth_frm_results.qs"))
+
+
+# D50 model --------------------------------------------------------------------
+
+
+# Fit FDboost with k-fold cross validation using the options above.
 res_d50 <- FDboost_kfold(
     data    = fd_curves_list$D50,
-    n_folds = nrow(fd_curves_list$D50$Y),
     fdboost_opts
 )
 
-# Velocity model.
+# Save results for traceability.
+qs::qsave(res_d50, file.path("out", "tmp", "s6_d50_frm_results.qs"))
+
+
+# Velocity model ---------------------------------------------------------------
+
+
+# Fit FDboost with k-fold cross validation using the options above.
 res_velocity <- FDboost_kfold(
     data    = fd_curves_list$VELOCITY,
-    n_folds = nrow(fd_curves_list$D50$VELOCITY),
     fdboost_opts
 )
+
+# Save results.
+qs::qsave(res_depth, file.path("out", "tmp", "s6_velocity_frm_results.qs"))
+
+
+# Plot results -----------------------------------------------------------------
+
+
+# To be completed...
 
