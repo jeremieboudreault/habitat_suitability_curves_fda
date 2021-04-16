@@ -104,8 +104,10 @@ FDboost_kfold <- function(
     n_s <- length(data$s)
 
     # Check on the number of folds.
-    if (!is.integer(n_folds) | n_folds < 1L | n_folds > n_obs) {
-        stop("Invalid number of folds.", call. FALSE)
+    if (!is.integer(n_folds) | n_folds != n_obs) {
+        stop("Invalid number of folds. ",
+             "Only leave-one-out cross validation is yet implemented",
+        call. = FALSE)
     }
 
     # Generate folds.
