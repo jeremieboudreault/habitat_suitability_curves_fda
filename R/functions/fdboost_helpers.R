@@ -86,14 +86,13 @@ calc_fun_metric <- function(y_hat, y_obs, metric = "frmse") {
 
 FDboost_kfold <- function(
     data,
-    n_folds,
-    fdboost_opt
+    fdboost_opts
 ) {
 
     # Checks on dimension of supplied data.
-    if (nrow(data$Y) =! nrow(data$X)   |
-        ncol(data$Y) =! length(data$s) |
-        ncol(data$X) =! length(data$r)) {
+    if (nrow(data$Y) != nrow(data$X)   |
+        ncol(data$Y) != length(data$s) |
+        ncol(data$X) != length(data$r)) {
         stop("Dimension of supplied data do not match.", call. = FALSE)
     }
 
@@ -103,10 +102,16 @@ FDboost_kfold <- function(
     # Number of points for Y.
     n_s <- length(data$s)
 
+    # Extract number of folds from fdboost_opts.
+    n_folds <- fdboost_opts$n_folds
+
     # Check on the number of folds.
-    if (!is.integer(n_folds) | n_folds != n_obs) {
-        stop("Invalid number of folds. ",
-             "Only leave-one-out cross validation is yet implemented",
+    if (n_folds == "loo") {
+        n_folds <- n_obs
+    } else if (!is.integer(n_folds) | n_folds < 1L | n_folds > n_obs) {
+        stop("Invalid number of folds.\n",
+             "> Specify the number of folds or use 'loo' for leave-one-out ",
+             "cross-validation.",
         call. = FALSE)
     }
 
@@ -118,7 +123,7 @@ FDboost_kfold <- function(
 
     # Apply in parallel the .FDboost_kfold_k function.
     res <- parallel::parLapplyLB(
-        X            = seq.int(1L, n_folds),
+        X            = seq_len(n_folds),
         fun          = .FDboost_kfold_k,
         data         = data,
         folds        = folds,
@@ -140,20 +145,22 @@ FDboost_kfold <- function(
     }
 
     # Calculate the chosen metric.
-    error <- apply(
+    metric <- apply(
         X      = results,
         MARGIN = 3L,
         FUN    = calc_fun_metric,
         y_obs  = data$Y,
-        err    = fdboost_opts$metric
+        metric = fdboost_opts$metric
     )
 
     # Find optimal mstop based on the value of the metric.
-    mstop_best <- which.min(error)
+    mstop_best <- which.min(metric)
 
     # Return results.
     return(structure(results,
-        mstop_best = mstop_best
+        "mstop"      = seq.int(1L, fdboost_opts$mstop_max),
+        "metric"     = metric,
+        "mstop_best" = mstop_best
     ))
 
 }
@@ -170,14 +177,17 @@ FDboost_kfold <- function(
 ) {
 
     # Create train dataset.
-    data_train <- list(s = data$s, r = data$r)
+    data_train <- list()
     data_train$Y <- data$Y[which(folds != fold_k), ]
     data_train$X <- data$X[which(folds != fold_k), ]
+    data_train$s <- data$s
+    data_train$r <- data$r
 
     # Create valid dataset.
-    data_train <- list(s = data$s, r = data$r)
-    data_valid$Y <- rbind(data$Y[which(folds == fold_k), ])
+    data_valid <- list()
     data_valid$X <- rbind(data$X[which(folds == fold_k), ])
+    data_valid$s <- data$s
+    data_valid$r <- data$r
 
     # Fit model.
     fit <- FDboost::FDboost(
@@ -199,11 +209,18 @@ FDboost_kfold <- function(
             fit_mstop <- fit[mstop]
 
             # Predict on "valid" dataset.
-            predict(
+            y_hat <- predict(
                 object  = fit_mstop,
                 newdata = data_valid,
                 type    = "response"
             )
+
+            # Delete attribute "offset".
+            attr(y_hat, "offset") <- NULL
+
+            # Return as a matrix.
+            return(y_hat)
+
         }
     )
 
@@ -214,3 +231,4 @@ FDboost_kfold <- function(
     return(results)
 
 }
+
