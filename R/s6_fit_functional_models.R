@@ -48,9 +48,6 @@ res_depth <- FDboost_kfold(
     fdboost_opts = depth_opts
 )
 
-# Save results for traceability.
-qs::qsave(res_depth, file.path("out", "tmp", "s6_depth_frm_results.qs"))
-
 
 # D50 model --------------------------------------------------------------------
 
@@ -64,9 +61,6 @@ res_d50 <- FDboost_kfold(
     fdboost_opts = d50_opts
 )
 
-# Save results for traceability.
-qs::qsave(res_d50, file.path("out", "tmp", "s6_d50_frm_results.qs"))
-
 
 # Velocity model ---------------------------------------------------------------
 
@@ -79,9 +73,6 @@ res_velocity <- FDboost_kfold(
     data         = fd_curves_list$VELOCITY,
     fdboost_opts = velocity_opts
 )
-
-# Save results.
-qs::qsave(res_depth, file.path("out", "tmp", "s6_velocity_frm_results.qs"))
 
 
 # Generate results for plotting ------------------------------------------------
@@ -186,4 +177,17 @@ facet_wrap(
 
 # Save plot.
 dev.off()
+
+
+# Exports ----------------------------------------------------------------------
+
+
+qs::qsave(
+    x   = list(
+        DEPTH    = res_depth,
+        D50      = res_d50,
+        VELOCITY = res_velocity
+    ),
+    file = file.path("out", "tmp", "s6_frm_results.qs")
+)
 
