@@ -195,7 +195,7 @@ FDboost_kfold <- function(
     # Return results.
     return(
         list(
-            pred          = results,
+            y_hat_kfold   = results,
             fdboost_opts  = fdboost_opts,
             mstops        = mstops,
             metric        = metric,
@@ -281,6 +281,55 @@ FDboost_kfold <- function(
 
     # Return results.
     return(results)
+
+}
+
+
+# Full model -------------------------------------------------------------------
+
+
+.FDboost <- function(
+    data,
+    fdboost_opts,
+    mstop_best
+) {
+
+    # Fit model.
+    fit <- FDboost::FDboost(
+        formula     = Y ~ 1L + bsignal(
+            x           = X,
+            s           = r,
+            inS         = "smooth",
+            degree      = fdboost_opts[["degree"]],
+            knots       = fdboost_opts[["knots"]],
+            differences = fdboost_opts[["difference"]],
+            cyclic      = FALSE
+        ),
+        timeformula = ~ bbs(s),
+        data        = data,
+        control     = mboost::boost_control(
+            mstop = mstop_best,
+            nu    = fdboost_opts$learning_rate
+        )
+    )
+
+    # Calculate prediction error for all mstop in a list.
+    y_hat <-  predict(
+        object  = fit,
+        newdata = data,
+        type    = "response"
+    )
+
+    # Delete attribute "offset".
+    attr(y_hat, "offset") <- NULL
+
+    # Return as a list.
+    return(
+        list(
+            fit   = fit,
+            y_hat = y_hat
+        )
+    )
 
 }
 
