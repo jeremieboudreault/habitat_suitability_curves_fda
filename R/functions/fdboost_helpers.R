@@ -44,7 +44,7 @@ generate_folds <- function(n_obs, n_folds) {
 # Calculate metrics on functional predictions ----------------------------------
 
 
-calc_fun_metric <- function(y_hat, y_obs, metric = "frmse") {
+calc_fun_metric <- function(y_hat, y_obs, metric = "fRMSE") {
 
     # Tradiditonal R square (R2).
     if (metric == "R2") {
@@ -61,14 +61,14 @@ calc_fun_metric <- function(y_hat, y_obs, metric = "frmse") {
     }
 
     # Functional Root Mean Square Error (fRMSE).
-    if (metric == "frmse") {
+    if (metric == "fRMSE") {
         return(
             sqrt(mean((y_obs - y_hat)^2))
         )
     }
 
     # Functional Mean Absoluation Error (fMAE).
-    if (metric == "fmae") {
+    if (metric == "fMAE") {
         return(
             mean(abs(y_obs - y_hat))
         )
@@ -84,7 +84,7 @@ calc_fun_metric <- function(y_hat, y_obs, metric = "frmse") {
         mstop_max     = 500L,
         mstop_step    = 1L,
         learning_rate = 0.1,
-        metric        = "frmse",
+        metric        = "fRMSE",
         n_folds       = "loo",
         knots         = 10L,
         degree        = 3L,
@@ -193,12 +193,15 @@ FDboost_kfold <- function(
     mstop_best <- mstops[which.min(metric)]
 
     # Return results.
-    return(structure(results,
-        "fdboost_opts" = fdboost_opts,
-        "mstops"       = mstops,
-        "mstop_best"   = mstop_best,
-        "metric"       = metric
-    ))
+    return(
+        list(
+            pred          = results,
+            fdboost_opts  = fdboost_opts,
+            mstops        = mstops,
+            metric        = metric,
+            mstop_best    = mstop_best
+        )
+    )
 
 }
 
@@ -241,7 +244,7 @@ FDboost_kfold <- function(
         timeformula = ~ bbs(s),
         data        = data_train,
         control     = mboost::boost_control(
-            mstop = fdboost_opts$mstop_max,
+            mstop = max(mstops),
             nu    = fdboost_opts$learning_rate
         )
     )
