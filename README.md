@@ -27,9 +27,9 @@ Scripts  are all from Jeremie Boudreault. They make the use of the R package `FD
 + `R/s2_compute_salmon_numbers.R`: convert measured salmon fork-lengths to number of fry and parr.
 + `R/s3_select_study_case.R`: select optimal data subset for this project.
 + `R/s4_generate_fd_curves.R`: generate (functional) curves of availability and selection/preference.
-+ `R/s5_prepare_data_modelling.R`: prepare data prior to fit function regression models.
-+ `R/s6_fit_function_models.R`: fit functional regression models to curves using a parallelized k-fold cross-validation implementation of `FDboost::FDboost`. 
-+ `R/s7_extract_frm_coefficients.R`: extract coefficients from fitted FRM and compute 95% CI using bootstrap.
++ `R/s5_prepare_data_modelling.R`: prepare data prior to fit function regression models (FRM).
++ `R/s6_fit_function_models.R`: fit FRMs to curves using a parallelized k-fold cross-validation implementation of `FDboost::FDboost()`. 
++ `R/s7_extract_frm_coefficients.R`: extract coefficients from FRM and compute bootstrap 95% CI.
 + `R/s8_calculate_frm_performance.R`: calculate some goodness-of-fit metrics for the fitted models. 
 
 
