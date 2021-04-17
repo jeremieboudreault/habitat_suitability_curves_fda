@@ -12,21 +12,35 @@
 
 
 
-# Globals ----------------------------------------------------------------------
+# Names ------------------------------------------------------------------------
 
 
-# List of variables for this project.
+# Variables names.
 var_names <- list(
-    VELOCITY = "Velocity (m/s)",
-    DEPTH    = "Depth (cm)",
-    D50      = "D50 (mm)"
+    DEPTH    = "Depth",
+    D50      = "D50",
+    VELOCITY = "Velocity"
 )
 
+# Variables names with units.
+var_names_u <- list(
+    DEPTH    = "Depth (cm)",
+    D50      = "D50 (mm)",
+    VELOCITY = "Velocity (m/s)"
+)
 
-# List of the names for available / selected.
+# Habitat type names.
 hab_names <- list(
     AVAILABLE = "Available",
     SELECTED  = "Selected"
+)
+
+# Metric names.
+metric_names <- list(
+    "fRMSE" = "Functional Root Mean Square Error (fRMSE)",
+    "fMAE"  = "Functional Mean Abosule Error (fMAE)",
+    "fR2"   = "Functional R2 (fR2)",
+    "R2"    = "R square (R2)"
 )
 
 
