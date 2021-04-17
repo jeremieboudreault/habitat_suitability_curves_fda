@@ -29,6 +29,8 @@ Scripts  are all from Jeremie Boudreault. They make the use of the R package `FD
 + `R/s4_generate_fd_curves.R`: generate (functional) curves of availability and selection/preference.
 + `R/s5_prepare_data_modelling.R`: prepare data prior to fit function regression models.
 + `R/s6_fit_function_models.R`: fit functional regression models to curves using a parallelized k-fold cross-validation implementation of `FDboost::FDboost`. 
++ `R/s7_extract_frm_coefficients.R`: extract coefficients from fitted FRM and compute 95% CI using bootstrap.
++ `R/s8_calculate_frm_performance.R`: calculate some goodness-of-fit metrics for the fitted models. 
 
 
 Results
