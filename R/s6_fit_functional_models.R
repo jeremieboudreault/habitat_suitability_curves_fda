@@ -40,10 +40,14 @@ fd_curves_list <- qs::qread(
 
 
 fdboost_opts <- list(
-    mstop_max     = 2000L,
+    mstop_max     = 500L,
+    mstop_step    = 1L,
     learning_rate = 0.1,
     metric        = "frmse",
-    n_folds       = "loo"
+    n_folds       = "loo",
+    knots         = 10L,
+    degree        = 3L,
+    difference    = 1L
 )
 
 
@@ -87,7 +91,4 @@ qs::qsave(res_depth, file.path("out", "tmp", "s6_velocity_frm_results.qs"))
 
 
 # Plot results -----------------------------------------------------------------
-
-
-# To be completed...
 
