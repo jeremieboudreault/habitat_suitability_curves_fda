@@ -76,6 +76,20 @@ calc_fun_metric <- function(y_hat, y_obs, metric = "fRMSE") {
 
 }
 
+# Wrapper function the the above one returning a list of various metrics.
+calc_fun_metrics <- function(y_obs, y_hat, metrics = names(metric_names)) {
+
+    return(
+        sapply(
+            X     = metrics,
+            FUN   = calc_fun_metric,
+            y_obs = y_obs,
+            y_hat = y_hat
+        )
+    )
+
+}
+
 
 # Create options to fit a FDboost ----------------------------------------------
 
@@ -327,7 +341,8 @@ FDboost_kfold <- function(
     return(
         list(
             fit   = fit,
-            y_hat = y_hat
+            y_hat = y_hat,
+            y_obs = data$Y
         )
     )
 
