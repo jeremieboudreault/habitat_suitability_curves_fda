@@ -116,7 +116,14 @@ FDboost_kfold <- function(
     }
 
     # Generate folds.
-    folds <- generate_fold(n_obs, n_folds)
+    folds <- generate_folds(n_obs, n_folds)
+
+    # Set values of mstop.
+    mstops <- seq.int(
+        from  = fdboost_opts$mstop_step,
+        to    = fdboost_opts$mstop_max,
+        by    = fdboost_opts$mstop_step
+    )
 
     # Set cluster for parralel computation.
     cl <- parallel::makeCluster(parallel::detectCores() - 1L)
@@ -128,6 +135,7 @@ FDboost_kfold <- function(
         data         = data,
         folds        = folds,
         fdboost_opts = fdboost_opts,
+        mstops       = mstops,
         cl           = cl
     )
 
@@ -138,9 +146,9 @@ FDboost_kfold <- function(
     results <- array(NA, dim = c(n_obs, n_s, fdboost_opts$mstop_max))
 
     # Rearrange results to the current position in the array.
-    for (mstop in seq_len(fdboost_opts$mstop_max)) {
+    for (mstop_i in seq_len(mstops)) {
         for (fold_k in seq_len(n_folds)) {
-            results[which(fold_k == folds), , mstop] <- res[[fold_k]][[mstop]]
+            results[which(fold_k == folds), , mstop_i] <- res[[fold_k]][[mstop_i]]
         }
     }
 
@@ -154,13 +162,14 @@ FDboost_kfold <- function(
     )
 
     # Find optimal mstop based on the value of the metric.
-    mstop_best <- which.min(metric)
+    mstop_best <- mstops[which.min(metric)]
 
     # Return results.
     return(structure(results,
-        "mstop"      = seq.int(1L, fdboost_opts$mstop_max),
-        "metric"     = metric,
-        "mstop_best" = mstop_best
+        "fdboost_opts" = fdboost_opts,
+        "mstops"       = mstops,
+        "mstop_best"   = mstop_best,
+        "metric"       = metric,
     ))
 
 }
@@ -173,7 +182,8 @@ FDboost_kfold <- function(
     fold_k,
     data,
     folds,
-    fdboost_opts
+    fdboost_opts,
+    mstops
 ) {
 
     # Create train dataset.
@@ -191,7 +201,15 @@ FDboost_kfold <- function(
 
     # Fit model.
     fit <- FDboost::FDboost(
-        formula     = Y ~ 1L + bsignal(x = X, s = r),
+        formula     = Y ~ 1L + bsignal(
+            x           = X,
+            s           = r,
+            inS         = "smooth",
+            degree      = fdboost_opts[["degree"]],
+            knots       = fdboost_opts[["knots"]],
+            differences = fdboost_opts[["difference"]],
+            cyclic      = FALSE
+        ),
         timeformula = ~ bbs(s),
         data        = data_train,
         control     = mboost::boost_control(
@@ -202,7 +220,7 @@ FDboost_kfold <- function(
 
     # Calculate prediction error for all mstop in a list.
     results <- lapply(
-        X   = seq.int(fdboost_opts$mstop_max, 1L),
+        X   = rev(mstops),
         FUN = function(mstop) {
 
             # Update the model.
@@ -223,6 +241,9 @@ FDboost_kfold <- function(
 
         }
     )
+
+    # Reverse the results because we want them from min to max_stop.
+    results <- rev(results)
 
     # Output file when completed.
     write.table("", file.path("cache", sprintf("Fold_%s_completed.txt", fold_k)))
