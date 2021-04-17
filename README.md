@@ -4,8 +4,8 @@ A new look at habitat suitability curves through FDA 👓
 
 + A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
 + This project is part of my master studies at [Institut National de la Recherche Scientifique](http://inrs.ca)
-+ All scripts and data are made freely available here under the [_Creative Common License_ ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-+ Any questions should be sent to _Jeremie.Boudreault [at] ete.inrs [dot] ca_
++ All scripts and data are made freely available here under the [Creative Common License ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
++ Any questions should be sent to __Jeremie.Boudreault [at] ete.inrs [dot] ca__
 
 
 Data
@@ -14,7 +14,7 @@ Data
 
 Data consists of a __field survey__ that have been conducted during summer 2017 on the  __Sainte-Marguerite River__ (SMR) and __Petite-Cascapedia River__ (PCR) :
 
-+ `data/field/*` : contains the two raw `xlsx` files filled after each day of field work 
++ `data/field/*` : contains the two raw `xlsx` files filled after each day of field work.
 
 
 R scripts
