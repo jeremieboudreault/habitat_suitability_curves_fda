@@ -179,6 +179,31 @@ facet_wrap(
 dev.off()
 
 
+# Fit full model ---------------------------------------------------------------
+
+
+# Depth.
+res_depth$full <- .FDboost(
+    data         = fd_curves_list$DEPTH,
+    fdboost_opts = res_depth$fdboost_opts,
+    mstop        = res_depth$mstop_best
+)
+
+# D50.
+res_d50$full <- .FDboost(
+    data         = fd_curves_list$D50,
+    fdboost_opts = res_d50$fdboost_opts,
+    mstop        = res_d50$mstop_best
+)
+
+# Velocity.
+res_velocity$full <- .FDboost(
+    data         = fd_curves_list$VELOCITY,
+    fdboost_opts = res_velocity$fdboost_opts,
+    mstop        = res_velocity$mstop_best
+)
+
+
 # Exports ----------------------------------------------------------------------
 
 
