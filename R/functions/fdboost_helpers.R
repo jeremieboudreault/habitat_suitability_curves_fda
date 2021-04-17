@@ -77,6 +77,34 @@ calc_fun_metric <- function(y_hat, y_obs, metric = "frmse") {
 }
 
 
+# Create options to fit a FDboost ----------------------------------------------
+
+
+.fdboost_opts <- function(
+        mstop_max     = 500L,
+        mstop_step    = 1L,
+        learning_rate = 0.1,
+        metric        = "frmse",
+        n_folds       = "loo",
+        knots         = 10L,
+        degree        = 3L,
+        difference    = 1L
+) {
+    return(
+        list(
+            mstop_max     = mstop_max,
+            mstop_step    = mstop_step,
+            learning_rate = learning_rate,
+            metric        = metric,
+            n_folds       = n_folds,
+            knots         = knots,
+            degree        = degree,
+            difference    = difference
+        )
+    )
+}
+
+
 # Fit a FDboost model with k-fold cross-validation -----------------------------
 
 
@@ -143,10 +171,10 @@ FDboost_kfold <- function(
     parallel::stopCluster(cl)
 
     # Create an array to rearrange results in a nicer format.
-    results <- array(NA, dim = c(n_obs, n_s, fdboost_opts$mstop_max))
+    results <- array(NA, dim = c(n_obs, n_s, length(mstops)))
 
     # Rearrange results to the current position in the array.
-    for (mstop_i in seq_len(mstops)) {
+    for (mstop_i in seq_along(mstops)) {
         for (fold_k in seq_len(n_folds)) {
             results[which(fold_k == folds), , mstop_i] <- res[[fold_k]][[mstop_i]]
         }
@@ -169,7 +197,7 @@ FDboost_kfold <- function(
         "fdboost_opts" = fdboost_opts,
         "mstops"       = mstops,
         "mstop_best"   = mstop_best,
-        "metric"       = metric,
+        "metric"       = metric
     ))
 
 }
