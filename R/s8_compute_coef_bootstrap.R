@@ -60,3 +60,31 @@ n_bs <- 1000L
 
 
 
+# Compute bootstrap of coefficients --------------------------------------------
+
+
+# Apply over all variables.
+bs_res <- lapply(
+    X = names(var_names),
+    FUN = function(var) {
+
+        # Apply over all bootstrap (n_bs).
+        do.call(what = abind, args = lapply(
+            X   = seq_len(n_bs),
+            FUN = function(i) {
+
+                # Fit functional model.
+                obj <- .FDboost(
+                    data         = generate_bs_sample(fd_curves_list[[var]]),
+                    fdboost_opts = frm_results[[var]]$fdboost_opts,
+                    mstop_best   = frm_results[[var]]$mstop_best
+                )
+
+                # Return fitted coef.
+                return(coef(obj$fit)$smterms$`bsignal(X) %O% bbs(s)`$value)
+
+            }
+        ))
+    }
+)
+
