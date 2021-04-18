@@ -121,3 +121,58 @@ std_dt[, MODEL := factor(
 names(std_dt) <- c("Y", "X", "Z", "MODEL")
 
 
+# Plot standard error of each regression coefficient ---------------------------
+
+
+.plot_std <- function(data) {
+
+    p <- ggplot(
+        data = data,
+        mapping = aes(
+            x = X,
+            y = Y,
+            z = Z,
+            fill = Z
+        )
+    ) +
+    geom_raster(
+        alpha = 1L
+    ) +
+    geom_abline(
+        slope     = 1L,
+        intercept = 0L,
+        lty       = 2L,
+        lwd       = 0.1
+    ) +
+    scale_fill_gradient(
+        low     = "#FFFFFF00",
+        high    = "darkgrey",
+        guide   = guide_colourbar(barwidth = 12L)
+    ) +
+    scale_x_continuous(
+        expand = c(0.001, 0.001)
+    ) +
+    scale_y_continuous(
+        expand = c(0.001, 0.001)
+    ) +
+    labs(
+        y    = "",
+        x    = "",
+        fill = ""
+    ) +
+    facet_wrap(
+        facets = ~ MODEL,
+        nrow   = 1L,
+        ncol   = 1L,
+        scales = "free",
+    ) +
+    theme(
+        panel.border     = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line        = element_line(colour = "white")
+    ) +
+    legend_bottom
+    return(p)
+
+}
