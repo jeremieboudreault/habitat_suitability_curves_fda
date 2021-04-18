@@ -79,5 +79,63 @@ coef_list <- lapply(
 )
 
 
+# Function to plot coefficients ------------------------------------------------
 
+
+# Generate colors for the plot.
+col_1 <- RColorBrewer::brewer.pal(9, "RdBu")
+col_fun <- grDevices::colorRampPalette(col_1)
+
+# Create a function to generate the plot.
+.plot_coef <- function(data) {
+
+    return(
+        ggplot(
+            data    = data,
+            mapping = aes(
+                x    = X,
+                y    = Y,
+                z    = Z,
+                fill = Z
+            )
+        ) +
+        geom_raster(
+            alpha = 1L
+        ) +
+        geom_abline(
+            slope     = 1L,
+            intercept = 0L,
+            lty       = 2L,
+            lwd       = 0.1
+        ) +
+        scale_fill_gradientn(
+            colors   = col_fun(100L),
+            limits   = c(-max(abs(data$Z)), max(abs(data$Z)))
+        ) +
+        scale_x_continuous(
+            expand = c(0.001, 0.001)
+        ) +
+        scale_y_continuous(
+            expand = c(0.001, 0.001)
+        ) +
+        labs(
+            y    = "",
+            x    = "",
+            fill = ""
+        ) +
+        facet_wrap(
+            facets = ~ MODEL,
+            nrow   = 1L,
+            ncol   = 1L,
+            scales = "free",
+        ) +
+        theme(
+            panel.border     = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line        = element_line(colour = "white")
+        ) +
+        legend_bottom
+    )
+}
 
