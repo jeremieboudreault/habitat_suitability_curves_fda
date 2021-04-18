@@ -1,7 +1,7 @@
-# s8_calculate_frm_performance.R
+# sZ_assess_models_performance.R
 
 
-# Calculate functional regression models performance.
+# Assess models performance.
 
 
 # Project : habitat_suitability_curves_fda
@@ -74,6 +74,6 @@ names(performance) <- names(var_names)
 
 qs::qsave(
     x    = performance,
-    file = file.path("out", "tmp", "s8_frm_performance.qs")
+    file = file.path("out", "tmp", "sZ_models_performance.qs")
 )
 
