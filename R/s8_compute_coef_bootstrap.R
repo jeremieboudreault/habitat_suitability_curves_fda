@@ -102,3 +102,22 @@ bs_res <- lapply(
 names(bs_res) <- names(var_names)
 
 
+# Standard error of the coefficients -------------------------------------------
+
+
+# Calculate standard error.
+std <- lapply(bs_res, function(w) apply(w, FUN = sd, MARGIN = c(1L, 2L)))
+
+# Melt into a data.table.
+std_dt <- data.table::setDT(reshape2::melt(std))
+
+# Replace values of <MODEL> with variables names and units.
+std_dt[, MODEL := factor(
+    x      = unlist(var_names_u[std_dt$MODEL], use.names = FALSE),
+    levels = unlist(var_names_u)
+)]
+
+# Update names.
+names(std_dt) <- c("Y", "X", "Z", "MODEL")
+
+
