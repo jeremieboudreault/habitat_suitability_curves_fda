@@ -40,3 +40,23 @@ fd_curves_list <- qs::qread(
     file = file.path("out", "tmp", "s5_fd_curves_list.qs")
 )
 
+
+# Generate bootstrap sample ----------------------------------------------------
+
+
+generate_bs_sample <- function(l) {
+    n_obs <- nrow(l$Y)
+    boot_i <- sample(seq_len(n_obs), size = n_obs, replace = TRUE)
+    l$Y <- l$Y[boot_i, ]
+    l$X <- l$X[boot_i, ]
+    return(l)
+}
+
+
+# Parameters (Number of bootstrap) ---------------------------------------------
+
+
+n_bs <- 1000L
+
+
+
