@@ -46,7 +46,6 @@ performance <- lapply(
 
         # Extract observations and results.
         res <- frm_results[[w]]
-        curves <- fd_curves[[w]]
 
         # Full model.
         full_perf <- calc_fun_metrics(
