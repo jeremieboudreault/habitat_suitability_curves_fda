@@ -60,6 +60,12 @@ get_range <- function(x, liminf = TRUE, factor = 1L) {
 }
 
 
+# abind : Bind matrices into a array.
+abind <- function(...) {
+    DescTools::Abind(..., along = 3L)
+}
+
+
 # fit_kde : Fit a KDE and scale it to 0 - 1.
 fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
 
