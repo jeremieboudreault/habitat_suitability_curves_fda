@@ -98,7 +98,7 @@ bs_res <- lapply(
     }
 )
 
-# Add names to the results
+# Add names to the results.
 names(bs_res) <- names(var_names)
 
 
@@ -111,14 +111,14 @@ std <- lapply(bs_res, function(w) apply(w, FUN = sd, MARGIN = c(1L, 2L)))
 # Melt into a data.table.
 std_dt <- data.table::setDT(reshape2::melt(std))
 
+# Update names.
+names(std_dt) <- c("Y", "X", "Z", "MODEL")
+
 # Replace values of <MODEL> with variables names and units.
 std_dt[, MODEL := factor(
     x      = unlist(var_names_u[std_dt$MODEL], use.names = FALSE),
     levels = unlist(var_names_u)
 )]
-
-# Update names.
-names(std_dt) <- c("Y", "X", "Z", "MODEL")
 
 
 # Plot standard error of each regression coefficient ---------------------------
@@ -190,7 +190,7 @@ ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
 
 # Save as a pdf for future use.
 pdf(
-    file   = file.path("out", "plots", "fig_7_frm_bs_std.pdf"),
+    file   = file.path("out", "plots", "fig_7_frm_coef_bootstrap.pdf"),
     width  = 10L,
     height = 4L
 )
