@@ -69,3 +69,15 @@ frm_results <- qs::qread(
 
 }
 
+
+# Extract coefficients for all three models ------------------------------------
+
+
+coef_list <- lapply(
+    X   = names(var_names),
+    FUN = .extract_coef
+)
+
+
+
+
