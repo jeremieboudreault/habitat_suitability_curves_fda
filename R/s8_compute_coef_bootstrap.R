@@ -176,3 +176,12 @@ names(std_dt) <- c("Y", "X", "Z", "MODEL")
     return(p)
 
 }
+
+# Generate all plots.
+ps <- lapply(var_names_u, function(var) .plot_std(std_dt[MODEL == var, ]))
+
+# Add x and y labs.
+ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
+ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
+
+
