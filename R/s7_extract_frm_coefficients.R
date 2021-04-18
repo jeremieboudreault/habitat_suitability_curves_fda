@@ -62,7 +62,7 @@ frm_results <- qs::qread(
     z_df <- reshape2::melt(z, value.name = "Z")
 
     # Add the name of variable.
-    z_df$MODEL <- var_names_u[[var_name]]
+    z_df$MODEL <- var_names_u[[var]]
 
     # Return z_df as a data.table.
     return(data.table::setDT(z_df))
