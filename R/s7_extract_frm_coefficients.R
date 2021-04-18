@@ -39,5 +39,33 @@ frm_results <- qs::qread(
 # Extract coefficients ---------------------------------------------------------
 
 
-# To be continued...
+.extract_coef <- function(var_name) {
+
+    # Extract results from the list of the 3 models.
+    res <- frm_results[[var_name]]
+
+    # Extract full fitted model from res.
+    fit <- res$full$fit
+
+    # Extract coefficient from fit.
+    fit_coef <- coef(fit)
+
+    # Extract x, y, z values.
+    z <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$value
+    rownames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$y
+    colnames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$x
+
+    # Add proper names to the matrix.
+    names(dimnames(z)) <- c("Y", "X")
+
+    # Generate a data.frame for plotting.
+    z_df <- reshape2::melt(z, value.name = "Z")
+
+    # Add the name of variable.
+    z_df$MODEL <- var_names_u[[var_name]]
+
+    # Return z_df as a data.table.
+    return(data.table::setDT(z_df))
+
+}
 
