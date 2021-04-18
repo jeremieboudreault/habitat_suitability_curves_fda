@@ -1,7 +1,7 @@
 # s7_extract_frm_coefficients.R
 
 
-# Extract FRM coefficients and compute bootstrap 95% CI.
+# Extract FRM coefficients and plot results.
 
 
 # Project : habitat_suitability_curves_fda
@@ -39,10 +39,10 @@ frm_results <- qs::qread(
 # Extract coefficients ---------------------------------------------------------
 
 
-.extract_coef <- function(var_name) {
+.extract_coef <- function(var) {
 
     # Extract results from the list of the 3 models.
-    res <- frm_results[[var_name]]
+    res <- frm_results[[var]]
 
     # Extract full fitted model from res.
     fit <- res$full$fit
@@ -139,16 +139,16 @@ col_fun <- grDevices::colorRampPalette(col_1)
     )
 }
 
-
-# Plot all coefficients --------------------------------------------------------
-
-
 # Generate all plots.
 ps <- lapply(coef_list, .plot_coef)
 
-# Add x and y labs to some plots.
+# Add x and y labs.
 ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
 ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
+
+
+# Plots ------------------------------------------------------------------------
+
 
 # Save as a pdf for future use.
 pdf(
