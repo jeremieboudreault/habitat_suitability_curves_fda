@@ -185,3 +185,31 @@ ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
 ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
 
 
+# Plot results -----------------------------------------------------------------
+
+
+# Save as a pdf for future use.
+pdf(
+    file   = file.path("out", "plots", "fig_7_frm_bs_std.pdf"),
+    width  = 10L,
+    height = 4L
+)
+
+# Plot.
+ggpubr::ggarrange(
+    plotlist = ps,
+    ncol     = 3L
+)
+
+# Save plot.
+dev.off()
+
+
+# Exports ----------------------------------------------------------------------
+
+
+qs::qsave(
+    x    = bs_res,
+    file = file.path("out", "tmp", "s8_frm_coef_bootstrap.qs")
+)
+
