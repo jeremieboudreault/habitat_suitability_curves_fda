@@ -27,6 +27,13 @@ source(file.path("R", "functions", "internals.R"))
 source(file.path("R", "functions", "fdboost_helpers.R"))
 
 
+# Parameters -------------------------------------------------------------------
+
+
+# Number of bootstrap.
+n_bs <- 1000L
+
+
 # Imports ----------------------------------------------------------------------
 
 
@@ -53,13 +60,6 @@ generate_bs_sample <- function(l) {
 }
 
 
-# Parameters (Number of bootstrap) ---------------------------------------------
-
-
-n_bs <- 1000L
-
-
-
 # Compute bootstrap of coefficients --------------------------------------------
 
 
@@ -80,11 +80,25 @@ bs_res <- lapply(
                     mstop_best   = frm_results[[var]]$mstop_best
                 )
 
-                # Return fitted coef.
-                return(coef(obj$fit)$smterms$`bsignal(X) %O% bbs(s)`$value)
+                # Fitted coefficients.
+                coef_fit <- coef(obj$fit)
+
+                # Extract matrix.
+                coef_mat <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$value
+
+                # Add row and column names.
+                rownames(coef_mat) <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$y
+                colnames(coef_mat) <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$x
+
+                # Return coef_mat.
+                return(coef_mat)
 
             }
         ))
     }
 )
+
+# Add names to the results
+names(bs_res) <- names(var_names)
+
 
