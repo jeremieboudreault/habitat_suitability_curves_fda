@@ -139,3 +139,30 @@ col_fun <- grDevices::colorRampPalette(col_1)
     )
 }
 
+
+# Plot all coefficients --------------------------------------------------------
+
+
+# Generate all plots.
+ps <- lapply(coef_list, .plot_coef)
+
+# Add x and y labs to some plots.
+ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
+ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
+
+# Save as a pdf for future use.
+pdf(
+    file   = file.path("out", "plots", "fig_6_frm_coef.pdf"),
+    width  = 10L,
+    height = 4L
+)
+
+# Plot.
+ggpubr::ggarrange(
+    plotlist = ps,
+    ncol     = 3L
+)
+
+# Save plot.
+dev.off()
+
