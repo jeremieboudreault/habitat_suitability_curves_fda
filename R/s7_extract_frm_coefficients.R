@@ -109,8 +109,9 @@ col_fun <- grDevices::colorRampPalette(col_1)
             lwd       = 0.1
         ) +
         scale_fill_gradientn(
-            colors   = col_fun(100L),
-            limits   = c(-max(abs(data$Z)), max(abs(data$Z)))
+            colors  = col_fun(100L),
+            limits  = c(-max(abs(data$Z)), max(abs(data$Z))),
+            guide   = guide_colourbar(barwidth = 12L)
         ) +
         scale_x_continuous(
             expand = c(0.001, 0.001)
@@ -127,7 +128,7 @@ col_fun <- grDevices::colorRampPalette(col_1)
             facets = ~ MODEL,
             nrow   = 1L,
             ncol   = 1L,
-            scales = "free",
+            scales = "free"
         ) +
         theme(
             panel.border     = element_blank(),
