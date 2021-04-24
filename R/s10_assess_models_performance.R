@@ -1,4 +1,4 @@
-# sZ_assess_models_performance.R
+# s10_assess_models_performance.R
 
 
 # Assess models performance.
@@ -74,6 +74,6 @@ names(performance) <- names(var_names)
 
 qs::qsave(
     x    = performance,
-    file = file.path("out", "tmp", "sZ_models_performance.qs")
+    file = file.path("out", "tmp", "s10_models_performance.qs")
 )
 
