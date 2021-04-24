@@ -1,4 +1,4 @@
-# s7_extract_frm_coefficients.R
+# s8_extract_frm_coefficients.R
 
 
 # Extract FRM coefficients and plot results.
@@ -32,7 +32,7 @@ source(file.path("R", "functions", "fdboost_helpers.R"))
 
 # Fitted functional models.
 frm_results <- qs::qread(
-    file = file.path("out", "tmp", "s6_frm_results.qs")
+    file = file.path("out", "tmp", "s7_frm_results_full.qs")
 )
 
 
