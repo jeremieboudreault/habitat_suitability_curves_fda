@@ -1,4 +1,4 @@
-# s8_compute_coef_bootstrap.R
+# s9_compute_coef_bootstrap.R
 
 
 # Compute regression coefficient bootstrap to calculate the standard error.
@@ -39,7 +39,7 @@ n_bs <- 1000L
 
 # Fitted functional models.
 frm_results <- qs::qread(
-    file = file.path("out", "tmp", "s6_frm_results.qs")
+    file = file.path("out", "tmp", "s7_frm_results_full.qs")
 )
 
 # Functional observations.
@@ -210,6 +210,6 @@ dev.off()
 
 qs::qsave(
     x    = bs_res,
-    file = file.path("out", "tmp", "s8_frm_coef_bootstrap.qs")
+    file = file.path("out", "tmp", "s9_frm_coef_bootstrap.qs")
 )
 
