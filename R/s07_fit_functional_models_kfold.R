@@ -1,7 +1,7 @@
 # s07_fit_functional_models_kfold.R
 
 
-# Step 07 : Fit functional regression model to curves with k-fold cross-validation.
+# Step 07 : Fit functional regression model with k-fold cross-validation.
 
 
 # Project : habitat_suitability_curves_fda
@@ -24,6 +24,7 @@ library(FDboost)
 
 
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "fdboost_helpers.R"))
 
 
@@ -32,7 +33,7 @@ source(file.path("R", "functions", "fdboost_helpers.R"))
 
 # Functional observations.
 fd_curves_list <- qs::qread(
-    file = file.path("out", "tmp", "s5_fd_curves_list.qs")
+    file = file.path("out", "tmp", "s06_fd_curves_list.qs")
 )
 
 
@@ -84,6 +85,6 @@ qs::qsave(
         D50      = res_d50,
         VELOCITY = res_velocity
     ),
-    file = file.path("out", "tmp", "s6_frm_results.qs")
+    file = file.path("out", "tmp", "s07_frm_results.qs")
 )
 
