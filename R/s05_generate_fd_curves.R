@@ -1,7 +1,7 @@
-# s4_generate_fd_curves.R
+# s05_generate_fd_curves.R
 
 
-# Generate functional curves for the further analysis.
+# Step 05 : Generate functional curves for the further analysis.
 
 
 # Project : habitat_suitability_curves_fda
@@ -23,7 +23,9 @@ library(ggforce)
 # Functions --------------------------------------------------------------------
 
 
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 
 
 # Imports ----------------------------------------------------------------------
@@ -31,7 +33,7 @@ source(file.path("R", "functions", "internals.R"))
 
 # Subsetted data for the analysis.
 data <- qs::qread(
-    file = file.path("out", "tmp", "s3_smr_pcr_subset_to_model.qs")
+    file = file.path("out", "tmp", "s03_smr_pcr_subset_to_model.qs")
 )
 
 
@@ -47,7 +49,7 @@ hab_avail <- data.table::melt.data.table(
 )
 
 # Add the <TYPE>.
-hab_avail[, TYPE := "Available"]
+hab_avail[, TYPE := "AVAILABLE"]
 
 
 # Generate selected habitat data -----------------------------------------------
@@ -69,7 +71,7 @@ irows <- unlist(lapply(
 hab_select <- hab_select[irows, ]
 
 # Add the <TYPE>.
-hab_select[, TYPE := "Selected"]
+hab_select[, TYPE := "SELECTED"]
 
 
 # Merge two tables -------------------------------------------------------------
@@ -80,13 +82,6 @@ hab <- data.table::rbindlist(list(hab_avail, hab_select))
 
 # Plot global histograms of availability / selection ---------------------------
 
-
-# Save as a pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_3_histograms_global.pdf"),
-    width  = 9L,
-    height = 4L
-)
 
 # Plot.
 ggplot(
@@ -100,32 +95,40 @@ geom_histogram(
         fill = TYPE,
         y    = ..density..
     ),
-    color="grey90",
-    lwd=0.5,
+    color    = "grey90",
+    lwd      = 0.5,
     position = "dodge",
-    bins=8
+    bins     = 8L
 ) +
 facet_wrap(
     facets = ~ VARIABLE,
-    nrow   = 2L,
+    nrow   = 1L,
     ncol   = 3L,
-    scales = "free"
+    scales = "free",
+    labeller = labeller(VARIABLE = unlist(var_names))
 ) +
 labs(
-    title = "",
+    title = NULL,
     y     = "Probability density function (PDF)",
-    x     = "Velocity (m/s)                                                   Depth (cm)                                                    D50 (mm)",
+    x     = "Depth (cm)                                                   D50 (mm)                                                    Velocity (m/s)",
     fill  = ""
 ) +
 theme(
     legend.position = "bottom"
 )  +
 scale_fill_manual(
-    values = c("#9B9B93", "#63B0CD")
-)
+    values = c("#9B9B93", "#63B0CD"),
+    breaks = names(hab_names),
+    labels = ul(hab_names)
+) +
+custom_theme()
 
 # Save plot.
-dev.off()
+ggsave(
+    file   = file.path("out", "plots", "fig_4_histograms_global.pdf"),
+    width  = 9L,
+    height = 4L
+)
 
 
 # Range of the habitat variables  ----------------------------------------------
@@ -144,7 +147,7 @@ hab_var_range
 
 # Manual adjustment for this specific dataset
 hab_var_range[2L, 2L] <- 100L
-hab_var_range[2L, 3L] <- 2L
+hab_var_range[2L, 3L] <- 1.75
 hab_var_range[2L, 4L] <- 300L
 
 # Check final result.
@@ -153,7 +156,7 @@ hab_var_range
 # Save for traceability.
 qs::qsave(
     x    = hab_var_range,
-    file = file.path("out", "tmp", "s4_hab_var_range.qs")
+    file = file.path("out", "tmp", "s05_hab_var_range.qs")
 )
 
 
