@@ -34,6 +34,11 @@ abind <- function(...) {
 }
 
 
+# ul : a small and compact version of unlist().
+ul <- function(x) {
+    unlist(x, recursive = FALSE, use.names = FALSE)
+}
+
 # fit_kde : Fit a KDE and scale it to 0 - 1.
 fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
 
