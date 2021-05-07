@@ -22,20 +22,20 @@ R scripts
 --------------------------------------------------------------------------------
 
 
-Scripts  are all from Jeremie Boudreault. They make the use of the R package `FDboost` for fitting __functional regression models__ (FRM) :
+Scripts are all from Jeremie Boudreault. They make the use of the R package `FDboost` for fitting __functional regression models__ (FRM) :
 
-+ `R/s01_clean_field_data.R` : clean the field data spreadsheets and produced cleaned datasets.
-+ `R/s02_compute_salmon_numbers.R`: convert measured salmon fork-lengths to number of fry and parr.
-+ `R/s03_select_study_case.R`: select optimal data subset for this project.
-+ `R/s04_map_studied_sites.R`: map sites studied in this project.
-+ `R/s05_generate_fd_curves.R`: generate (functional) curves of availability and selection/preference.
-+ `R/s06_prepare_data_modelling.R`: prepare data prior to fit function regression models (FRM).
-+ `R/s07_fit_function_models.R`: fit FRMs to curves using a parallelized k-fold cross-validation implementation of `FDboost::FDboost()`. 
-+ `R/s08_define_optimal_stopping.R`: choose optimal early stopping parameter.
-+ `R/s09_extract_frm_coefficients.R`: extract coefficients surfaces from fitted FRM.
-+ `R/s10_compute_coef_bootstrap.R`: compute standard-error of FRM coefficients using bootstrap. 
-+ `R/s11_build_classical_models.R`: build classical local and regional models of HSC.
-+ `R/s12_assess_models_performance.R`: calculate some goodness-of-fit metrics for the fitted models. 
++ `s01_clean_field_data.R` : clean the field data spreadsheets and produced cleaned datasets.
++ `s02_compute_salmon_numbers.R`: convert measured salmon fork-lengths to number of fry and parr.
++ `s03_select_study_case.R`: select optimal data subset for this project.
++ `s04_map_studied_sites.R`: map sites studied in this project.
++ `s05_generate_fd_curves.R`: generate (functional) curves of availability and selection/preference.
++ `s06_prepare_data_modelling.R`: prepare data prior to fit function regression models (FRM).
++ `s07_fit_function_models.R`: fit FRMs to curves using a parallelized k-fold cross-validation. 
++ `s08_define_optimal_stopping.R`: choose optimal early stopping parameter.
++ `s09_extract_frm_coefficients.R`: extract coefficients surfaces from fitted FRM.
++ `s10_compute_coef_bootstrap.R`: compute standard-error of FRM coefficients using bootstrap. 
++ `s11_build_classical_models.R`: build classical local and regional models of HSC.
++ `s12_assess_models_performance.R`: calculate some goodness-of-fit metrics for the fitted models. 
 
 
-___Enjoy ! ✌🏻___
+___Enjoy !___ ✌🏻
