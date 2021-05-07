@@ -1,7 +1,7 @@
-# s5_prepare_data_modelling.R
+# s06_prepare_data_modelling.R
 
 
-# Prepare data for modelling.
+# Step 06 : Prepare data prior to modelling.
 
 
 # Project : habitat_suitability_curves_fda
@@ -22,6 +22,7 @@ library(data.table)
 
 
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "globals.R"))
 
 
 # Imports ----------------------------------------------------------------------
