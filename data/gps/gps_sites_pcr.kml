@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Sites Faits (Ordre rivière)</name>
+    <Style id="icon-1899-F57C00-normal">
+      <IconStyle>
+        <color>ff007cf5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-F57C00-highlight">
+      <IconStyle>
+        <color>ff007cf5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-F57C00">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-F57C00-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-F57C00-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Site 9</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0Q_p-wj3WHGy4vBRvmiYr5QlLb4Tz2wsaXhHHHDcunOJFifv6DkqkY3ZrdxqqYy5JzjHZke8FSnSXPfcRW7iMvIJY3XrGe6GxaWY2vDfJ6VBJhyM8L74XPt0NxnxDITELZf0MEODc1WfVNoKSmvXtI3oTN7419iZ-_vLgAgPUBeG86hM-3Qv1W5et4LBn9tY3fFOqqcvBAW44GUXa-zSSIiRiQvbiVYZTyFzIQ3Jyf8y2eZIcI3HnYaPa7jTqKSq9vGFiz" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1qehQ_9hn4YQiIH-OchHU983tNihbJIif2PjZD4LmolQw1CDeS-slQoXq324ih8s-ytrcKx9CHXFgONlmFKxPdGLg876YU9-Mz0_6b8x830oRAx4HwqK2vPsnQpUjCpDT01LVueo4nOhVKxfSSRyj51QWwOEjpzRQBwHhu4hOC5g0xpVh-T3iRbt1I198Rgo75no1aVheWpf2ZQ3Ps22dqV4rZkXRz8847SerqtPyNGIMYFM33TgotviYu_EgeUP8zPdqiXg" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1mlP5b9BgZF3B1oiwq574FacJ_sPAY0P8gFcBznlcBVta2s0F54d27ph3eGEwM0OmjIypbLWB_AH0sjOLtQinjPS_l_TBsvYEl0TvGfi7KqV9YW_r9voHeWIYIZOc-9owzpaJLNmQs1vG1UKhkpFghezZBgwczThp7iFzbiw5-z5zTj8udmySFXpE5N19i49Kf_dsD5X4PLDYE-aN41c-LtamwksftlszzQoQR1wism8SMZHx3Y5W03I2aIBci41q-RNVS_OKr" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1Ve8ngcYW5JQuzibCFP7R1fdyx9WiedXtdei78c9ekNIw2Bi4jDv1KgCcuNJDbpJvp5_oCI7h8a7cvr99dh1AFul7zlq2QGC3z4VPqih1PQiY76v06H7suQRbGCraXQkXKSqJTbFyHUAKKHtkykT2p1Fb7cVqsRelC3jut0TZ5_5H7g7GQyVilG08ozS4VUq8B35xOxQ03TmrE6kYHtioI_JR0fYDfdE-5sJkDX_Li6SJAjiyKatZJSnw-658FilSWwPcNNA" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0Q_p-wj3WHGy4vBRvmiYr5QlLb4Tz2wsaXhHHHDcunOJFifv6DkqkY3ZrdxqqYy5JzjHZke8FSnSXPfcRW7iMvIJY3XrGe6GxaWY2vDfJ6VBJhyM8L74XPt0NxnxDITELZf0MEODc1WfVNoKSmvXtI3oTN7419iZ-_vLgAgPUBeG86hM-3Qv1W5et4LBn9tY3fFOqqcvBAW44GUXa-zSSIiRiQvbiVYZTyFzIQ3Jyf8y2eZIcI3HnYaPa7jTqKSq9vGFiz https://lh3.googleusercontent.com/umsh/ALX7VA1qehQ_9hn4YQiIH-OchHU983tNihbJIif2PjZD4LmolQw1CDeS-slQoXq324ih8s-ytrcKx9CHXFgONlmFKxPdGLg876YU9-Mz0_6b8x830oRAx4HwqK2vPsnQpUjCpDT01LVueo4nOhVKxfSSRyj51QWwOEjpzRQBwHhu4hOC5g0xpVh-T3iRbt1I198Rgo75no1aVheWpf2ZQ3Ps22dqV4rZkXRz8847SerqtPyNGIMYFM33TgotviYu_EgeUP8zPdqiXg https://lh3.googleusercontent.com/umsh/ALX7VA1mlP5b9BgZF3B1oiwq574FacJ_sPAY0P8gFcBznlcBVta2s0F54d27ph3eGEwM0OmjIypbLWB_AH0sjOLtQinjPS_l_TBsvYEl0TvGfi7KqV9YW_r9voHeWIYIZOc-9owzpaJLNmQs1vG1UKhkpFghezZBgwczThp7iFzbiw5-z5zTj8udmySFXpE5N19i49Kf_dsD5X4PLDYE-aN41c-LtamwksftlszzQoQR1wism8SMZHx3Y5W03I2aIBci41q-RNVS_OKr https://lh3.googleusercontent.com/umsh/ALX7VA1Ve8ngcYW5JQuzibCFP7R1fdyx9WiedXtdei78c9ekNIw2Bi4jDv1KgCcuNJDbpJvp5_oCI7h8a7cvr99dh1AFul7zlq2QGC3z4VPqih1PQiY76v06H7suQRbGCraXQkXKSqJTbFyHUAKKHtkykT2p1Fb7cVqsRelC3jut0TZ5_5H7g7GQyVilG08ozS4VUq8B35xOxQ03TmrE6kYHtioI_JR0fYDfdE-5sJkDX_Li6SJAjiyKatZJSnw-658FilSWwPcNNA</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.72697,48.236584,28.4
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 12</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA1aphHpspywR2BzYd2JPvAzk5pvI4cUA4xi4Lvq8JCqQY_coNBNYvdBTWGAz2jtOtDWmpyn5zJd_g2ALsNiGNAjMFHd5Xm_vVO8sCtkxVt0rxAnRtkMMMjSncniR32Ok9whZmyaj7E11w3PwSQIfZDqUmJzMwi3OPeAwSRvmzK3xHzAN47I9R0ukxvfV2mD1sw4jP2InHDeD4u8SYwsARibwYIbO-DdXm2cmBEYwhHd48zif1hfQYlOVrqjv87W9TbeQbTMnA" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA05INIXCNoMdzYiBro6h14pUvv8qKvYyy7IcVCUYHXfavh_12fCSBdR0AxW8n6NnbjB_LflHXofpzny2kvS97rpX4I166aZmvP1ZyhsCYya_LwMe-M_-DlK0b4PUlUe8ljnwLxBthyIPy7cq1BacnD1xijpTV5lLDPnZaM-S0YRgrxm8hK_t8QnwfoanTRcbigY5trU8EQFpSX3dy6q14Ca6gN-zKH38hBeGkHTeEg1-iv5Z3LgfDPtcu2VRrAIwKxLuWrL" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA2pQF526X1Z74H52PnLmTqH-st1USRLVXWmoPWnaKygc5dcFEh2pwGJcSEvCaw2991tjFTMpKB8xTGWJUlBiDDWBXXKdH_3cbqI5SjGqme4UTsNy7Mnf8DiB6dUQ3vfxYwBifoqFWXg6OJ0YggTDLc_-PLlJW8hYSd5jDQavwJ23pO_fMghDK7r1WRKYns4urhUzEYexbjqzYbDyE_0-AGyWBnsow_Wp_G2_FyRIBLllc4JgorYKpsqIlFMWSXNWVWnHrJ3" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA1aphHpspywR2BzYd2JPvAzk5pvI4cUA4xi4Lvq8JCqQY_coNBNYvdBTWGAz2jtOtDWmpyn5zJd_g2ALsNiGNAjMFHd5Xm_vVO8sCtkxVt0rxAnRtkMMMjSncniR32Ok9whZmyaj7E11w3PwSQIfZDqUmJzMwi3OPeAwSRvmzK3xHzAN47I9R0ukxvfV2mD1sw4jP2InHDeD4u8SYwsARibwYIbO-DdXm2cmBEYwhHd48zif1hfQYlOVrqjv87W9TbeQbTMnA https://lh3.googleusercontent.com/umsh/ALX7VA05INIXCNoMdzYiBro6h14pUvv8qKvYyy7IcVCUYHXfavh_12fCSBdR0AxW8n6NnbjB_LflHXofpzny2kvS97rpX4I166aZmvP1ZyhsCYya_LwMe-M_-DlK0b4PUlUe8ljnwLxBthyIPy7cq1BacnD1xijpTV5lLDPnZaM-S0YRgrxm8hK_t8QnwfoanTRcbigY5trU8EQFpSX3dy6q14Ca6gN-zKH38hBeGkHTeEg1-iv5Z3LgfDPtcu2VRrAIwKxLuWrL https://lh3.googleusercontent.com/umsh/ALX7VA2pQF526X1Z74H52PnLmTqH-st1USRLVXWmoPWnaKygc5dcFEh2pwGJcSEvCaw2991tjFTMpKB8xTGWJUlBiDDWBXXKdH_3cbqI5SjGqme4UTsNy7Mnf8DiB6dUQ3vfxYwBifoqFWXg6OJ0YggTDLc_-PLlJW8hYSd5jDQavwJ23pO_fMghDK7r1WRKYns4urhUzEYexbjqzYbDyE_0-AGyWBnsow_Wp_G2_FyRIBLllc4JgorYKpsqIlFMWSXNWVWnHrJ3</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.711945,48.261742,35.72
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 13</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2Y3M46R-Jtfu2c6jEfIM6QLHBv5odjXaS-q-SwQAEtLLFV87V3UnOSsQZ9Lm7f3PsIxXAR-zyYTO-ptQBGYdyzEdR158PSGr7HQE2QoPErLjqWJbcgpnJhu5ebg2-dgAJipZjT4Jv7BG85bI7pLM2VGnHGBkv86JmzBUeCmY8XFoi95F3xPc9RPsWyk3FsAuHWWkSEogxuIBPUAeW5P75Z7x2pHoHkLSYmmWy0aMmgYI7g_RXw2E-BWJidmOaSxYxka7Wr" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1zDTEMp1paw9R_oAZn567N8nzLy49ajqpI7CgOKeNtUDbY7JyD763lZIYh8zBD2bcP5Z5TjVqbbbxjFiyWu6AIpOlrBVffLH0bSyTvEswt3l26ERxoz3DE5YVldFBmBCIkrsly7zjL2tXFOsxWeu3PoB1ihNqkdKotRrJte68hTWHxLBit7nBNut-I-iJSBhfpygrb6im1eseaSuZXZGWLSMhWpbAwNmRPaR4E-xEQ_w6Cw5Zo_VdKMiiqTXbkFxBeW2_fTg" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2Y3M46R-Jtfu2c6jEfIM6QLHBv5odjXaS-q-SwQAEtLLFV87V3UnOSsQZ9Lm7f3PsIxXAR-zyYTO-ptQBGYdyzEdR158PSGr7HQE2QoPErLjqWJbcgpnJhu5ebg2-dgAJipZjT4Jv7BG85bI7pLM2VGnHGBkv86JmzBUeCmY8XFoi95F3xPc9RPsWyk3FsAuHWWkSEogxuIBPUAeW5P75Z7x2pHoHkLSYmmWy0aMmgYI7g_RXw2E-BWJidmOaSxYxka7Wr https://lh3.googleusercontent.com/umsh/ALX7VA1zDTEMp1paw9R_oAZn567N8nzLy49ajqpI7CgOKeNtUDbY7JyD763lZIYh8zBD2bcP5Z5TjVqbbbxjFiyWu6AIpOlrBVffLH0bSyTvEswt3l26ERxoz3DE5YVldFBmBCIkrsly7zjL2tXFOsxWeu3PoB1ihNqkdKotRrJte68hTWHxLBit7nBNut-I-iJSBhfpygrb6im1eseaSuZXZGWLSMhWpbAwNmRPaR4E-xEQ_w6Cw5Zo_VdKMiiqTXbkFxBeW2_fTg</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.709961,48.265661,30.92
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 18</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA1PQY7NSyWAkrCTA6yAzF5AlZrAnCHNO5sKrYwoVTmbuwbKyoISO3cuhqnMC2XCch7iODwGnDkmYq5d3iVEOt6ThyZsEQAgYxpI9UD_MxWHpmNXxH6AGY7GeTgbgYZmmN1EmNp6RRdaPNS-axNjQTF9AxMLtuz_0izGw4ER7saWdjnI28AIPzLf8ekgriYelRYy7pP9DIJGl3ReUZHcHve9WyqVLjkzhYo27RLAWb-PqlmtNZCfm8O7I0EAchlIeGbdruqO" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA3W-0BhjG_wd9nkRjs4kawYwBo8ZqQCXR9FOy26AZVPbb4kmBLC2RVmk_tq-rmKPQlk5x0jyZKQMAeBAtU18SflqY8C5rHcxzydzkjF6c2-2AYBdiCeyQRofvlHGpfQpHN_EHlEvATxap9hkV-ehRiaf_s5IXk5zimS_ARWxxhLCIcV1ASKGeGMTikYba_FNExmcCF04EjXgldqQ4zA9JvwoGFMl0701nXDdVGv7eZGVAQ-kutO2tfOiLG_ljkAOPZJv-I" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA3pdXT4K4Pq7MFEXiw_GPpBvp6Hdbx4YpekYV4P2_IrxCmWhfCM6aaMPjHA_La207MrvCgTcBJQoT10mS2Lg0zt-8LsYKFfO4lqKN_ShMlrZXUKrJCpeGHmWs0GJCQ48xO3Z7gjkguDgEQmToWG60qSS8pTvIxd_j7o53NU0ELDiFUV6dHRw7ciG_9U2SP-8juuPFroujuEZ9Chu9NRyqVqLhNuTNC1PKq3zKYOVIy4E1u-tP9TuEAD75bm2nnSTFRm-jPJ" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA1PQY7NSyWAkrCTA6yAzF5AlZrAnCHNO5sKrYwoVTmbuwbKyoISO3cuhqnMC2XCch7iODwGnDkmYq5d3iVEOt6ThyZsEQAgYxpI9UD_MxWHpmNXxH6AGY7GeTgbgYZmmN1EmNp6RRdaPNS-axNjQTF9AxMLtuz_0izGw4ER7saWdjnI28AIPzLf8ekgriYelRYy7pP9DIJGl3ReUZHcHve9WyqVLjkzhYo27RLAWb-PqlmtNZCfm8O7I0EAchlIeGbdruqO https://lh3.googleusercontent.com/umsh/ALX7VA3W-0BhjG_wd9nkRjs4kawYwBo8ZqQCXR9FOy26AZVPbb4kmBLC2RVmk_tq-rmKPQlk5x0jyZKQMAeBAtU18SflqY8C5rHcxzydzkjF6c2-2AYBdiCeyQRofvlHGpfQpHN_EHlEvATxap9hkV-ehRiaf_s5IXk5zimS_ARWxxhLCIcV1ASKGeGMTikYba_FNExmcCF04EjXgldqQ4zA9JvwoGFMl0701nXDdVGv7eZGVAQ-kutO2tfOiLG_ljkAOPZJv-I https://lh3.googleusercontent.com/umsh/ALX7VA3pdXT4K4Pq7MFEXiw_GPpBvp6Hdbx4YpekYV4P2_IrxCmWhfCM6aaMPjHA_La207MrvCgTcBJQoT10mS2Lg0zt-8LsYKFfO4lqKN_ShMlrZXUKrJCpeGHmWs0GJCQ48xO3Z7gjkguDgEQmToWG60qSS8pTvIxd_j7o53NU0ELDiFUV6dHRw7ciG_9U2SP-8juuPFroujuEZ9Chu9NRyqVqLhNuTNC1PKq3zKYOVIy4E1u-tP9TuEAD75bm2nnSTFRm-jPJ</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.73585,48.316697,57.36
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 19</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3ie8tdkLzESxWWP8cweCR7Ri9mHYZ1ho7fhMjyukzmvtSOsLev9YJtu5mdZQRwL5eqpKMuH0sED-9FdOXKrrpXQ4uOQHe9PoKRSYTMzHwA1ge8rdx1ccY-HAmYpjnIKIy44NBklvzMolnf1OL3OIxVfZv_NEyyC_CQi9-8-nfpj-TjooOs7tS6FXBOtBYoi5LEmN0IHHWTjJnWLeG9zRT35nOPoJbyun4qV5UtMBINpHZ6ywWis4NZeai3wp7NonihElCgdA" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1lQW99N31o9hs60GHv5bqvG5AJO2FT_82b-mtZ4yi_kpLyJcnupRJH9-N_W_AGFMm-gsDjTK2rrq-zq4j2LKn7wzhWBsrCA1U3d_0NCUZ-rCC6QviqW-WUO0bZ9r16KU4IlVBG9981Q2z6oG15PwLWMLVP-UWPAXRTmsLS_kELbyBo5bV8oaTCeA_mGcsRTYcDozvNbrKDp02jV4OfvT0M0Wy8nKcyTyspBxSLimuTlxoXFJSDJb6prX3CNKUG_QE6gau5cg" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0fVc1FOg_hLW5_8kzHH1Oiw5_-ytwZ2FhoIl_098AjuMfLXekxtMfx4tlCiFHLB1G59Yh6mZeons5bWrB1wZ97VwQOCpSMuqCjDfVz2hQvnKIkndy6FDjllnhLVrFiuoYAN2oTHc3iBjmHDwKeD05GWpbFB1FIjC5ulpMUgBXmFaWPBtdhtkUWd4Bm1MLgE5DlumUB10kXmpQXggclufv6EuWu_LHuckLTRxw_oPn0Cz8u-FO08gWsS0eC5lqcYlxgcs3K" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3ie8tdkLzESxWWP8cweCR7Ri9mHYZ1ho7fhMjyukzmvtSOsLev9YJtu5mdZQRwL5eqpKMuH0sED-9FdOXKrrpXQ4uOQHe9PoKRSYTMzHwA1ge8rdx1ccY-HAmYpjnIKIy44NBklvzMolnf1OL3OIxVfZv_NEyyC_CQi9-8-nfpj-TjooOs7tS6FXBOtBYoi5LEmN0IHHWTjJnWLeG9zRT35nOPoJbyun4qV5UtMBINpHZ6ywWis4NZeai3wp7NonihElCgdA https://lh3.googleusercontent.com/umsh/ALX7VA1lQW99N31o9hs60GHv5bqvG5AJO2FT_82b-mtZ4yi_kpLyJcnupRJH9-N_W_AGFMm-gsDjTK2rrq-zq4j2LKn7wzhWBsrCA1U3d_0NCUZ-rCC6QviqW-WUO0bZ9r16KU4IlVBG9981Q2z6oG15PwLWMLVP-UWPAXRTmsLS_kELbyBo5bV8oaTCeA_mGcsRTYcDozvNbrKDp02jV4OfvT0M0Wy8nKcyTyspBxSLimuTlxoXFJSDJb6prX3CNKUG_QE6gau5cg https://lh3.googleusercontent.com/umsh/ALX7VA0fVc1FOg_hLW5_8kzHH1Oiw5_-ytwZ2FhoIl_098AjuMfLXekxtMfx4tlCiFHLB1G59Yh6mZeons5bWrB1wZ97VwQOCpSMuqCjDfVz2hQvnKIkndy6FDjllnhLVrFiuoYAN2oTHc3iBjmHDwKeD05GWpbFB1FIjC5ulpMUgBXmFaWPBtdhtkUWd4Bm1MLgE5DlumUB10kXmpQXggclufv6EuWu_LHuckLTRxw_oPn0Cz8u-FO08gWsS0eC5lqcYlxgcs3K</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.737638,48.32085,49.85
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 14</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3En_PjQPZTKYlsbs1aLeY0OAO3AjSOGVx07tswO-bid0BpkhjMSgkjvNbxNvQnItDMDlSVWywulqM_8jaFc4rNKTajoebJuwo-Sq_DxZRwJwfoYxgXgi3AvINu39WBJIy7VZJewL5c_59WnTHSl9hIN5eExMLli2GIgCu9N442CfkC54lg6UnEacnA8jijl3xuFujJhDxhsmKFOU1r0PdhCJDrBGGpRwmNxS_Arqz4L8JMii7tdFlSw04MFW0Zhf2p-J3a" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3En_PjQPZTKYlsbs1aLeY0OAO3AjSOGVx07tswO-bid0BpkhjMSgkjvNbxNvQnItDMDlSVWywulqM_8jaFc4rNKTajoebJuwo-Sq_DxZRwJwfoYxgXgi3AvINu39WBJIy7VZJewL5c_59WnTHSl9hIN5eExMLli2GIgCu9N442CfkC54lg6UnEacnA8jijl3xuFujJhDxhsmKFOU1r0PdhCJDrBGGpRwmNxS_Arqz4L8JMii7tdFlSw04MFW0Zhf2p-J3a</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.709197,48.270041,36.81
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 20</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA1vhPwD6By4eTHXqBGQ8QP_BtF7fz6eyCWW5-IyqJwLQAYsIcDwnEaStlI1BHfVVyMfmx3lfcm9hBWQCW1Y9K22LfWHtyMfoS2H6yaiSX-1NDBFlAwUhxH-L8RQ_FzTjHylEQEqPeLbtstoi_jDZ85J7xBu8xhz2Y9lfIAWvdXh6MF6FcSvKesTfbXXyJxshRnRvYG1u2FzXk6B6o1DKLml78c6h8x5kN3fLRmXnyiWa7EOpsu9K3r9WDHMaskJUhlGxGxIWg" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0fA5gok6FzsYenGa1gAqe6atwsfMoFqV0b_g5QWHU33VgfoQRQBxKOORS-BHglI3flblsOOAAZcO4AqyYB7Q3UY48esi6OdWnWNqf9Me-i_WTjUhe-NQvVYTgUEdt1dscsQ1BqQAHYszA-p4Z7Vy0v6tbTjDR3_wemnRkbLIna9X3vipeLMWsBHpmDJPpPB7WnRBrk5SFBRXqjCAqaBl9pBj-IsgvIb4pfsh5vEcREpveo-2vs8B6BOq8ZvVCfgslAGOp4Tw" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA1vhPwD6By4eTHXqBGQ8QP_BtF7fz6eyCWW5-IyqJwLQAYsIcDwnEaStlI1BHfVVyMfmx3lfcm9hBWQCW1Y9K22LfWHtyMfoS2H6yaiSX-1NDBFlAwUhxH-L8RQ_FzTjHylEQEqPeLbtstoi_jDZ85J7xBu8xhz2Y9lfIAWvdXh6MF6FcSvKesTfbXXyJxshRnRvYG1u2FzXk6B6o1DKLml78c6h8x5kN3fLRmXnyiWa7EOpsu9K3r9WDHMaskJUhlGxGxIWg https://lh3.googleusercontent.com/umsh/ALX7VA0fA5gok6FzsYenGa1gAqe6atwsfMoFqV0b_g5QWHU33VgfoQRQBxKOORS-BHglI3flblsOOAAZcO4AqyYB7Q3UY48esi6OdWnWNqf9Me-i_WTjUhe-NQvVYTgUEdt1dscsQ1BqQAHYszA-p4Z7Vy0v6tbTjDR3_wemnRkbLIna9X3vipeLMWsBHpmDJPpPB7WnRBrk5SFBRXqjCAqaBl9pBj-IsgvIb4pfsh5vEcREpveo-2vs8B6BOq8ZvVCfgslAGOp4Tw</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.736081,48.327389,57.31
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 21</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0QXcQMMefjtoZ0YI0D6B-2T3YHKRC0AOuN1xqcje93D8DSR2u03PZ5Xd4E_2G8oojb42tj6wiDoeMIrlVT7nQAIs3IbMWOdVbnqbkLd9YZgsKPsr-j-w4NUwYniwiIXq3_EsE1EWbwaW5u53Rgwv3IXDeF_Tmbsu6bqA3IN4m_4aqI4B76APV1B0lUim1kET9ayRojY_HXqEhplEhDR6NQICfpS6TWrKTxJr3-kUo-6IAti7amS8T-q-NO0rCsLMn4lKaPEg" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA362BE2uriWoCFu7FHVNX59H1NXNFclK2k5683TjqxdgIj9ewLWhZuC-VdCElq0cTGoPDxgt0XaPXwkHVxLoZRL3eZMGDyjBprmKrIXmZQap9e6KC8X5r8zqD2T4FWW75p4sIPxCaDTZ1y4f7qhLINhZwID3ibg5AsLN0Vw03KqqyPfCSUyrvCDqdeqR1x0Eif9An0xubuPFswsvvmrApEyz5jXBAi1Sj7mXs81jYQHPukjXbmB9XAGo8cg0ycD9ujWxyVA" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0QXcQMMefjtoZ0YI0D6B-2T3YHKRC0AOuN1xqcje93D8DSR2u03PZ5Xd4E_2G8oojb42tj6wiDoeMIrlVT7nQAIs3IbMWOdVbnqbkLd9YZgsKPsr-j-w4NUwYniwiIXq3_EsE1EWbwaW5u53Rgwv3IXDeF_Tmbsu6bqA3IN4m_4aqI4B76APV1B0lUim1kET9ayRojY_HXqEhplEhDR6NQICfpS6TWrKTxJr3-kUo-6IAti7amS8T-q-NO0rCsLMn4lKaPEg https://lh3.googleusercontent.com/umsh/ALX7VA362BE2uriWoCFu7FHVNX59H1NXNFclK2k5683TjqxdgIj9ewLWhZuC-VdCElq0cTGoPDxgt0XaPXwkHVxLoZRL3eZMGDyjBprmKrIXmZQap9e6KC8X5r8zqD2T4FWW75p4sIPxCaDTZ1y4f7qhLINhZwID3ibg5AsLN0Vw03KqqyPfCSUyrvCDqdeqR1x0Eif9An0xubuPFswsvvmrApEyz5jXBAi1Sj7mXs81jYQHPukjXbmB9XAGo8cg0ycD9ujWxyVA</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.739775,48.340392,55.76
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 5</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3r39UYVgow1c0e0-pM9_SQIXpG_x2-9oOmP5m69tEUlgR7L05e7RfsD-LGZrbmoM_qzF6EV7tJeXpVAj7Y7mH3i3jOVWd5aoqhHG8NGrzLIJXjNMhSKjSL_gjDjcidkDNBuw7dnF0fXsecaJQXZEUwn66pvMpmz0aKC6FArnUjOEH3O1FtbnHr3ThR8JXh7lvwxhim18Wx5nzaflRU_ARh4aGtIFkLk3Yvti8TthK0DbBu2FUc-WGHVztFvcgOO2ri8jxnuQ" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0Ol6bgC_tZVSwBgOT6WjvK0XBxsGI17-GyQkndEQK4vFkRW1pSP7Fqa-IDWsIG49RGZcIPxczAk0Q-anP-X3nmmyV2KecMSpMJAEJDsFDQYBqD5ElAPSBqp12iEo6_NlZoPxE-SahLjciuyLVx37v2q30Ad9gMufAsEs9Wfeerh_p93cKd1a2VwOCyPjkBT8P09f3KNhLDVNKTltsiBugeMVggA_f5lvgLa7YRXcGN12IYlTqgIO_L8nQIVIO7Zc5uc4oe" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA3KNNGQT0PnDSJLVzKINMKQ7PVkvZx4J_py_mMlhh27_522w3d0iha7P9IPla_F-WOlm274nNax_DrOJcVCzP--Vw4jfP2MtTGTurA72evfhAYz_6xlJIAN_j-Xtbzk43h_JoMeu__eUTVPk3pVPJorujTh-L2Ihs8ZjNRdyQt8DnriYvqs_Yd-FFUiKQViO9ZX0ixT-0SMbKz26L5eyRCSmNFZTib0Rxk3RqbcXtG7IAurj6uPkXDDg8C-FlpDj9AtPLo" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3r39UYVgow1c0e0-pM9_SQIXpG_x2-9oOmP5m69tEUlgR7L05e7RfsD-LGZrbmoM_qzF6EV7tJeXpVAj7Y7mH3i3jOVWd5aoqhHG8NGrzLIJXjNMhSKjSL_gjDjcidkDNBuw7dnF0fXsecaJQXZEUwn66pvMpmz0aKC6FArnUjOEH3O1FtbnHr3ThR8JXh7lvwxhim18Wx5nzaflRU_ARh4aGtIFkLk3Yvti8TthK0DbBu2FUc-WGHVztFvcgOO2ri8jxnuQ https://lh3.googleusercontent.com/umsh/ALX7VA0Ol6bgC_tZVSwBgOT6WjvK0XBxsGI17-GyQkndEQK4vFkRW1pSP7Fqa-IDWsIG49RGZcIPxczAk0Q-anP-X3nmmyV2KecMSpMJAEJDsFDQYBqD5ElAPSBqp12iEo6_NlZoPxE-SahLjciuyLVx37v2q30Ad9gMufAsEs9Wfeerh_p93cKd1a2VwOCyPjkBT8P09f3KNhLDVNKTltsiBugeMVggA_f5lvgLa7YRXcGN12IYlTqgIO_L8nQIVIO7Zc5uc4oe https://lh3.googleusercontent.com/umsh/ALX7VA3KNNGQT0PnDSJLVzKINMKQ7PVkvZx4J_py_mMlhh27_522w3d0iha7P9IPla_F-WOlm274nNax_DrOJcVCzP--Vw4jfP2MtTGTurA72evfhAYz_6xlJIAN_j-Xtbzk43h_JoMeu__eUTVPk3pVPJorujTh-L2Ihs8ZjNRdyQt8DnriYvqs_Yd-FFUiKQViO9ZX0ixT-0SMbKz26L5eyRCSmNFZTib0Rxk3RqbcXtG7IAurj6uPkXDDg8C-FlpDj9AtPLo</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.764045,48.22418,12.8
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 6</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3ZBYWbSet0TXD79sz1G6UWu0iXpcvoksA6CyNwHzqYpW3SQLn92ABxfKHKceoQt8kHxGumtK3uiT4LSes_qGwxKIizJG6IgfOmzpz9MHol_O2dzGd1QFaqmYoQmqCYfmgvxA43HJf7H9E87CcIJrmsksZgiOkC443amJCGqCM1EytWUkZ3w0M9CEtYa76U89j18z7Ml4tBstjUApUe592qLscoMNzMHeDZYS6cCXrroCs6DHjXCoTdg4W5MdpwZCeUjSJpAg" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0Gl7X3w8CPj0--vFq6TtgCRE4HBIBwf3WK2xSqgNRx-Hl0HhY_NFGXov2Oiu70lOr8zEeBHVDNdH_Su551oXhaLqJX7h77YppYRv9fJbsPXOFPQvxY5WGubvUgjxJIkOzRHwEKUPTXnM3ekQxBkL2CCB_XwZ1RPCnGE50dwhCMFHtCC73fQls8WH9t2Xe1XJ9M0Q_4BgJ0QSJsG_n7U8p5vG8_g4A9nJ6LjkOt3_Xa37ikzv-uz6yLNo-CtNVjSjB_47SC" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3ZBYWbSet0TXD79sz1G6UWu0iXpcvoksA6CyNwHzqYpW3SQLn92ABxfKHKceoQt8kHxGumtK3uiT4LSes_qGwxKIizJG6IgfOmzpz9MHol_O2dzGd1QFaqmYoQmqCYfmgvxA43HJf7H9E87CcIJrmsksZgiOkC443amJCGqCM1EytWUkZ3w0M9CEtYa76U89j18z7Ml4tBstjUApUe592qLscoMNzMHeDZYS6cCXrroCs6DHjXCoTdg4W5MdpwZCeUjSJpAg https://lh3.googleusercontent.com/umsh/ALX7VA0Gl7X3w8CPj0--vFq6TtgCRE4HBIBwf3WK2xSqgNRx-Hl0HhY_NFGXov2Oiu70lOr8zEeBHVDNdH_Su551oXhaLqJX7h77YppYRv9fJbsPXOFPQvxY5WGubvUgjxJIkOzRHwEKUPTXnM3ekQxBkL2CCB_XwZ1RPCnGE50dwhCMFHtCC73fQls8WH9t2Xe1XJ9M0Q_4BgJ0QSJsG_n7U8p5vG8_g4A9nJ6LjkOt3_Xa37ikzv-uz6yLNo-CtNVjSjB_47SC</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.751377,48.223998,19.18
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 8</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2HcwmkDs3jrjvi9NjFEoINtavzg_TQzqrLQQIgAFLOw47QkxRv4u6X4-AlfNqUIOfBNkor59j_YVAJt_NrxC9q2vK-TVl60fhCndY0IkXGCHWq6K3IcOegdlHinjc0CZGRNhMZ9te7cDr2U5YBp6PQY3q8EygTQCwzbpXQK8wneySHuoEiqyTngOoM9IOrokYDFBGWvbdJruIfqke42lUgu21udUBOxFNIhSmW0NN8EkTpiYiRVMPwXTyxaVcjjBc7wVZa8g" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA2VG1L7Ttks4FKoIPEht1QBWcVBZNX5yZrVagdSWYd0Y1XBok4LEyvo-wwJvEoKrlf2YHMsTrngqKkiD6qb7kRgboECmPic3IqjElBvi_eGsRohfkymiWsiJeMKj2EQNZ8eOvq4Vv33A5XvU1mw7SsewPDmsQDPuOFPC1mdmiPG6QvIOriXVK9R1AXsFwS2ZJIE3D5adJRmRi0DKQE5-nbUB97efpc9P2GFlUAdWh90G9gaDvdCUxoF9BQcIXHI5RtHSGGW" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2HcwmkDs3jrjvi9NjFEoINtavzg_TQzqrLQQIgAFLOw47QkxRv4u6X4-AlfNqUIOfBNkor59j_YVAJt_NrxC9q2vK-TVl60fhCndY0IkXGCHWq6K3IcOegdlHinjc0CZGRNhMZ9te7cDr2U5YBp6PQY3q8EygTQCwzbpXQK8wneySHuoEiqyTngOoM9IOrokYDFBGWvbdJruIfqke42lUgu21udUBOxFNIhSmW0NN8EkTpiYiRVMPwXTyxaVcjjBc7wVZa8g https://lh3.googleusercontent.com/umsh/ALX7VA2VG1L7Ttks4FKoIPEht1QBWcVBZNX5yZrVagdSWYd0Y1XBok4LEyvo-wwJvEoKrlf2YHMsTrngqKkiD6qb7kRgboECmPic3IqjElBvi_eGsRohfkymiWsiJeMKj2EQNZ8eOvq4Vv33A5XvU1mw7SsewPDmsQDPuOFPC1mdmiPG6QvIOriXVK9R1AXsFwS2ZJIE3D5adJRmRi0DKQE5-nbUB97efpc9P2GFlUAdWh90G9gaDvdCUxoF9BQcIXHI5RtHSGGW</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.733225,48.233738,19.62
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 10</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA33rWf04S9cNYFIioyP8ViU8eUdRHGMMd7etk6iFw839KJJn1YqQzcpw8foOWJ6oLTHXJWXrNd0626_GszJhFmyckX7tuRAAg-aCo63VTROlse_-CcPlL0mFW0GAEm3tS-0VdN8ml3fYCoVGCWBVDCzA_O09M2EwVHHoatmNluR4cL_0rHlq74_oxAqSXF3BlodAyYaS3aiIv4NOjsIy9OdDlrAUltzPejeDhtx5CkUTKO_BqX2IooS-kJRdJJab_Ft1bbM" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA3sdT900-BbBnSm1EmHjAw93JqDRbHP_jQHT_XdORAU0Tpb7FCvR_fYWdpCGRX8CeOMd0zZn7wlxZi6fBR-2-WfiTNvMSCpAGcw3pokO2skZwycl6hWSCuk4wP85W1AvDDGTK175h1Ja_5JzrynNCL0ck3qXxBawsP0tiBJeHZHhFXWK7_hHn90x7shcEtSa-i09WspZEWjQh_fXI-Evtllz6yRnX9ebrn_ulKUXX52AFX998_swObP96w3yGj01vyg4R1N" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA33rWf04S9cNYFIioyP8ViU8eUdRHGMMd7etk6iFw839KJJn1YqQzcpw8foOWJ6oLTHXJWXrNd0626_GszJhFmyckX7tuRAAg-aCo63VTROlse_-CcPlL0mFW0GAEm3tS-0VdN8ml3fYCoVGCWBVDCzA_O09M2EwVHHoatmNluR4cL_0rHlq74_oxAqSXF3BlodAyYaS3aiIv4NOjsIy9OdDlrAUltzPejeDhtx5CkUTKO_BqX2IooS-kJRdJJab_Ft1bbM https://lh3.googleusercontent.com/umsh/ALX7VA3sdT900-BbBnSm1EmHjAw93JqDRbHP_jQHT_XdORAU0Tpb7FCvR_fYWdpCGRX8CeOMd0zZn7wlxZi6fBR-2-WfiTNvMSCpAGcw3pokO2skZwycl6hWSCuk4wP85W1AvDDGTK175h1Ja_5JzrynNCL0ck3qXxBawsP0tiBJeHZHhFXWK7_hHn90x7shcEtSa-i09WspZEWjQh_fXI-Evtllz6yRnX9ebrn_ulKUXX52AFX998_swObP96w3yGj01vyg4R1N</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.721693,48.240543,24.6
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 15</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3-30O72U-JWc95W1X6yN3TMEQuudGJR6AgaHG7UxM7iCDDngkHGtmBY0maKwm4GD4BWtEV7gsrJOgp0mpqmZoOyrPglIJIxikJP3wZuc1GwQW9Tj5GHkOIPJ7PTjnGTlRU7JjPqHhBeTXXolAAfZaCpjCVIqdf5Eb-ZU0z1-1ReOvc-P51tQ_H-_t5M9OGRAN6KzmEzeXN6KG5MZBib8t2XntdK-qulYLAg8c5ydPG8T9wulWzUm1hXXH-Zzu48QSedzXO" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0GL2yjTmqaoP2ODyzPMdcF32x0R89ulByoYLs8xvGu_40X6a0ZhEize37qnwiLV9sgyS_L6ufllae4huXBGvJgePlcBsR5aJ7Dd6GB6sW51a4m7jNeWmjKc8BpPJ4UGVVkmoiu2YdFQQFfh7DIhjWcWq_nxf8naSP7Uk63Rvpm1bUaP4QW_08mlIYma8KRLn4Qid0xupKimq4K9-xgA_hDzpcrD20okuexN5IRuVt2izykMRAi1IV5TaT9y_lJifsGP4kCDQ" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3-30O72U-JWc95W1X6yN3TMEQuudGJR6AgaHG7UxM7iCDDngkHGtmBY0maKwm4GD4BWtEV7gsrJOgp0mpqmZoOyrPglIJIxikJP3wZuc1GwQW9Tj5GHkOIPJ7PTjnGTlRU7JjPqHhBeTXXolAAfZaCpjCVIqdf5Eb-ZU0z1-1ReOvc-P51tQ_H-_t5M9OGRAN6KzmEzeXN6KG5MZBib8t2XntdK-qulYLAg8c5ydPG8T9wulWzUm1hXXH-Zzu48QSedzXO https://lh3.googleusercontent.com/umsh/ALX7VA0GL2yjTmqaoP2ODyzPMdcF32x0R89ulByoYLs8xvGu_40X6a0ZhEize37qnwiLV9sgyS_L6ufllae4huXBGvJgePlcBsR5aJ7Dd6GB6sW51a4m7jNeWmjKc8BpPJ4UGVVkmoiu2YdFQQFfh7DIhjWcWq_nxf8naSP7Uk63Rvpm1bUaP4QW_08mlIYma8KRLn4Qid0xupKimq4K9-xgA_hDzpcrD20okuexN5IRuVt2izykMRAi1IV5TaT9y_lJifsGP4kCDQ</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.722778,48.28636,38.25
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 16</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3vg6v4jrjB6HyK5oDCrRi83WsBPZimN2rI6HhIShBxenUlGhvQGunmcJnF69M0Ep0TpisURHyj6t8vv5Il0GzGXJejMRnGe4ZAYdiV6lOaibmfV7Z0q5EuNHn8w0J0zpI_j9xm9sS-2JphIyHx9tSWG_FEz0UaRsuTrbkw9HKU-F9Wd5VDcU-S-Rvoh-9uupOQ-lDAyX7vBINb0bpccTGNGnVFKrCGbQ_bl_ebETyUeKOwp1IuEHYUcIjb5HQiUq3jM2oz2JGG" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0276AtKhQDd5owKIdgYdGKreO9RVA8ppoNUlAk9vqvqhwaf5q1Pz0lGTgjhd-zQRyt89UWDkUb3_sH_VDxVQ-4WNsdXiC6fkNTHtyfzRShtSYOKTCji46lx5frnOzZAjuPonqcT5GY9uQfETA-JMdjF7lfSu6w7OU8Iy3P6VOkSIiY4TE7KVzMeeOMipRdHp0WOtPnPS9-0vwC76p7K1DKdL_yJKZOPxPcYuAGG670-EzyUoCuRc4Lz5RETAc-Sc_0jVI" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3vg6v4jrjB6HyK5oDCrRi83WsBPZimN2rI6HhIShBxenUlGhvQGunmcJnF69M0Ep0TpisURHyj6t8vv5Il0GzGXJejMRnGe4ZAYdiV6lOaibmfV7Z0q5EuNHn8w0J0zpI_j9xm9sS-2JphIyHx9tSWG_FEz0UaRsuTrbkw9HKU-F9Wd5VDcU-S-Rvoh-9uupOQ-lDAyX7vBINb0bpccTGNGnVFKrCGbQ_bl_ebETyUeKOwp1IuEHYUcIjb5HQiUq3jM2oz2JGG https://lh3.googleusercontent.com/umsh/ALX7VA0276AtKhQDd5owKIdgYdGKreO9RVA8ppoNUlAk9vqvqhwaf5q1Pz0lGTgjhd-zQRyt89UWDkUb3_sH_VDxVQ-4WNsdXiC6fkNTHtyfzRShtSYOKTCji46lx5frnOzZAjuPonqcT5GY9uQfETA-JMdjF7lfSu6w7OU8Iy3P6VOkSIiY4TE7KVzMeeOMipRdHp0WOtPnPS9-0vwC76p7K1DKdL_yJKZOPxPcYuAGG670-EzyUoCuRc4Lz5RETAc-Sc_0jVI</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.72447,48.299756,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 11</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2HBg9cnmeHiMvESO1zA-oc9ZXx5gnxt8zuUfq7-n73i4GPPBkiB9TbM4KZeVTa2devsQ8CWcrOw1mtrwBm7mNb8nSj1M2H6CqFpLywsHwqJNOk-X6TMY0UvWQLVhhRpIkqKD6ui0LLGcknEKeGvef04HnYM-Pi1_rksPsbPM_NEiBUh9m-UtkTOR44rVQ_80s1Vq1ikle374h-XKH9FQfBzl1DSP8E5IwQiA-10o42THbIOQA91zkMCB8QyjmfdBmBujAd_yc" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0kxB1bAlVXQN9yaNw8Z-B0PSix2jiWgYmHG3o5lBIuKDVkdd06uRg50ITibt41AnOcRwXTrZlOJqWMaGljImm9W-uCWZ9FtMWDLfLmj3dZ1zYx5wKQVcTl0LxNt9Sg-Gzi8JJtwQD_gKzNpKk0VWm1GZ8Rz22Ml_AJODQcRAtDFMToaCmoaBVqnCDgKUos914WvZOGgx9S2ZV4289MBOXmIS_Y7sxaa_B_2KGtKulwOhw5-WlsRiUo3rD1uc_FqB4ZGjo" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2HBg9cnmeHiMvESO1zA-oc9ZXx5gnxt8zuUfq7-n73i4GPPBkiB9TbM4KZeVTa2devsQ8CWcrOw1mtrwBm7mNb8nSj1M2H6CqFpLywsHwqJNOk-X6TMY0UvWQLVhhRpIkqKD6ui0LLGcknEKeGvef04HnYM-Pi1_rksPsbPM_NEiBUh9m-UtkTOR44rVQ_80s1Vq1ikle374h-XKH9FQfBzl1DSP8E5IwQiA-10o42THbIOQA91zkMCB8QyjmfdBmBujAd_yc https://lh3.googleusercontent.com/umsh/ALX7VA0kxB1bAlVXQN9yaNw8Z-B0PSix2jiWgYmHG3o5lBIuKDVkdd06uRg50ITibt41AnOcRwXTrZlOJqWMaGljImm9W-uCWZ9FtMWDLfLmj3dZ1zYx5wKQVcTl0LxNt9Sg-Gzi8JJtwQD_gKzNpKk0VWm1GZ8Rz22Ml_AJODQcRAtDFMToaCmoaBVqnCDgKUos914WvZOGgx9S2ZV4289MBOXmIS_Y7sxaa_B_2KGtKulwOhw5-WlsRiUo3rD1uc_FqB4ZGjo</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.714536,48.250985,39.73
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 23</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2jrg46Awa3wi8TEKtZdyS5EQbCAXP14uzdiied4ap10Cv-yeAC882JzcYRBaELg8y_yBYlFHl6RshvxpYsoaF7Zj2yQYw1FgJvCQaoN-xonxtZ7-DRVKz3Su3wE_hNynaYVxcI9Jp9UvXiBlD9A7j3RtROThWgn41GunQaGPZ2nxolXc9JCk_77pS7vDvqy_-dL4CHljWvMOnY9VLypaJVsA_OsojCAeFl2bl1MimAlwdEDIZC6g0nks30dnpQR975-hWi" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA012L0L7yLgrr9qVfcqprPlXRpoiO2niuuKtO9153pEQg7II_iaMN2GrHf1GtXT7LrjYziMx2W89Hv2MjEFdHxERdLS36vjfm_N1LD6fLonjMa3gk_vckNm1FVzhxXzafmRSQFDg_hd5sht_mQgkaRB_3iB1MQOj30k3ELB-69KYfrAfFno3OB8EwJSrjZDaYJP_m4HvFvK7SIEMGh1LthEfr-32b-KMQ0Mzmg5Js3mVpsB9S28Swr5K2EoEmfof-TiFXErgw" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2jrg46Awa3wi8TEKtZdyS5EQbCAXP14uzdiied4ap10Cv-yeAC882JzcYRBaELg8y_yBYlFHl6RshvxpYsoaF7Zj2yQYw1FgJvCQaoN-xonxtZ7-DRVKz3Su3wE_hNynaYVxcI9Jp9UvXiBlD9A7j3RtROThWgn41GunQaGPZ2nxolXc9JCk_77pS7vDvqy_-dL4CHljWvMOnY9VLypaJVsA_OsojCAeFl2bl1MimAlwdEDIZC6g0nks30dnpQR975-hWi https://lh3.googleusercontent.com/umsh/ALX7VA012L0L7yLgrr9qVfcqprPlXRpoiO2niuuKtO9153pEQg7II_iaMN2GrHf1GtXT7LrjYziMx2W89Hv2MjEFdHxERdLS36vjfm_N1LD6fLonjMa3gk_vckNm1FVzhxXzafmRSQFDg_hd5sht_mQgkaRB_3iB1MQOj30k3ELB-69KYfrAfFno3OB8EwJSrjZDaYJP_m4HvFvK7SIEMGh1LthEfr-32b-KMQ0Mzmg5Js3mVpsB9S28Swr5K2EoEmfof-TiFXErgw</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.747656,48.353243,66.17
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 25</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA3Ec0QDzeS8NDLeg5d8mSpCuKzuu4mJVVrfnoTqB5V9BwvKDPo4xRz2kMJ2KPwku7Ws_GWwKd_8YIL700q-3Ws6xvYSnzPJcwX8rfygIdAKBu7nEFc60sdWF229SQIKRmo1e5nlHCTn2t3Gr2eK3K9u1VBZaTKSDWgEb7qJNsscX3FPA1HMIGO5yU3uOZ-dOznDafXkW3bZ2oX_rO5rakEAvAtA8e__NOFFBjMv0OFZtV9OsKx3cujzT5EiuUXsgWyjPriMqg" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA244fmeQ3h2lLcau_PDqYtbKMHFG6Fmw5a3iEgKgxawsKnYqXAIt6FaqR9di4unW_I0qfeWuNKqViA-65Tds0v7OJsr_m_tNR6gV07VILXLCrgBH8LmMftG4e4jlPrcYgqo_iaIPuQHUnHurwQhGp5CNLCOEuO1GhGruAgo8S06ZbFYfVMSaETYxJK6clGG4Wv5_QCDjx3EFwH_4tPy8p-yPOekXGLeJtRVB-Ev6Kl4QZp7XHoU3zDMvJyAm6SRdMFh5WOjUg" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA3Ec0QDzeS8NDLeg5d8mSpCuKzuu4mJVVrfnoTqB5V9BwvKDPo4xRz2kMJ2KPwku7Ws_GWwKd_8YIL700q-3Ws6xvYSnzPJcwX8rfygIdAKBu7nEFc60sdWF229SQIKRmo1e5nlHCTn2t3Gr2eK3K9u1VBZaTKSDWgEb7qJNsscX3FPA1HMIGO5yU3uOZ-dOznDafXkW3bZ2oX_rO5rakEAvAtA8e__NOFFBjMv0OFZtV9OsKx3cujzT5EiuUXsgWyjPriMqg https://lh3.googleusercontent.com/umsh/ALX7VA244fmeQ3h2lLcau_PDqYtbKMHFG6Fmw5a3iEgKgxawsKnYqXAIt6FaqR9di4unW_I0qfeWuNKqViA-65Tds0v7OJsr_m_tNR6gV07VILXLCrgBH8LmMftG4e4jlPrcYgqo_iaIPuQHUnHurwQhGp5CNLCOEuO1GhGruAgo8S06ZbFYfVMSaETYxJK6clGG4Wv5_QCDjx3EFwH_4tPy8p-yPOekXGLeJtRVB-Ev6Kl4QZp7XHoU3zDMvJyAm6SRdMFh5WOjUg</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.763389,48.361166,68.96
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 3</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2gpFUrqcsYqPrVLi5vg6DMI6BxIUPZuqPVb1MXXdIDgnTEtNoOKz82kQu868QrXUNGk4rUY9O3GO2UfyubVZEm8bGbmtIvn_gC1T8qSikC4t1mYmhlY_uo4H0tQTPRf3Q8cdIc3lt7FQ6XnOq0LKhhxxnlteDaJXbZnppgWjae5GpTcmAPKS9lXuTQUJkYyXKtSxk8BKmvI5DKUEhLtftb3K0MwW9mTRv5TqjrNbES7dTB-NP-OjXE10IgdmXT7pbjXDMZ" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0i9VJhClAXS9bMGo7ZBlqsliFwV1-eJxOJ9RcMMTEDzF984hkfpzQaRE5VGD2eGYisFR7tM643UnCPrgAQFNrG9kkHP0B_aDpM9EX420UNaPSpnan6-VpW_embf9fCkwFrINq9ilCczBOCbDxc13_KP0PhZG42_Hb4Ng8wqYT3gAv71MBgTZtD2xLSR2YU5J2xShY60Rn91BB9QrZtCNhWN6eEYJLvLU8dY8O_NPEbMzmAlx0qHVmK_BjJxXN0x2IIdTKy" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1j4ZQxQih_rE2HbFTQ2Ms9IBbqHe76mgqwNnNlc4k3em-RVtTGf_riWdr3ZUvlnqcgFVc2rRsrlwFk6ayD-ir9EHmHcDgq5Uv3m24X5kOqiKC_FHJFEWWBTmg9zhHewLKr-bIkyeiBWsmKvu0oT6-BZmUCFEBa4vlhjurSO6k4fTHEhvg7caRFuTMXKY3RBVm67VXLI7w9S1kV7x5K4eJ8XFZXJr9rLQ3iN3hqg-bqq8F25Za0TWGIdl97DS6XgMSWVQsK" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2gpFUrqcsYqPrVLi5vg6DMI6BxIUPZuqPVb1MXXdIDgnTEtNoOKz82kQu868QrXUNGk4rUY9O3GO2UfyubVZEm8bGbmtIvn_gC1T8qSikC4t1mYmhlY_uo4H0tQTPRf3Q8cdIc3lt7FQ6XnOq0LKhhxxnlteDaJXbZnppgWjae5GpTcmAPKS9lXuTQUJkYyXKtSxk8BKmvI5DKUEhLtftb3K0MwW9mTRv5TqjrNbES7dTB-NP-OjXE10IgdmXT7pbjXDMZ https://lh3.googleusercontent.com/umsh/ALX7VA0i9VJhClAXS9bMGo7ZBlqsliFwV1-eJxOJ9RcMMTEDzF984hkfpzQaRE5VGD2eGYisFR7tM643UnCPrgAQFNrG9kkHP0B_aDpM9EX420UNaPSpnan6-VpW_embf9fCkwFrINq9ilCczBOCbDxc13_KP0PhZG42_Hb4Ng8wqYT3gAv71MBgTZtD2xLSR2YU5J2xShY60Rn91BB9QrZtCNhWN6eEYJLvLU8dY8O_NPEbMzmAlx0qHVmK_BjJxXN0x2IIdTKy https://lh3.googleusercontent.com/umsh/ALX7VA1j4ZQxQih_rE2HbFTQ2Ms9IBbqHe76mgqwNnNlc4k3em-RVtTGf_riWdr3ZUvlnqcgFVc2rRsrlwFk6ayD-ir9EHmHcDgq5Uv3m24X5kOqiKC_FHJFEWWBTmg9zhHewLKr-bIkyeiBWsmKvu0oT6-BZmUCFEBa4vlhjurSO6k4fTHEhvg7caRFuTMXKY3RBVm67VXLI7w9S1kV7x5K4eJ8XFZXJr9rLQ3iN3hqg-bqq8F25Za0TWGIdl97DS6XgMSWVQsK</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.793705,48.202083,9.52
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 17</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0lUfnRcbf9WV6jIZ6cfFQEW48G10YA_iFi5dHrCPjIAXyfzn7JIkcHKTPN0NC43FYUgy_SMvfytU3Xilx-mWe-8q53_1eMwB4nBdWOOImz2TUv7RBY2Tcm09z1fO5I7XgZ5kFGrURx5sh2_WPksXf9B9wHQgEmk_fWFc7CwqDdUolbxQkdGUClMSwk3_QWLaiaUDgo34I1Ycp9UjgckjLDk-xI5x2apYL06L--1c8ZT0mS_CEHyOjVWWuUj07bXiTPB_FmDA" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA2lJKYCg2U-_-BpHZ1TeXdp2QM1fISJ9yPOCx7nQZUcBNAHa4P5XZmoZpRcI7d_Vj7QZ8NvZz1O8FwaStv05V6TRXF0yG_j-2-DautTO-oGPoKX7mPE-EtH4RuPw3u2vp-oux4Mt5s2Jkv5oe1yNDxv_JYfjeSyCPYvoOJs3xtAX2363JX-6-FM89Ruzb1pZHh11PCMJ4IFV-nuH9A4bxXg_VCTuy5pR7WIDNGs_2j2jJN2Qfq-wTYYO6RxA1CXozlTrl0g" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA0FzpiLTS4aizRtawvOP2bPLo49OCXUSkFkEvB5wUIAFDY9lXfA0gEHupDFE_W1rfBnDO_N0-kX6gr8hqnHByDHFvzn-TbctyL--hmf4fYKa8Vxs0slkLd47LrdvJG6Fw3opqgt7de8L2BmBzRZz5_iRK05gxxspJqtmiXAPJIEaMAh5nfSHUkyTOvdY7Yv4QWHJGLmp-RVUQFrJnc_t2guHf1EtAm9_2wRvuHxZFIc2003s4eNxbUcgEX3r03NaKoK_C3PjJ8" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0lUfnRcbf9WV6jIZ6cfFQEW48G10YA_iFi5dHrCPjIAXyfzn7JIkcHKTPN0NC43FYUgy_SMvfytU3Xilx-mWe-8q53_1eMwB4nBdWOOImz2TUv7RBY2Tcm09z1fO5I7XgZ5kFGrURx5sh2_WPksXf9B9wHQgEmk_fWFc7CwqDdUolbxQkdGUClMSwk3_QWLaiaUDgo34I1Ycp9UjgckjLDk-xI5x2apYL06L--1c8ZT0mS_CEHyOjVWWuUj07bXiTPB_FmDA https://lh3.googleusercontent.com/umsh/ALX7VA2lJKYCg2U-_-BpHZ1TeXdp2QM1fISJ9yPOCx7nQZUcBNAHa4P5XZmoZpRcI7d_Vj7QZ8NvZz1O8FwaStv05V6TRXF0yG_j-2-DautTO-oGPoKX7mPE-EtH4RuPw3u2vp-oux4Mt5s2Jkv5oe1yNDxv_JYfjeSyCPYvoOJs3xtAX2363JX-6-FM89Ruzb1pZHh11PCMJ4IFV-nuH9A4bxXg_VCTuy5pR7WIDNGs_2j2jJN2Qfq-wTYYO6RxA1CXozlTrl0g https://lh3.googleusercontent.com/umsh/ALX7VA0FzpiLTS4aizRtawvOP2bPLo49OCXUSkFkEvB5wUIAFDY9lXfA0gEHupDFE_W1rfBnDO_N0-kX6gr8hqnHByDHFvzn-TbctyL--hmf4fYKa8Vxs0slkLd47LrdvJG6Fw3opqgt7de8L2BmBzRZz5_iRK05gxxspJqtmiXAPJIEaMAh5nfSHUkyTOvdY7Yv4QWHJGLmp-RVUQFrJnc_t2guHf1EtAm9_2wRvuHxZFIc2003s4eNxbUcgEX3r03NaKoK_C3PjJ8</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.734129,48.305915,48.4
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 27</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0-C4JxtWhbdBgxaSpm9UcutGW2cFch3_ygKKCgxP2h09dJNIFPZHL__t4TdqrDfWUkaNy-vNcSgzpTRSEEDWrGKaCAGlbToeHoduIMkaEzEKJN_s-vEv7_s_0IIB5ObAb-EADTckDMXf46SjH_x_b8iKr_R82AVLA3ihe5v8vxkVQMG6HAySck3TFgrrATSMp62XCYHlxKT795jnISf2Y38lLk5HiBqhvf5ga8pZtkB2c5uka7173VhA67r5au90UJjg149A" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA3aFBih_kIoHs6fSIMur3vr5IN5UBai3SRTKWrwR6rFUHVknCz4q1BDHooKbFcV6p2bGBN3TK_1BQUSGdZWioyfMMwVP27yxZ696GvCbICaIoJBZ7BYqHXFRZwG7HfoExAioN8FiRBmZElyxBwgVnLaW6lWS_Yz3t4_obGo1KMmqsBoOriXF7yfr4PxIeSgwsBChdpIeA3bL8SQwVoQs7FW1WjUdj-E_rMaaeIbre9OzHGt2hJxwS4xpyUZfefP1Nv7OE54Iw" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0-C4JxtWhbdBgxaSpm9UcutGW2cFch3_ygKKCgxP2h09dJNIFPZHL__t4TdqrDfWUkaNy-vNcSgzpTRSEEDWrGKaCAGlbToeHoduIMkaEzEKJN_s-vEv7_s_0IIB5ObAb-EADTckDMXf46SjH_x_b8iKr_R82AVLA3ihe5v8vxkVQMG6HAySck3TFgrrATSMp62XCYHlxKT795jnISf2Y38lLk5HiBqhvf5ga8pZtkB2c5uka7173VhA67r5au90UJjg149A https://lh3.googleusercontent.com/umsh/ALX7VA3aFBih_kIoHs6fSIMur3vr5IN5UBai3SRTKWrwR6rFUHVknCz4q1BDHooKbFcV6p2bGBN3TK_1BQUSGdZWioyfMMwVP27yxZ696GvCbICaIoJBZ7BYqHXFRZwG7HfoExAioN8FiRBmZElyxBwgVnLaW6lWS_Yz3t4_obGo1KMmqsBoOriXF7yfr4PxIeSgwsBChdpIeA3bL8SQwVoQs7FW1WjUdj-E_rMaaeIbre9OzHGt2hJxwS4xpyUZfefP1Nv7OE54Iw</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.783497,48.375315,83.14
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 28</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2nMd-4VSU5XJbpDlv2afvi9zBuQxHArGdswNHUJL3FQwhdb8eqBdElvbmrP-100_8LXsjSlwVps4yQytV8VUUZQHvkeAnAgsXQSrtB_HMwyCAFHWNkRxH7W6j2hghVGrQ2WkTOdyor1uQQJzq0OlILbrnS_b9YghNWWHQBT2k4Kyo9wIi-UB2qSrqipJbuUTfUYtafCFror7YoXfRVTrenVMEw1TWNLb-YC7LYyJhMIolSK6oFErCi-ayud4Se6gnDKjVlr0gj" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA2wpSP8RmdsO6hYhUVR27g0DJjhpBCQh3VGQNq6_Kd932CZHdOu5c8zhXcmYCH8PxpaqodH5W9aZKDQD5WnD2klcDjrNg2zGQDRpqVArV9VqgpnjggVSp_kos8AxHGjL2bu54p0y1bDIIuQtXVYxkhxHkk7lQiISV-K3NeFB5qIlIIC3LLG7ylbaITV2_zSTlCa5qIyhk3B7Ly9Y-E9W9SUeepmqomp01mYqKUvXdJR54an3eeL_ar_ev3JOm1WtoEoZe9cOQ" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2nMd-4VSU5XJbpDlv2afvi9zBuQxHArGdswNHUJL3FQwhdb8eqBdElvbmrP-100_8LXsjSlwVps4yQytV8VUUZQHvkeAnAgsXQSrtB_HMwyCAFHWNkRxH7W6j2hghVGrQ2WkTOdyor1uQQJzq0OlILbrnS_b9YghNWWHQBT2k4Kyo9wIi-UB2qSrqipJbuUTfUYtafCFror7YoXfRVTrenVMEw1TWNLb-YC7LYyJhMIolSK6oFErCi-ayud4Se6gnDKjVlr0gj https://lh3.googleusercontent.com/umsh/ALX7VA2wpSP8RmdsO6hYhUVR27g0DJjhpBCQh3VGQNq6_Kd932CZHdOu5c8zhXcmYCH8PxpaqodH5W9aZKDQD5WnD2klcDjrNg2zGQDRpqVArV9VqgpnjggVSp_kos8AxHGjL2bu54p0y1bDIIuQtXVYxkhxHkk7lQiISV-K3NeFB5qIlIIC3LLG7ylbaITV2_zSTlCa5qIyhk3B7Ly9Y-E9W9SUeepmqomp01mYqKUvXdJR54an3eeL_ar_ev3JOm1WtoEoZe9cOQ</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.787489,48.405875,95.81
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 30</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA1OuT5yqF-Mv7Da-uq4QQ0MVD-eSRp-OfD3LNYRU-s0u4XtbB-dcX-90e9YwDPRcUkdAYapGRFJrJiv95Jz5x0DC-yM59v9NtGkmDgPqD2drMF3bf-K-LHw9HeeACu8_C5La7FfyW8Vx1Pl6k3GWbr7UDzSC0IHfR0PmpURXpgDIR2L8fbc6AZGADP7nH_EA-7JODEd-rpIqOjSj9BUWQyUScdqEv4g3UyPTH9-mpIF679J5v7dzhoNH6fjnp0PWury-qo" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA14Imbe9lekvvP1vnrA0Cw-Z4VkhcO5ZzAwRpEFPauu7sOBHP1zdWsSWHKskiI9orz1O8i3JnNzDO0H_-o_CvZ0gwWVmk3ytNrzNGGXE_cZ9jGXVmKJIXXYDrHlP0y-sZhiNUAlcX8JthzKZGkVt5a1gG1Omozp67hJVS-wv2ACopwGAfV3aQbLplJWJyUlNnbHxYxQibq7j7h5p5EoKjua4w4n-wiElv50PPv2y1zJsp_PWfsZyaDd8y4y6jItMrik8JyhKQ" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA1OuT5yqF-Mv7Da-uq4QQ0MVD-eSRp-OfD3LNYRU-s0u4XtbB-dcX-90e9YwDPRcUkdAYapGRFJrJiv95Jz5x0DC-yM59v9NtGkmDgPqD2drMF3bf-K-LHw9HeeACu8_C5La7FfyW8Vx1Pl6k3GWbr7UDzSC0IHfR0PmpURXpgDIR2L8fbc6AZGADP7nH_EA-7JODEd-rpIqOjSj9BUWQyUScdqEv4g3UyPTH9-mpIF679J5v7dzhoNH6fjnp0PWury-qo https://lh3.googleusercontent.com/umsh/ALX7VA14Imbe9lekvvP1vnrA0Cw-Z4VkhcO5ZzAwRpEFPauu7sOBHP1zdWsSWHKskiI9orz1O8i3JnNzDO0H_-o_CvZ0gwWVmk3ytNrzNGGXE_cZ9jGXVmKJIXXYDrHlP0y-sZhiNUAlcX8JthzKZGkVt5a1gG1Omozp67hJVS-wv2ACopwGAfV3aQbLplJWJyUlNnbHxYxQibq7j7h5p5EoKjua4w4n-wiElv50PPv2y1zJsp_PWfsZyaDd8y4y6jItMrik8JyhKQ</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.845597,48.484376,111.26
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 7</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0xJ7iPeK33BSbLPfWZldqPQGXWvm2Krx_1YzkVTcxw3Q7HfSq4Om3IxJ8PADOlj2n6NMZnkUQi83YZAZ3FRCrhzhjC01BCCMVvJz3yiVlCPB2CxHfDqtLjOmsLy3gkhbtylMU6XJPI-7a6Ob60fIpxKy-1HJ24yCt6OeHee3-G80aDEKkHmJW7klaZz1qqgIdPjQAlYpp-h16mUjt4h-QYccKSHuCgqwFtpW4r5ikHCAoipyWxaYMzBclPUNrn153OLAhgXvs" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1IlYd1qed6VT-f49a7Vz4qG10wjC3UZSwiHA9cuct6DOIZXMV89_xthigbTU_oFPzGzwejxX31baiaHLTVPptS0rUDfSXQbYfmQJTM1MLWBi2OmG0xmlNziJRC-s7DFq6HXgdDQojUgoRQhFJGnF-ROWj2ArL971JNo-DPNx8bCkVNNngCdzPqpBOUk9SP-8kMKT66wGRzyRz6_vXnHDKjPcVMcdtbUZrmXeGrrT81UR_giLywi6Lg5L6dWWNszrXN3JBVrJk" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0xJ7iPeK33BSbLPfWZldqPQGXWvm2Krx_1YzkVTcxw3Q7HfSq4Om3IxJ8PADOlj2n6NMZnkUQi83YZAZ3FRCrhzhjC01BCCMVvJz3yiVlCPB2CxHfDqtLjOmsLy3gkhbtylMU6XJPI-7a6Ob60fIpxKy-1HJ24yCt6OeHee3-G80aDEKkHmJW7klaZz1qqgIdPjQAlYpp-h16mUjt4h-QYccKSHuCgqwFtpW4r5ikHCAoipyWxaYMzBclPUNrn153OLAhgXvs https://lh3.googleusercontent.com/umsh/ALX7VA1IlYd1qed6VT-f49a7Vz4qG10wjC3UZSwiHA9cuct6DOIZXMV89_xthigbTU_oFPzGzwejxX31baiaHLTVPptS0rUDfSXQbYfmQJTM1MLWBi2OmG0xmlNziJRC-s7DFq6HXgdDQojUgoRQhFJGnF-ROWj2ArL971JNo-DPNx8bCkVNNngCdzPqpBOUk9SP-8kMKT66wGRzyRz6_vXnHDKjPcVMcdtbUZrmXeGrrT81UR_giLywi6Lg5L6dWWNszrXN3JBVrJk</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.739273,48.22762,31.46
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 1</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0agu-Um02SQFrZ81cnaltaTwFsRLgUOFbSCazn20eL6xR4iODJKknE8h5pv0VpkzjgvyFjLeADcui7UE_S3yJ9BmHNLqLy9_boWlr5iIkdfvAzJJBUcDj1SXY4T67wLH_kdwhzQtfPUzXgHptmJ0Xf263iCywhv8WblFb4sXxqFh6XgBVSiSR5xQblFI5E_Vs_L1yJ2Win_RK2oDXOo1GINs_XRvoXw6sNpwiDguqfdU_Hxap8J8tmqJQGz1gpWPZNnLA" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA33CoAbR8jogs_QOURr2tYzgOiCdKKxF7LxK_jzigVa0aDpB8jgVJr0srqUaoTasixbMO_3FWlO_kTAqbLAWUJbiv2AGTWoFI_9gS5on7uNGNuFQhTuSUszvRcuT_DLBrkpN5-zuo7_hEsR9iBEHoWtwnhjhEzd3iStqO5bIezFcvLQJbOdELH208WCyV3Xi0jn_mHicxh0NgypNXzI3BP2YcqkcUmg7mZMFzetUXfvF7-cuqH9RfMaLNqArK3m7jLtJrw_qOc" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0agu-Um02SQFrZ81cnaltaTwFsRLgUOFbSCazn20eL6xR4iODJKknE8h5pv0VpkzjgvyFjLeADcui7UE_S3yJ9BmHNLqLy9_boWlr5iIkdfvAzJJBUcDj1SXY4T67wLH_kdwhzQtfPUzXgHptmJ0Xf263iCywhv8WblFb4sXxqFh6XgBVSiSR5xQblFI5E_Vs_L1yJ2Win_RK2oDXOo1GINs_XRvoXw6sNpwiDguqfdU_Hxap8J8tmqJQGz1gpWPZNnLA https://lh3.googleusercontent.com/umsh/ALX7VA33CoAbR8jogs_QOURr2tYzgOiCdKKxF7LxK_jzigVa0aDpB8jgVJr0srqUaoTasixbMO_3FWlO_kTAqbLAWUJbiv2AGTWoFI_9gS5on7uNGNuFQhTuSUszvRcuT_DLBrkpN5-zuo7_hEsR9iBEHoWtwnhjhEzd3iStqO5bIezFcvLQJbOdELH208WCyV3Xi0jn_mHicxh0NgypNXzI3BP2YcqkcUmg7mZMFzetUXfvF7-cuqH9RfMaLNqArK3m7jLtJrw_qOc</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.81321,48.187303,5.11
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 22</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0RTBlLB5EYK6ek7H8LH-Lw0BMx3nqx6RtYaLbBRfZ6vX8pklE4juqwoM-Br1_3u07KEi3ZCWIz2HD8KPj3VooxSA3-L8wSOlu16uMrXZK1C8qg9mR6mLGYY9D-J3vHJtiwvrJdU8RfuNUSWF0VCqE0IZ_vvrnuKQ5hh23UoxhvbWd4r3_nOTuO0VdZ_R1L6kXvkMQNAw1Q9-rGB1H0dtpQ2Zt01soD8qZ8vhN0xIBSOOWGfd7s444S3rMLSfkqtF2PIbUgJg" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA2CiVtuQZUBN_ZUtOf8PbGenXYCSg1dkarfhfUmIGHX8DiLxtUa1VbCWvG35J2kQY-63vYWk5Ur1ZqsinlPsN1kzG1MLFpxVobuaTNHWHh-ZfBZWo1H8rb3NygaqRuDBZqwNHULJ7_nzmEmc6iAx5EyGNs0oro5clEsi-uonzcfnStwNrU9cBtqU3ZA3nk1GSrlysA6eGVNaq3hUvQcO_D1dAsjbhazR5z09q4dJsI5d3NnmSGoHWPU71qgcTth0BF5-nkFd9Y" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0RTBlLB5EYK6ek7H8LH-Lw0BMx3nqx6RtYaLbBRfZ6vX8pklE4juqwoM-Br1_3u07KEi3ZCWIz2HD8KPj3VooxSA3-L8wSOlu16uMrXZK1C8qg9mR6mLGYY9D-J3vHJtiwvrJdU8RfuNUSWF0VCqE0IZ_vvrnuKQ5hh23UoxhvbWd4r3_nOTuO0VdZ_R1L6kXvkMQNAw1Q9-rGB1H0dtpQ2Zt01soD8qZ8vhN0xIBSOOWGfd7s444S3rMLSfkqtF2PIbUgJg https://lh3.googleusercontent.com/umsh/ALX7VA2CiVtuQZUBN_ZUtOf8PbGenXYCSg1dkarfhfUmIGHX8DiLxtUa1VbCWvG35J2kQY-63vYWk5Ur1ZqsinlPsN1kzG1MLFpxVobuaTNHWHh-ZfBZWo1H8rb3NygaqRuDBZqwNHULJ7_nzmEmc6iAx5EyGNs0oro5clEsi-uonzcfnStwNrU9cBtqU3ZA3nk1GSrlysA6eGVNaq3hUvQcO_D1dAsjbhazR5z09q4dJsI5d3NnmSGoHWPU71qgcTth0BF5-nkFd9Y</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.748282,48.345022,67.53
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 24</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2BKgzua94scTNja0YY7JCD6W1oPDC77w86KfQ5AVM6DlZo1fs18WGdt_sjZdsljp27P-e_f95cw25LQihBqtB9DnARyJE_rslDy_YTk8V-Vs04kltwJDngD23qER1r_fuGBNld0IFZE6Sc3WonJmOEDJu_QLqeQ2-rUUUdirQAJr7hYBCF31XrDvL24QxfnoHJLwrHhSCIijSnFOIfiyZropJar1bo9VlYWw-LXQebTQgVH70e2LvMtbWuCxUvNfZmyGKUfbJh" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1Iy2aWHkl_TzSvqrp9bc5uk2Or7wu-USDRSSpshrVlmV23f5M7lXtwNie61mqqOoYVQgv54Wnb8yCEb6eIuhS9o_H5H-WxSttDhm5ClDryXan8wf4mkNAecbpv8fX7x-PCTpTcDdOrs6_upHFV-wf1CaLhO2GST0Iym_5vG0cwJ2th-o4ZWv5zMQ04eCZEC4Oq0lBx3iGrkfxfubieT0WoBQE0AGjsm4nu8oK6a09Op1N-bB0wREhc6wdO3SACtDc-siQUtQ" height="200" width="auto" /><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA01DeVVgogXSwcRjHD1Pgv9WT9rmPSFmXJHLs7PIrNEW3deHW3kWCk4os_4LkvknvNN29WdW6N1aOmwG_blUSpReFOQhyBSazMdxx2V2L0BVSSrL-5z7BJ2jUcPt10hnQl3N3MwqDxWzTX93q_j6p9lg8gToVsQTYyToeR40A5qwcgukKh2r2RGzofmv__Tj3iZyVV81kVWWrjgD8CuLYSdThL5kc3BhATxPMII_UVzNhPW0Hj3JrAJX8Y94d6J0kkb8Hyp9Q" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2BKgzua94scTNja0YY7JCD6W1oPDC77w86KfQ5AVM6DlZo1fs18WGdt_sjZdsljp27P-e_f95cw25LQihBqtB9DnARyJE_rslDy_YTk8V-Vs04kltwJDngD23qER1r_fuGBNld0IFZE6Sc3WonJmOEDJu_QLqeQ2-rUUUdirQAJr7hYBCF31XrDvL24QxfnoHJLwrHhSCIijSnFOIfiyZropJar1bo9VlYWw-LXQebTQgVH70e2LvMtbWuCxUvNfZmyGKUfbJh https://lh3.googleusercontent.com/umsh/ALX7VA1Iy2aWHkl_TzSvqrp9bc5uk2Or7wu-USDRSSpshrVlmV23f5M7lXtwNie61mqqOoYVQgv54Wnb8yCEb6eIuhS9o_H5H-WxSttDhm5ClDryXan8wf4mkNAecbpv8fX7x-PCTpTcDdOrs6_upHFV-wf1CaLhO2GST0Iym_5vG0cwJ2th-o4ZWv5zMQ04eCZEC4Oq0lBx3iGrkfxfubieT0WoBQE0AGjsm4nu8oK6a09Op1N-bB0wREhc6wdO3SACtDc-siQUtQ https://lh3.googleusercontent.com/umsh/ALX7VA01DeVVgogXSwcRjHD1Pgv9WT9rmPSFmXJHLs7PIrNEW3deHW3kWCk4os_4LkvknvNN29WdW6N1aOmwG_blUSpReFOQhyBSazMdxx2V2L0BVSSrL-5z7BJ2jUcPt10hnQl3N3MwqDxWzTX93q_j6p9lg8gToVsQTYyToeR40A5qwcgukKh2r2RGzofmv__Tj3iZyVV81kVWWrjgD8CuLYSdThL5kc3BhATxPMII_UVzNhPW0Hj3JrAJX8Y94d6J0kkb8Hyp9Q</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.759593,48.354766,70.49
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 26</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA35VhiBnC69i4IfpQE5nEeFQgA49Rs7Y5W8oTJ8sSBFj_Ndqpz2s6wqosc7ONH-IJcCRGz9WHgaWvuM5uWH8Qjt0CJk02u13VTf-7TC07HfLN5YxlDMV7aFiM2Y0dpDiu7pxXK99vXHki2ew4kMsH0ZiQvbHaR2kumdhPeqoa9fCebStYB_lh26RayVVD0B1SccRm13f7ULbW_knUjw4Gt_0NYZmdM6nRjpmARj_UVMzQLYqiyRob2-Ygb7UU-RgN0w7pneMA" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1YWR9XdkYb_mq2pEshgqKV9uoRbZZIFIFt_k_5d2m6Bnta5_iEvmzq8FQOyHLMSNSNsG_pes-fLMlqVdNEEpLsG-A5XFwurmAX9rkq006FT-tzL1gjUBXA-GM4KqzVCLFvcVFCqnj3EDhZIwUvYEPtY1IgpGG0ihVrd9cJCWKA4xmYGHchW_wwc5DKRqn72onfPBv66p1qGKnYjR8e-f1XlIXrLatUjmXJ0E4NNcT09LkTPHdw1fAvkN_C98GHvGymuShAZA" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA35VhiBnC69i4IfpQE5nEeFQgA49Rs7Y5W8oTJ8sSBFj_Ndqpz2s6wqosc7ONH-IJcCRGz9WHgaWvuM5uWH8Qjt0CJk02u13VTf-7TC07HfLN5YxlDMV7aFiM2Y0dpDiu7pxXK99vXHki2ew4kMsH0ZiQvbHaR2kumdhPeqoa9fCebStYB_lh26RayVVD0B1SccRm13f7ULbW_knUjw4Gt_0NYZmdM6nRjpmARj_UVMzQLYqiyRob2-Ygb7UU-RgN0w7pneMA https://lh3.googleusercontent.com/umsh/ALX7VA1YWR9XdkYb_mq2pEshgqKV9uoRbZZIFIFt_k_5d2m6Bnta5_iEvmzq8FQOyHLMSNSNsG_pes-fLMlqVdNEEpLsG-A5XFwurmAX9rkq006FT-tzL1gjUBXA-GM4KqzVCLFvcVFCqnj3EDhZIwUvYEPtY1IgpGG0ihVrd9cJCWKA4xmYGHchW_wwc5DKRqn72onfPBv66p1qGKnYjR8e-f1XlIXrLatUjmXJ0E4NNcT09LkTPHdw1fAvkN_C98GHvGymuShAZA</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.757901,48.373278,75.03
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 29</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA0qcqzj8JtBKhCmPJUv3PNdcWhkDXScxo4ehGNm8VHMmJPsOlSgJmwEwMpKYCgX5LUdXK1Vg9R1jvSdmS7rjE_4I_gDkFdV0V8jGRA83x3Yjpb_roFQFSv9ELgXrIPtbUunVDC319kcczwEPI78roi6sRyVsu7G0nrJADJewBssEVhWb3PT9UYJ5V6KrEtjncoJiFOcE6GHGYrzLIfCMu8QW5eM72hE0MXsI1L21B7QImVthd1LeVIxGUu4eiVIjvZQQOuIUg" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1u9AabU3tU5QhYYiWOTB4_FVDULCZeNHiF3TAjNfRs57n9b8l_11Ouw5lDQBMMxNmjh4CPsiJOJ3jZ2yzvA92s5KtA1GE1tzVShLt0Ct_i-8aOboeZGmmWCxONBGiYqLplrqlt5FAge1BovBxVfsaikdH8roYglu2l_CgZboW9agRAOsgwoOFLR-v1TscEdZ5s26nK7EZuTt6shrW2uMHCwvrwDUw4C33-8SP9f32R0Oz3x-RzVebMueBhkdCFrtjFJBE" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA0qcqzj8JtBKhCmPJUv3PNdcWhkDXScxo4ehGNm8VHMmJPsOlSgJmwEwMpKYCgX5LUdXK1Vg9R1jvSdmS7rjE_4I_gDkFdV0V8jGRA83x3Yjpb_roFQFSv9ELgXrIPtbUunVDC319kcczwEPI78roi6sRyVsu7G0nrJADJewBssEVhWb3PT9UYJ5V6KrEtjncoJiFOcE6GHGYrzLIfCMu8QW5eM72hE0MXsI1L21B7QImVthd1LeVIxGUu4eiVIjvZQQOuIUg https://lh3.googleusercontent.com/umsh/ALX7VA1u9AabU3tU5QhYYiWOTB4_FVDULCZeNHiF3TAjNfRs57n9b8l_11Ouw5lDQBMMxNmjh4CPsiJOJ3jZ2yzvA92s5KtA1GE1tzVShLt0Ct_i-8aOboeZGmmWCxONBGiYqLplrqlt5FAge1BovBxVfsaikdH8roYglu2l_CgZboW9agRAOsgwoOFLR-v1TscEdZ5s26nK7EZuTt6shrW2uMHCwvrwDUw4C33-8SP9f32R0Oz3x-RzVebMueBhkdCFrtjFJBE</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.81944,48.454904,104.91
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 2</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA2AVE2yzNVmGp3GBN-sHRhnBP03ZV_dwJ824mOIwd5AOLBpB6qGkh2sIFIKo_MEvXdXvD2hpR_YRKdMJOuIih6KdDIztgNDd3ySXFq_7uWlsi7eyyD31UPcyxXX-F1q37Ggx9GGl98_QpW7dI_yXoAmOK284hfyZOGTfVNQlDGpQYEcd6we0YOs8-IJVG5xWRIX6nTpmwil8hc4VIDqz6DdD6dIzIMV8qTmk5R6N-STUYlixJSVZQV97q5YajbuZ9ZBhIMTpA" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA1Nwm21X-fM8KePpToHIpB_92-I_Df3HlUQJNEAXq2P3JYfS4jRqbuESopw6a_IExC-wDbaGT09SdOr8k6P-sNOITHosITFRTItDHfAkaE4kbXHtnE3gg_Uez3rsahZ90lKoAv_a905yGMjpJYAiVR03DnHCxwdFPAKUoQzMucuv8yHIkURh65imGcCXVzQMPe89F5Pt6R2RzZgkeYm4-6k0PPdxpqqoHXtalHe9BMHDwPHG_UDY6qdAcK4DvdHWXyr0XZmtA" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA2AVE2yzNVmGp3GBN-sHRhnBP03ZV_dwJ824mOIwd5AOLBpB6qGkh2sIFIKo_MEvXdXvD2hpR_YRKdMJOuIih6KdDIztgNDd3ySXFq_7uWlsi7eyyD31UPcyxXX-F1q37Ggx9GGl98_QpW7dI_yXoAmOK284hfyZOGTfVNQlDGpQYEcd6we0YOs8-IJVG5xWRIX6nTpmwil8hc4VIDqz6DdD6dIzIMV8qTmk5R6N-STUYlixJSVZQV97q5YajbuZ9ZBhIMTpA https://lh3.googleusercontent.com/umsh/ALX7VA1Nwm21X-fM8KePpToHIpB_92-I_Df3HlUQJNEAXq2P3JYfS4jRqbuESopw6a_IExC-wDbaGT09SdOr8k6P-sNOITHosITFRTItDHfAkaE4kbXHtnE3gg_Uez3rsahZ90lKoAv_a905yGMjpJYAiVR03DnHCxwdFPAKUoQzMucuv8yHIkURh65imGcCXVzQMPe89F5Pt6R2RzZgkeYm4-6k0PPdxpqqoHXtalHe9BMHDwPHG_UDY6qdAcK4DvdHWXyr0XZmtA</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.798822,48.191852,11.48
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 4</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/umsh/ALX7VA1RzfXTGX5uHoS521zW-Cd3wvIZIbleDSGFcx2z6R0hpMfk_G0S-b2OLMeH996IRezPtgz7mAToCcJjKmN1o4Cki-0Tcf8pQu-71mhdB4DL9mLWobXNHyLRtwu-HZxKZyKYyKRlb3pAoj12f8mnZW5lVo16rfX1BD6wYlX8ekROXDUN57DgjNl2IM4Bopi5kemZCJwokSK9g4UCubDBE1jQ5-XgG_aR57OtXsqqqwLWIcA6jTMp0HRC9HMVebgh9pWhUFCviDU" height="200" width="auto" /><br><br><br><br><img src="https://lh3.googleusercontent.com/umsh/ALX7VA13vIiUDZfx28z1citfmf5lwh8jgCaoaU4SysaVKpH732hgtq-AdvAQw0zI_6CprC0XGx_8BG1FYO8hT7t3DCXOpXznCcvsk9vLDMF2Jtt3ffDwKJjUjHStq0-Mt1Vzgh0z-BOwipj7KAbbqZ8UrkzvcDr6QTL1oWKaIZMgPWN1Ds7CkOoDxXoeT8QdL5k-fH2ieN-GSay7naIoDI-e52Fze6dnrtyEkDmmTauIH_9unc4B0tauIQxiV9akb-jNmKt1HJs7" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-F57C00</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/umsh/ALX7VA1RzfXTGX5uHoS521zW-Cd3wvIZIbleDSGFcx2z6R0hpMfk_G0S-b2OLMeH996IRezPtgz7mAToCcJjKmN1o4Cki-0Tcf8pQu-71mhdB4DL9mLWobXNHyLRtwu-HZxKZyKYyKRlb3pAoj12f8mnZW5lVo16rfX1BD6wYlX8ekROXDUN57DgjNl2IM4Bopi5kemZCJwokSK9g4UCubDBE1jQ5-XgG_aR57OtXsqqqwLWIcA6jTMp0HRC9HMVebgh9pWhUFCviDU https://lh3.googleusercontent.com/umsh/ALX7VA13vIiUDZfx28z1citfmf5lwh8jgCaoaU4SysaVKpH732hgtq-AdvAQw0zI_6CprC0XGx_8BG1FYO8hT7t3DCXOpXznCcvsk9vLDMF2Jtt3ffDwKJjUjHStq0-Mt1Vzgh0z-BOwipj7KAbbqZ8UrkzvcDr6QTL1oWKaIZMgPWN1Ds7CkOoDxXoeT8QdL5k-fH2ieN-GSay7naIoDI-e52Fze6dnrtyEkDmmTauIH_9unc4B0tauIQxiV9akb-jNmKt1HJs7</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -65.774697,48.207346,26.49
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Sites Faits (Ordre rivière-25)</name>
+    <Style id="icon-1739-0288D1-labelson-nodesc">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Placemark>
+      <name>Site 2</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -69.925719,48.282501,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 3</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -69.944901,48.301252,51.46
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 4</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -69.973509,48.315647,64.31
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 5</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -69.991346,48.322057,58.36
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 7</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.10608,48.353656,73.51
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 8</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.126171,48.359376,81.79
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 9</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.176526,48.37292,78.1
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 10</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.209171,48.38617,88.75
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 11</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.247995,48.395641,89.67
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 12</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.27989,48.40403,118.62
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 13</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.294212,48.402957,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 15</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.340482,48.416856,126
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 16</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.38281,48.427394,123.37
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 17</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.431812,48.431792,144.3
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 18</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.441247,48.438939,149.91
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 19</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.449374,48.442603,151.18
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 21</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.467438,48.444531,159.18
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 22</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.490054,48.453716,182.82
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 23</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.502447,48.456266,185.43
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 24</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.519658,48.459094,191
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 25</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.542902,48.465426,203.35
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 6</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.062133,48.33559,70.84
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 20</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.463542,48.443653,160.46
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 26</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.693839,48.524088,304.4
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 1</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -69.92973,48.278771,19.07
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Site 14</name>
+      <styleUrl>#icon-1739-0288D1-labelson-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -70.327101,48.412455,116.06
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
