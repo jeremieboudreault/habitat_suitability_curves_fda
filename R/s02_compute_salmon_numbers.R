@@ -22,14 +22,16 @@ library(ggplot2)
 # Functions --------------------------------------------------------------------
 
 
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 
 
 # Imports ----------------------------------------------------------------------
 
 
 data <- qs::qread(
-    file.path("out", "tmp", "smr_pcr_cleaned_s1.qs")
+    file.path("out", "tmp", "s01_smr_pcr_cleaned.qs")
 )
 
 
@@ -44,7 +46,6 @@ lengths_smr <- as.vector(na.omit(unlist(
     x         = data[RIVER == "SMR", cnames, with = FALSE],
     use.names = FALSE
 )))
-
 
 # Extract lengths for PCR
 lengths_pcr <- as.vector(na.omit(unlist(
@@ -77,8 +78,11 @@ ggplot(
     mapping = aes(x = LENGTH)
 ) +
 geom_histogram(
+    boundary = 0L,
     binwidth = 2.5,
-    boundary = 0L
+    fill     = "#c1c1c1",
+    color    = "#636363",
+    lwd      = 0.25
 ) +
 labs(
     title = "Juvenile salmons lengths distribution",
@@ -92,7 +96,8 @@ facet_wrap(
     ~ RIVER,
     nrow   = 2L,
     scales = "free_y"
-)
+) +
+custom_theme()
 
 
 # Define threshold limits ------------------------------------------------------
@@ -105,7 +110,7 @@ lengths[, list(MIN = min(LENGTH), MAX = max(LENGTH)), by = RIVER]
 lengths_lim <- data.table::data.table(
     RIVER    = rep(c("SMR", "PCR"), each = 4L),
     LIM      = rep(c("MIN_0", "MIN_1", "MIN_2", "MAX_2"), length.out = 8L),
-    VAL      = c(30L, 55L, 88L, 125L, 43L, 63L, 93L, 132L)
+    VAL      = c(30, 55, 87.5, 125, 42.5, 62.5, 92.5, 132.5)
 )
 
 # Check result.
@@ -115,29 +120,21 @@ lengths_lim
 # Final plot -------------------------------------------------------------------
 
 
-# Save as a .pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_1_salmon_lengths.pdf"),
-    width  = 6L,
-    height = 5L
-)
-
 # Plot.
 ggplot(
     data    = lengths,
     mapping = aes(x = LENGTH)
 ) +
 geom_histogram(
-    mapping = aes(group = RIVER),
-    boundary = 0L,
+    boundary = 0,
     binwidth = 2.5,
     fill     = "#c1c1c1",
     color    = "#636363",
     lwd      = 0.25
 ) +
 labs(
-    title = "",
-    x     = "Length (mm)",
+    title = NULL,
+    x     = "Fork length (mm)",
     y     = "Number of juvenile salmon"
 ) +
 scale_x_continuous(
@@ -147,13 +144,13 @@ geom_vline(
     data    = lengths_lim,
     mapping = aes(xintercept = VAL),
     color   = "red",
-    lwd     = 1L,
-    lty     = 3L
+    lwd     = 0.3,
+    lty     = 2L
 ) +
 geom_text(
     data    = data.frame(
         X     = c(42.5, 53, 71.5, 78, 106.5, 112.5),
-        Y     = c(85L, 35L, 40L, 40L, 20L, 20L),
+        Y     = c(82L, 32L, 38L, 38L, 18L, 18L),
         TEXT  = rep(c("Fry (0+)", "Parr (1+)", "Parr (2+)"), each = 2L),
         RIVER = rep(c("SMR", "PCR"), length.out = 6L)
     ),
@@ -166,13 +163,20 @@ geom_text(
     nudge_y = -3L
 ) +
 facet_wrap(
-    facets = ~ RIVER,
-    nrow   = 2L,
-    scales = "free_y"
-)
+    facets   = ~ RIVER,
+    nrow     = 2L,
+    scales   = "free_y",
+    as.table = FALSE,
+    labeller = labeller(RIVER = unlist(riv_names))
+) +
+custom_theme()
 
 # Save to pdf.
-dev.off()
+ggsave(
+    file   = file.path("out", "plots", "fig_1_salmon_lengths.pdf"),
+    width  = 7L,
+    height = 6L
+)
 
 
 # Convert lengths to number ----------------------------------------------------
@@ -213,7 +217,7 @@ data[ , N_FRY_T   := as.integer(N_FRY + N_FRY_M) ]
 data[ , N_PARR_M  := as.integer(N_PARR1_M + N_PARR2_M + N_PARR3_M) ]
 data[ , N_PARR1_T := as.integer(N_PARR1_M) ]
 data[ , N_PARR2_T := as.integer(N_PARR2_M) ]
-data[ , N_PARR_T  := as.integer(N_PARR + N_PARR1_M) ]
+data[ , N_PARR_T  := as.integer(N_PARR + N_PARR_M) ]
 data[ , N_SASA_M  := as.integer(N_FRY_M + N_PARR_M) ]
 data[ , N_SASA_T  := as.integer(N_FRY_T + N_PARR_T + N_SASA) ]
 
@@ -258,5 +262,6 @@ sapply(data, class)
 
 qs::qsave(
     x    = data,
-    file = file.path("out", "tmp", "s2_smr_pcr_salmon_number.qs")
+    file = file.path("out", "tmp", "s02_smr_pcr_salmon_number.qs")
 )
+
