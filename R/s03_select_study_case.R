@@ -22,7 +22,9 @@ library(ggplot2)
 # Functions --------------------------------------------------------------------
 
 
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 
 
 # Imports ----------------------------------------------------------------------
@@ -30,7 +32,7 @@ source(file.path("R", "functions", "internals.R"))
 
 # Cleaned data of SMR and PCR with salmon numbers.
 data <- qs::qread(
-    file.path("out", "tmp", "s2_smr_pcr_salmon_number.qs")
+    file.path("out", "tmp", "s02_smr_pcr_salmon_number.qs")
 )
 
 
@@ -58,7 +60,10 @@ data_per_site <- data[, list(
 
 # Extract columns names starting with N_OBS.
 cnames <- names(data_per_site)
-cnames <- cnames[substr(cnames, 1L, 5L) == "N_OBS"]
+cnames <- cnames[
+    substr(cnames, 1L, 5L) == "N_OBS" &
+    substr(cnames, nchar(cnames), nchar(cnames)) == "M"
+]
 
 # Summary of the number of observation
 res <- dtlapply(
@@ -77,13 +82,6 @@ res <- dtlapply(
 # Plot results -----------------------------------------------------------------
 
 
-# Save as a pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_2_study_case_selection.pdf"),
-    width  = 6L,
-    height = 5L
-)
-
 # Plot.
 ggplot(
     data    = res,
@@ -100,18 +98,26 @@ geom_raster(
 geom_text(
     col     = "white",
 ) +
-scale_fill_gradient(
-    low  = "darkred",
-    high = "darkgreen"
+scale_fill_gradientn(
+    colors = RColorBrewer::brewer.pal(11L, "RdYlGn")[-c(1, 5, 6, 7, 11)]
 ) +
 labs(
-    title = "Number of observations for our study",
-    y     = "Selected variable",
-    x     = "Minimum number of observations required"
+    title = "Number of sites for our study",
+    y     = "Studied variable",
+    x     = "Minimum number of observations / site required"
+) +
+custom_theme() +
+theme(
+    panel.grid   = element_blank(),
+    panel.border =element_blank()
 )
 
 # Save the plot.
-dev.off()
+ggsave(
+    file   = file.path("out", "plots", "fig_2_study_case_selection.pdf"),
+    width  = 6L,
+    height = 5L
+)
 
 
 # Optimal selected study case --------------------------------------------------
@@ -121,14 +127,14 @@ dev.off()
 threshold <- 4L
 
 # Selected variable.
-var_selected <- "N_PARR_T"
+var_selected <- "N_PARR_M"
 
 
 # Subset the study case --------------------------------------------------------
 
 
 # Extract the selected sites that fit the criteria.
-sites_selected <- data_per_site[get(var_selected) >= n_obs_threshold, .(RIVER, SITE)]
+sites_selected <- data_per_site[get(var_selected) >= threshold, .(RIVER, SITE)]
 
 # Add a new definition of the site.
 sites_selected[, SITENEW := 1:.N]
@@ -162,5 +168,6 @@ data_clean <- data_selected[, .(
 
 qs::qsave(
     x    = data_clean,
-    file = file.path("out", "tmp", "s3_smr_pcr_subset_to_model.qs")
+    file = file.path("out", "tmp", "s03_smr_pcr_subset_to_model.qs")
 )
+
