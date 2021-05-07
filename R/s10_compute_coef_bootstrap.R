@@ -179,7 +179,7 @@ std_dt[, MODEL := factor(
         panel.grid.minor = element_blank(),
         axis.line        = element_line(colour = "white")
     ) +
-    legend_bottom
+    custom_theme()
 
 }
 
@@ -187,8 +187,8 @@ std_dt[, MODEL := factor(
 ps <- lapply(var_names_u, function(var) .plot_std(std_dt[MODEL == var, ]))
 
 # Add x and y labs.
-ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
-ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
+ps[[1L]] <- ps[[1L]] + ylab(paste0(hab_names[["SELECTED"]], " (s)"))
+ps[[2L]] <- ps[[2L]] + xlab(paste0(hab_names[["AVAILABLE"]], " (r)"))
 
 # Plot.
 plot_bs <- ggpubr::ggarrange(
@@ -200,17 +200,36 @@ plot_bs <- ggpubr::ggarrange(
 # Combine both plots -----------------------------------------------------------
 
 
+# Add some spacing on top of the graphs.
+for (i in 1:2) {
+
+    plot_frm_coef <- ggpubr::annotate_figure(
+        p  =   plot_frm_coef,
+        top = "",
+    )
+
+    plot_bs <- ggpubr::annotate_figure(
+        p  =   plot_bs,
+        top = "",
+    )
+
+}
+
 # Plot.
 ggpubr::ggarrange(
     plotlist = list(plot_frm_coef, plot_bs),
-    labels   = c("a) FRM \beta(s, r) coefficients", "b) Bootstrap standard error")
+    nrow     = 2L,
+    labels   = c("a) B(s, r) coefficients", "b) Bootstrap standard error"),
+    legend = "bottom",
+    hjust = -0.1,
+    heights = c(1.2, 1.2)
 )
 
 # Save plot.
 ggsave(
-    filename = file.path("out", "plots", "fig_8_frm_coef_bs.pdf",
-    width = 10L,
-    height = 5L)
+    filename = file.path("out", "plots", "fig_8_frm_coef_bs.pdf"),
+    width    = 10L,
+    height   = 9L
 )
 
 
