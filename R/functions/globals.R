@@ -48,3 +48,15 @@ metric_names <- list(
     "fR2"   = "Functional R2 (fR2)",
     "R2"    = "R square (R2)"
 )
+
+
+# Parameters -------------------------------------------------------------------
+
+
+# Values of the adjust parameters for the KDE.
+adjust_list <- list(
+    DEPTH    = 1.5,
+    D50      = 1.7,
+    VELOCITY = 1.5
+)
+

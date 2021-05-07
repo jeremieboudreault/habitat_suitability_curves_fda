@@ -170,13 +170,6 @@ tbl <- data.table::setDT(expand.grid(
     TYPE          = names(hab_names)
 ))
 
-# Adjust for each variables.
-adjust_list <- list(
-    DEPTH    = 1.5,
-    D50      = 1.7,
-    VELOCITY = 1.5
-)
-
 # Loop over all possible values.
 fd_curves <- dtlapply(
     X   = seq.int(1L, nrow(tbl)),
