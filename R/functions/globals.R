@@ -15,6 +15,12 @@
 # Names ------------------------------------------------------------------------
 
 
+# River names.
+riv_names <- list(
+    SMR  = "Sainte-Marguerite River",
+    PCR  = "Petite-Cascapedia River"
+)
+
 # Variables names.
 var_names <- list(
     DEPTH    = "Depth",
