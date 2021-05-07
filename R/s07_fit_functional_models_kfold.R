@@ -1,7 +1,7 @@
-# s6_fit_functional_models_kfold.R
+# s07_fit_functional_models_kfold.R
 
 
-# Fit functional regression model to curves with k-fold cross-validation.
+# Step 07 : Fit functional regression model to curves with k-fold cross-validation.
 
 
 # Project : habitat_suitability_curves_fda
