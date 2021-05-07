@@ -1,7 +1,7 @@
-# s3_select_study_case.R
+# s03_select_study_case.R
 
 
-# Select optimal study case to be modelled (0+, 1+, 2+).
+# Step 03 : Select optimal study case to be modelled (0+, 1+, 2+).
 
 
 # Project : habitat_suitability_curves_fda
