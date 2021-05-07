@@ -136,8 +136,12 @@ var_selected <- "N_PARR_M"
 # Extract the selected sites that fit the criteria.
 sites_selected <- data_per_site[get(var_selected) >= threshold, .(RIVER, SITE)]
 
-# Add a new definition of the site.
-sites_selected[, SITENEW := 1:.N]
+# Add a new definition <SITE_INTERNAL> of the site for internal purposes.
+sites_selected[, SITE_INTERNAL := 1:.N]
+
+# Add a new definition <SITE_NEW> of the site per river.
+sites_selected[RIVER == "SMR", SITE_NEW := order(SITE)]
+sites_selected[RIVER == "PCR", SITE_NEW := order(SITE)]
 
 # Add an indicator.
 sites_selected[, SELECTED := TRUE]
@@ -153,8 +157,9 @@ data_selected <- data.table::merge.data.table(
 # Rearrange the table.
 data_clean <- data_selected[, .(
     RIVER,
-    SITE,
-    SITENEW,
+    SITE_ORIGINAL = SITE,
+    SITE_NEW,
+    SITE_INTERNAL,
     PARCEL,
     Y = get(var_selected),
     VELOCITY,
