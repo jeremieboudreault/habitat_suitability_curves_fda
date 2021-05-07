@@ -1,7 +1,7 @@
-# s9_compute_coef_bootstrap.R
+# s10_compute_coef_bootstrap.R
 
 
-# Compute regression coefficient bootstrap to calculate the standard error.
+# Step 10 : Compute standard effort of regression coefficient with bootstrap.
 
 
 # Project : habitat_suitability_curves_fda
