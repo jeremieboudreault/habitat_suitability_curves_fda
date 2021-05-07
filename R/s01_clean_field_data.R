@@ -1,4 +1,4 @@
-# s1_clean_field_data.R
+# s01_clean_field_data.R
 
 
 # Import and clean the field data and produce nice ready-to-use files.
@@ -22,6 +22,7 @@ library(data.table)
 # Functions --------------------------------------------------------------------
 
 
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
 
 
