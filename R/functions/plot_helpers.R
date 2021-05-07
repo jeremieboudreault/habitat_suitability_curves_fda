@@ -25,7 +25,28 @@ rotate_x_axis <- ggplot2::theme(
 )
 
 
-# legend_bottom : Bring legend to the bottom of the plot.
-legend_bottom <- ggplot2::theme(
-    legend.position = "bottom"
-)
+# Custom theme -----------------------------------------------------------------
+
+
+# custom_theme() : A customised theme for ggplot2.
+custom_theme <- function(x) {
+    theme_light() +
+    theme(
+        plot.title   = element_text(
+            face  = "bold",
+            hjust = 0.5,
+            size  = 12L
+        ),
+        plot.subtitle = element_text(
+            hjust = 0.5,
+            size  = 11L
+        ),
+        strip.text = element_text(
+            colour = "black"
+        ),
+        strip.background = element_rect(
+            fill = "#c1c1c1"
+        ),
+        legend.position = "bottom"
+    )
+}
