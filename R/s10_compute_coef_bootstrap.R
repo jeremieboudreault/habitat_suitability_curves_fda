@@ -23,7 +23,9 @@ library(FDboost)
 # Functions --------------------------------------------------------------------
 
 
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 source(file.path("R", "functions", "fdboost_helpers.R"))
 
 
@@ -39,12 +41,17 @@ n_bs <- 1000L
 
 # Fitted functional models.
 frm_results <- qs::qread(
-    file = file.path("out", "tmp", "s7_frm_results_full.qs")
+    file = file.path("out", "tmp", "s08_frm_results_full.qs")
 )
 
 # Functional observations.
 fd_curves_list <- qs::qread(
-    file = file.path("out", "tmp", "s5_fd_curves_list.qs")
+    file = file.path("out", "tmp", "s06_fd_curves_list.qs")
+)
+
+# Plot of regression coefficient.
+plot_frm_coef <- qs::qread(
+    file = file.path("out", "tmp", "s09_frm_coef_plot.qs")
 )
 
 
@@ -126,7 +133,7 @@ std_dt[, MODEL := factor(
 
 .plot_std <- function(data) {
 
-    p <- ggplot(
+    ggplot(
         data = data,
         mapping = aes(
             x = X,
@@ -173,7 +180,6 @@ std_dt[, MODEL := factor(
         axis.line        = element_line(colour = "white")
     ) +
     legend_bottom
-    return(p)
 
 }
 
@@ -184,25 +190,28 @@ ps <- lapply(var_names_u, function(var) .plot_std(std_dt[MODEL == var, ]))
 ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
 ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
 
-
-# Plot results -----------------------------------------------------------------
-
-
-# Save as a pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_7_frm_coef_bootstrap.pdf"),
-    width  = 10L,
-    height = 4L
-)
-
 # Plot.
-ggpubr::ggarrange(
+plot_bs <- ggpubr::ggarrange(
     plotlist = ps,
     ncol     = 3L
 )
 
+
+# Combine both plots -----------------------------------------------------------
+
+
+# Plot.
+ggpubr::ggarrange(
+    plotlist = list(plot_frm_coef, plot_bs),
+    labels   = c("a) FRM \beta(s, r) coefficients", "b) Bootstrap standard error")
+)
+
 # Save plot.
-dev.off()
+ggsave(
+    filename = file.path("out", "plots", "fig_8_frm_coef_bs.pdf",
+    width = 10L,
+    height = 5L)
+)
 
 
 # Exports ----------------------------------------------------------------------
@@ -210,6 +219,6 @@ dev.off()
 
 qs::qsave(
     x    = bs_res,
-    file = file.path("out", "tmp", "s9_frm_coef_bootstrap.qs")
+    file = file.path("out", "tmp", "s10_frm_coef_bootstrap.qs")
 )
 
