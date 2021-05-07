@@ -23,7 +23,9 @@ library(FDboost)
 # Functions --------------------------------------------------------------------
 
 
+source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 source(file.path("R", "functions", "fdboost_helpers.R"))
 
 
@@ -32,7 +34,7 @@ source(file.path("R", "functions", "fdboost_helpers.R"))
 
 # Fitted functional models.
 frm_results <- qs::qread(
-    file = file.path("out", "tmp", "s7_frm_results_full.qs")
+    file = file.path("out", "tmp", "s08_frm_results_full.qs")
 )
 
 
@@ -130,13 +132,13 @@ col_fun <- grDevices::colorRampPalette(col_1)
             ncol   = 1L,
             scales = "free"
         ) +
+        custom_theme() +
         theme(
             panel.border     = element_blank(),
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             axis.line        = element_line(colour = "white")
-        ) +
-        legend_bottom
+        )
     )
 }
 
@@ -144,26 +146,20 @@ col_fun <- grDevices::colorRampPalette(col_1)
 ps <- lapply(coef_list, .plot_coef)
 
 # Add x and y labs.
-ps[[1L]] <- ps[[1L]] + ylab(hab_names[["SELECTED"]])
-ps[[2L]] <- ps[[2L]] + xlab(hab_names[["AVAILABLE"]])
-
-
-# Plots ------------------------------------------------------------------------
-
-
-# Save as a pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_6_frm_coef.pdf"),
-    width  = 10L,
-    height = 4L
-)
+ps[[1L]] <- ps[[1L]] + ylab(paste0(hab_names[["SELECTED"]], " (s)"))
+ps[[2L]] <- ps[[2L]] + xlab(paste0(hab_names[["AVAILABLE"]], " (r)"))
 
 # Plot.
-ggpubr::ggarrange(
+p <- ggpubr::ggarrange(
     plotlist = ps,
     ncol     = 3L
 )
 
-# Save plot.
-dev.off()
+# Export plot ------------------------------------------------------------------
+
+
+qs::qsave(
+    x    = p,
+    file = file.path("out", "tmp", "s09_frm_coef_plot.qs")
+)
 
