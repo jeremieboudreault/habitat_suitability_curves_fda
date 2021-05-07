@@ -1,7 +1,7 @@
 # s01_clean_field_data.R
 
 
-# Import and clean the field data and produce nice ready-to-use files.
+# Step 01 : Import and clean the field data and produce nice ready-to-use files.
 
 
 # Project : habitat_suitability_curves_fda
@@ -115,7 +115,7 @@ dim(pcr_data)
 # Check the class of the variables
 sapply(pcr_data, class)
 
-# Remove parcels where D50 was bedrock (D50=10000), not fish found anyway
+# Remove parcels where D50 was bedrock (D50=10000), not fish found anyway.
 pcr_data <- pcr_data[D50 != 10000, ]
 
 # Rename, update and delete some columns.
@@ -179,6 +179,6 @@ data <- data.table::rbindlist(
 
 qs::qsave(
     x    = data,
-    file = file.path("out", "tmp", "s1_smr_pcr_cleaned.qs")
+    file = file.path("out", "tmp", "s01_smr_pcr_cleaned.qs")
 )
 
