@@ -165,10 +165,17 @@ qs::qsave(
 
 # Create a canvas table.
 tbl <- data.table::setDT(expand.grid(
-    SITENEW  = unique(hab$SITENEW),
-    VARIABLE = names(var_names),
-    TYPE     = unlist(hab_names, use.names = FALSE)
+    SITE_INTERNAL = unique(hab$SITE_INTERNAL),
+    VARIABLE      = names(var_names),
+    TYPE          = names(hab_names)
 ))
+
+# Adjust for each variables.
+adjust_list <- list(
+    DEPTH    = 1.5,
+    D50      = 1.7,
+    VELOCITY = 1.5
+)
 
 # Loop over all possible values.
 fd_curves <- dtlapply(
@@ -176,20 +183,23 @@ fd_curves <- dtlapply(
     FUN = function(w) {
 
         # Extract information from the canvas tbl.
-        site <- tbl$SITENEW[w]
+        site <- tbl$SITE_INTERNAL[w]
         var  <- tbl$VARIABLE[w]
         type <- tbl$TYPE[w]
 
         # Fit curves
         fit <- fit_kde(
-            x     = hab[SITENEW  == site &
-                        VARIABLE == var  &
-                        TYPE     == type, VALUE],
-            range = hab_var_range[, var, with = FALSE]
+            x       = hab[SITE_INTERNAL == site &
+                        VARIABLE       == var  &
+                        TYPE           == type, VALUE],
+            range   = hab_var_range[, var, with = FALSE],
+            adjust  = adjust_list[[var]],
+            npoints = 2^7,
+            scale   = FALSE
         )
 
         # Add relevant information.
-        fit[, `:=`(SITENEW = site, VARIABLE = var, TYPE = type)]
+        fit[, `:=`(SITE_INTERNAL = site, VARIABLE = var, TYPE = type)]
 
         # Return fitted function.
         return(fit)
@@ -198,58 +208,146 @@ fd_curves <- dtlapply(
 )
 
 
-# Plot curves ------------------------------------------------------------------
+# Labels for plotting ----------------------------------------------------------
 
 
-# Save as a pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_4_habitat_fd_curves.pdf"),
-    width  = 8L,
-    height = 8L
-)
+# Extract labels
+labels <- unique(data[, .(LABEL = paste0(RIVER, " - ", SITE_NEW), SITE_INTERNAL)])
 
-# Loop over all variables.
-for (var in names(var_names)) {
+# Convert labels to a list.
+x_labels <- as.list(labels$LABEL)
 
-    # Loop over two pages.
-    for (page.i in c(1L, 2L)) {
+# Merge labels with "fd_curves" and "hab".
+fd_curves[, LABEL := factor(ul(x_labels[SITE_INTERNAL]), ul(x_labels))]
+hab[,       LABEL := factor(ul(x_labels[SITE_INTERNAL]), ul(x_labels))]
 
-        # Generate plot.
-        p <- ggplot(
-            data    = fd_curves[VARIABLE == var, ],
-            mapping = aes(x = X)) +
+
+# Plotting function for curves and histograms ----------------------------------
+
+
+plot_kde_hist <- function(sites) {
+
+    # Generate the tree plots for all habitat habitat variables.
+    p <- lapply(names(var_names), function(var) {
+        ggplot(
+            data    = fd_curves[
+                SITE_INTERNAL %in% sites &
+                    VARIABLE == var,
+                ],
+            mapping = aes(x = X)
+        ) +
+        geom_histogram(
+            data = hab[SITE_INTERNAL %in% sites & VARIABLE == var, ],
+            mapping = aes(
+                x    = VALUE,
+                y    = ..density..,
+                fill = TYPE
+            ),
+            color    = "grey90",
+            lwd      = 0.1,
+            position = "dodge",
+            bins     = 10L
+        ) +
         geom_line(
             mapping = aes(
                 y     = Y,
-                color = TYPE),
-            lwd     = 1L
+                color = TYPE
+            ),
+            lwd         = 1L,
+            show.legend = FALSE
         ) +
-        facet_wrap_paginate(
-            facets = ~ SITENEW,
-            nrow   = 5L,
-            ncol   = 4L,
-            scales = "free_y",
-            page   = page.i
+        facet_wrap(
+            facets   = ~ LABEL,
+            ncol     = 4L,
+            nrow     = 1L,
+            scales   = "free"
         ) +
         labs(
-            title = paste0(
-                "Habitat availability / selection for ", tolower(var)
-            ),
-            color = "",
-            x     = var_names[var],
-            y     = "Probability density function (PDF)"
+            title = paste0(letters[which(var == names(var_names))], ") ",
+                           var_names[[var]]),
+            fill  = "",
+            x     = var_names_u[[var]],
+            y     = NULL
         ) +
         scale_color_manual(
-            values = c("#9B9B93", "#63B0CD")
+            values = c("#282822", "#257B97"),
+            breaks = names(hab_names),
+            label  = ul(hab_names)
         ) +
-        legend_bottom
+        scale_fill_manual(
+            values = c("#9B9B93", "#63B0CD"),
+            breaks = names(hab_names),
+            label  = ul(hab_names)
+        ) +
+        custom_theme() +
+        theme(plot.title = element_text(hjust = 0))
+    })
 
-        # Print plot.
-        print(p)
-    }
+    # Align the third graph with the other.
+    p[[3L]] <- p[[3L]] + ylab("")
+
+    # Generate the plot.
+    p_all <- ggpubr::ggarrange(
+        plotlist      = p,
+        nrow          = 3L,
+        legend        = "bottom",
+        common.legend = TRUE
+    )
+
+    # Add y_axis.
+    p_all <- ggpubr::annotate_figure(
+        p    = p_all,
+        left = "Probability density function (PDF)"
+    )
+
+    # Print plot.
+    print(p_all)
+
+    # Return null.
+    return(invisible(NULL))
+
 }
 
-# Saving plot.
+
+# Plot a subset of the curves --------------------------------------------------
+
+
+# Select sites.
+sites <- c(5L, 14L, 22L, 33L)
+
+# Plot curves.
+plot_kde_hist(sites)
+
+# Save plot for further use.
+ggsave(
+    file   = file.path("out", "plots", "fig_5_kde_curves_overview.pdf"),
+    width  = 8L,
+    height = 7L
+)
+
+# Plot all curves --------------------------------------------------------------
+
+
+# Create subsets of 4 sites for plotting.
+sites <- unique(data$SITE_INTERNAL)
+sites_subset <- lapply(
+    X   = seq_len(ceiling(length(sites)/4L)),
+    FUN = function(w) { seq.int(w * 4 - 3L, w * 4L) }
+)
+
+# Create pdf to save all the graphs.
+pdf(
+    file   = file.path("out", "plots", "fig_6_kde_curves_all.pdf"),
+    width  = 8L,
+    height = 7L
+)
+
+# Plot for all sites.
+for (sites in sites_subset) {
+    plot_kde_hist(sites)
+}
+
+# Close plot.
 dev.off()
 
 
@@ -258,6 +356,6 @@ dev.off()
 
 qs::qsave(
     x    = fd_curves,
-    file = file.path("out", "tmp", "s4_fd_curves_dt.qs")
+    file = file.path("out", "tmp", "s05_fd_curves_dt.qs")
 )
 
