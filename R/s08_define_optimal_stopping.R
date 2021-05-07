@@ -23,8 +23,10 @@ library(FDboost)
 # Functions --------------------------------------------------------------------
 
 
-source(file.path("R", "functions", "internals.R"))
 source(file.path("R", "functions", "fdboost_helpers.R"))
+source(file.path("R", "functions", "globals.R"))
+source(file.path("R", "functions", "internals.R"))
+source(file.path("R", "functions", "plot_helpers.R"))
 
 
 # Imports ----------------------------------------------------------------------
@@ -32,12 +34,12 @@ source(file.path("R", "functions", "fdboost_helpers.R"))
 
 # Fitted functional models.
 frm_results <- qs::qread(
-    file = file.path("out", "tmp", "s6_frm_results.qs")
+    file = file.path("out", "tmp", "s07_frm_results.qs")
 )
 
 # Functional observations.
 fd_curves_list <- qs::qread(
-    file = file.path("out", "tmp", "s5_fd_curves_list.qs")
+    file = file.path("out", "tmp", "s06_fd_curves_list.qs")
 )
 
 
@@ -87,13 +89,6 @@ metric_name <- metric_names[[frm_results$DEPTH$fdboost_opts$metric]]
 # Plot -------------------------------------------------------------------------
 
 
-# Save as a pdf for future use.
-pdf(
-    file   = file.path("out", "plots", "fig_5_early_stopping.pdf"),
-    width  = 10L,
-    height = 4L
-)
-
 # Plot.
 ggplot(
     data    = early_stop_curves,
@@ -128,19 +123,25 @@ geom_text(
     cex   = 2L
 ) +
 labs(
-    title = "Early stopping regularisation for the three models",
+    title = NULL,
     x     = "Number of iterations",
-    y     = metric_name
+    y     = "Loss function"
 ) +
 facet_wrap(
     facets = ~ MODEL,
     nrow   = 1L,
     ncol   = 3L,
     scales = "free"
-)
+) +
+custom_theme()
 
 # Save plot.
-dev.off()
+ggsave(
+    file   = file.path("out", "plots", "fig_7_early_stopping.pdf"),
+    width  = 9L,
+    height = 3L
+)
+
 
 
 # Fit full model ---------------------------------------------------------------
@@ -173,6 +174,6 @@ frm_results$VELOCITY$full <- .FDboost(
 
 qs::qsave(
     x    = frm_results,
-    file = file.path("out", "tmp", "s7_frm_results_full.qs")
+    file = file.path("out", "tmp", "s08_frm_results_full.qs")
 )
 
