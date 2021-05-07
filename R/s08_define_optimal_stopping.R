@@ -1,7 +1,7 @@
-# s7_define_optimal_stopping.R
+# s08_define_optimal_stopping.R
 
 
-# Define optimal stopping from the fitted FRMs.
+# Step 08 : Define optimal stopping from the fitted FRMs.
 
 
 # Project : habitat_suitability_curves_fda
