@@ -1,7 +1,7 @@
 # internals.R
 
 
-# Internal functions and global variables.
+# Internal functions.
 
 
 # Project : habitat_suitability_curves_fda
@@ -10,38 +10,6 @@
 # Depends : R (v3.6.3)
 # License : CC BY-NC-ND 4.0
 
-
-
-# Names ------------------------------------------------------------------------
-
-
-# Variables names.
-var_names <- list(
-    DEPTH    = "Depth",
-    D50      = "D50",
-    VELOCITY = "Velocity"
-)
-
-# Variables names with units.
-var_names_u <- list(
-    DEPTH    = "Depth (cm)",
-    D50      = "D50 (mm)",
-    VELOCITY = "Velocity (m/s)"
-)
-
-# Habitat type names.
-hab_names <- list(
-    AVAILABLE = "Available",
-    SELECTED  = "Selected"
-)
-
-# Metric names.
-metric_names <- list(
-    "fRMSE" = "Functional Root Mean Square Error (fRMSE)",
-    "fMAE"  = "Functional Mean Abosule Error (fMAE)",
-    "fR2"   = "Functional R2 (fR2)",
-    "R2"    = "R square (R2)"
-)
 
 
 # Data functions ---------------------------------------------------------------
@@ -87,23 +55,4 @@ fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
     return(data.table::data.table(X = fit$x, Y = fit$y))
 
 }
-
-
-# ggplot helpers ---------------------------------------------------------------
-
-
-# rotate_x_axis : Rotate the ticks of the x axis on a ggplot2 graph.
-rotate_x_axis <- ggplot2::theme(
-    axis.text.x = element_text(
-        angle = 90L,
-        vjust = 0.5,
-        hjust = 1L
-    )
-)
-
-
-# legend_bottom : Bring legend to the bottom of the plot.
-legend_bottom <- ggplot2::theme(
-    legend.position = "bottom"
-)
 
