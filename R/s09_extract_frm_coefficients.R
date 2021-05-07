@@ -1,7 +1,7 @@
-# s8_extract_frm_coefficients.R
+# s09_extract_frm_coefficients.R
 
 
-# Extract FRM coefficients and plot results.
+# Step 09 : Extract FRM coefficients and plot results.
 
 
 # Project : habitat_suitability_curves_fda
