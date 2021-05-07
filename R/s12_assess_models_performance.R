@@ -1,7 +1,7 @@
-# s10_assess_models_performance.R
+# s12_assess_models_performance.R
 
 
-# Assess models performance.
+# Step 12 : Assess models performance.
 
 
 # Project : habitat_suitability_curves_fda
