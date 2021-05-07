@@ -40,7 +40,7 @@ ul <- function(x) {
 }
 
 # fit_kde : Fit a KDE and scale it to 0 - 1.
-fit_kde <- function(x, range, npoints = 2^7, adjust = 4L, scale = FALSE) {
+fit_kde <- function(x, range, npoints = 2^7, adjust = 1L, scale = FALSE) {
 
     # Calculate fit.
     fit <- stats::density(
