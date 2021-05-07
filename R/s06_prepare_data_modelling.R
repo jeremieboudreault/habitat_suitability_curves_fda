@@ -30,7 +30,12 @@ source(file.path("R", "functions", "globals.R"))
 
 # Functional observations.
 fd_curves <- qs::qread(
-    file.path("out", "tmp", "s4_fd_curves_dt.qs")
+    file.path("out", "tmp", "s05_fd_curves_dt.qs")
+)
+
+# Load data per site.
+data <- qs::qread(
+    file.path("out", "tmp", "s03_smr_pcr_subset_to_model.qs")
 )
 
 
@@ -39,17 +44,27 @@ fd_curves <- qs::qread(
 
 # Y(s).
 fd_curves_y <- data.table::dcast.data.table(
-    data      = fd_curves[TYPE == "Selected", ],
-    formula   = X + VARIABLE ~ SITENEW,
+    data      = fd_curves[TYPE == "SELECTED", ],
+    formula   = X + VARIABLE ~ SITE_INTERNAL,
     value.var = "Y"
 )
 
 # X(r).
 fd_curves_x <- data.table::dcast.data.table(
-    data      = fd_curves[TYPE == "Available", ],
-    formula   = X + VARIABLE ~ SITENEW,
+    data      = fd_curves[TYPE == "AVAILABLE", ],
+    formula   = X + VARIABLE ~ SITE_INTERNAL,
     value.var = "Y"
 )
+
+
+# Extract information about the rivers -----------------------------------------
+
+
+site_info <- unique(data[, .(
+    SITE_INTERNAL,
+    SITE_LABEL = paste0(RIVER, " - ", SITE_NEW),
+    RIVER
+)])[order(SITE_INTERNAL), ]
 
 
 # Generate dataset for all three habitat variable ------------------------------
@@ -60,10 +75,13 @@ fd_curves_list <- lapply(
     X   = names(var_names),
     FUN = function(var) {
         return(list(
-            Y = t(as.matrix(fd_curves_y[VARIABLE == var, -c("X", "VARIABLE")])),
-            X = t(as.matrix(fd_curves_x[VARIABLE == var, -c("X", "VARIABLE")])),
-            s = unlist(fd_curves_y[VARIABLE == var, "X"], use.names = FALSE),
-            r = unlist(fd_curves_x[VARIABLE == var, "X"], use.names = FALSE)
+            Y     = t(as.matrix(fd_curves_y[VARIABLE == var, -c("X", "VARIABLE")])),
+            X     = t(as.matrix(fd_curves_x[VARIABLE == var, -c("X", "VARIABLE")])),
+            s     = unlist(fd_curves_y[VARIABLE == var, "X"], use.names = FALSE),
+            r     = unlist(fd_curves_x[VARIABLE == var, "X"], use.names = FALSE),
+            SITE_INTERNAL = site_info$SITE_INTERNAL,
+            SITE_LABEL    = site_info$SITE_LABEL,
+            RIVER         = site_info$RIVER
         ))
     }
 )
@@ -77,6 +95,6 @@ names(fd_curves_list) <- names(var_names)
 
 qs::qsave(
     x = fd_curves_list,
-    file = file.path("out", "tmp", "s5_fd_curves_list.qs")
+    file = file.path("out", "tmp", "s06_fd_curves_list.qs")
 )
 
