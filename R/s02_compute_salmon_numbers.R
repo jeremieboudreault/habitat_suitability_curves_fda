@@ -1,7 +1,7 @@
-# s2_compute_salmon_numbers.R
+# s02_compute_salmon_numbers.R
 
 
-# Compute salmon numbers based on the measured fork-lengths.
+# Step 02 :  Compute salmon numbers based on the measured fork-lengths.
 
 
 # Project : habitat_suitability_curves_fda
