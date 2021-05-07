@@ -27,7 +27,6 @@ library(sp)
 
 source(file.path("R", "functions", "globals.R"))
 source(file.path("R", "functions", "internals.R"))
-source(file.path("R", "functions", "plot_helpers.R"))
 
 
 # Imports ----------------------------------------------------------------------
@@ -39,7 +38,7 @@ data <- qs::qread(
 )
 
 # Extract unique sites.
-data_site <- unique(data[, .(RIVER, SITE)])
+data_site <- unique(data[, .(RIVER, SITE_ORIGINAL, SITE_NEW)])
 
 
 # GPS points for the SMR -------------------------------------------------------
@@ -61,17 +60,17 @@ names(gps_points_smr) <- c("SITE", "LON", "LAT", "Z", "C")
 # Keep the three first columns.
 gps_points_smr[, `:=`(Z = NULL, C = NULL)]
 
-# Update <SITE>.
-gps_points_smr[, SITE := as.integer(substr(SITE, 6L, nchar(SITE)))]
+# Create a new field <SITE_ORIGINAL> for merging purpose.
+gps_points_smr[, SITE_ORIGINAL := as.integer(substr(SITE, 6L, nchar(SITE)))]
 
 # Select the subset of points retained for the studied site.
-gps_smr_sub <- gps_points_smr[data_site[RIVER == "SMR", ], , on = "SITE"]
+gps_smr_sub <- gps_points_smr[data_site[RIVER == "SMR", ], , on = "SITE_ORIGINAL"]
 
 # Order by sitte.
-gps_smr_sub <- gps_smr_sub[order(SITE), ]
+gps_smr_sub <- gps_smr_sub[order(SITE_NEW), ]
 
 # Create a variable <NEWSITE>
-gps_smr_sub[, NEWSITE := 1:.N]
+gps_smr_sub[, NEWSITE := SITE_NEW]
 
 # Convert to spdf.
 gps_smr_sub_spdf <- sp::SpatialPointsDataFrame(
@@ -100,17 +99,17 @@ names(gps_points_pcr) <- c("SITE", "LON", "LAT", "Z", "C")
 # Keep the three first columns.
 gps_points_pcr[, `:=`(Z = NULL, C = NULL)]
 
-# Update <SITE>.
-gps_points_pcr[, SITE := as.integer(substr(SITE, 6L, nchar(SITE)))]
+# Create new <SITE_ORIGINAL> field.
+gps_points_pcr[, SITE_ORIGINAL := as.integer(substr(SITE, 6L, nchar(SITE)))]
 
 # Select the subset of points retained for the studied site.
-gps_pcr_sub <- gps_points_pcr[data_site[RIVER == "PCR", ], , on = "SITE"]
+gps_pcr_sub <- gps_points_pcr[data_site[RIVER == "PCR", ], , on = "SITE_ORIGINAL"]
 
 # Order by sitte.
-gps_pcr_sub <- gps_pcr_sub[order(SITE), ]
+gps_pcr_sub <- gps_pcr_sub[order(SITE_NEW), ]
 
 # Create a variable <NEWSITE>
-gps_pcr_sub[, NEWSITE := 1:.N]
+gps_pcr_sub[, NEWSITE := SITE_NEW]
 
 # Convert to spdf.
 gps_pcr_sub_spdf <- sp::SpatialPointsDataFrame(
