@@ -32,8 +32,8 @@ Scripts are all from Jeremie Boudreault. They make the use of the R package `FDb
 + `s06_prepare_data_modelling.R`: prepare data prior to fit function regression models (FRM).
 + `s07_fit_function_models.R`: fit FRMs to curves using a parallelized k-fold cross-validation. 
 + `s08_define_optimal_stopping.R`: choose optimal early stopping parameter.
-+ `s09_extract_frm_coefficients.R`: extract coefficients surfaces from fitted FRM.
-+ `s10_compute_coef_bootstrap.R`: compute standard-error of FRM coefficients using bootstrap. 
++ `s09_compute_coef_bootstrap.R`: compute standard-error of FRM coefficients using bootstrap. 
++ `s10_plot_frm_coefficients.R`: plots intercept and coefficients surfaces from fitted FRM.
 + `s11_build_classical_models.R`: build classical local and regional models of HSC.
 + `s12_assess_models_performance.R`: calculate some goodness-of-fit metrics for the fitted models. 
 
