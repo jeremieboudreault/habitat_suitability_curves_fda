@@ -360,3 +360,25 @@ FDboost_kfold <- function(
 
 }
 
+
+# Extract coefficents ----------------------------------------------------------
+
+
+.extract_coef <- function(fit_coef) {
+
+    # Extract x, y, z values.
+    z <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$value
+    rownames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$y
+    colnames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$x
+
+    # Add proper names to the matrix.
+    names(dimnames(z)) <- c("Y", "X")
+
+    # Generate a data.frame for plotting.
+    z_df <- as.data.table(reshape2::melt(z, value.name = "Z"))
+
+    # Return "z_df".
+    return(z_df)
+
+}
+
