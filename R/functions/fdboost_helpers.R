@@ -91,6 +91,18 @@ calc_fun_metrics <- function(y_obs, y_hat, metrics = names(metric_names)) {
 }
 
 
+# Generate bootstrap sample ----------------------------------------------------
+
+
+generate_bs_sample <- function(l) {
+    n_obs <- nrow(l$Y)
+    boot_i <- sample(seq_len(n_obs), size = n_obs, replace = TRUE)
+    l$Y <- l$Y[boot_i, ]
+    l$X <- l$X[boot_i, ]
+    return(l)
+}
+
+
 # Create options to fit a FDboost ----------------------------------------------
 
 
@@ -102,7 +114,7 @@ calc_fun_metrics <- function(y_obs, y_hat, metrics = names(metric_names)) {
         n_folds       = "loo",
         knots         = 10L,
         degree        = 3L,
-        difference    = 1L
+        differences   = 2L
 ) {
     return(
         list(
@@ -113,7 +125,7 @@ calc_fun_metrics <- function(y_obs, y_hat, metrics = names(metric_names)) {
             n_folds       = n_folds,
             knots         = knots,
             degree        = degree,
-            difference    = difference
+            differences   = differences
         )
     )
 }
@@ -252,7 +264,7 @@ FDboost_kfold <- function(
             inS         = "smooth",
             degree      = fdboost_opts[["degree"]],
             knots       = fdboost_opts[["knots"]],
-            differences = fdboost_opts[["difference"]],
+            differences = fdboost_opts[["differences"]],
             cyclic      = FALSE
         ),
         timeformula = ~ bbs(s),
@@ -316,7 +328,7 @@ FDboost_kfold <- function(
             inS         = "smooth",
             degree      = fdboost_opts[["degree"]],
             knots       = fdboost_opts[["knots"]],
-            differences = fdboost_opts[["difference"]],
+            differences = fdboost_opts[["differences"]],
             cyclic      = FALSE
         ),
         timeformula = ~ bbs(s),
