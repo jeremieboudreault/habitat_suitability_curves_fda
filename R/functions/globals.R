@@ -60,3 +60,9 @@ adjust_list <- list(
     VELOCITY = 1.5
 )
 
+# Number of values for coefficients.
+n_val_coef <- 100L
+
+# Number of bootstrap.
+n_bs <- 1000L
+
