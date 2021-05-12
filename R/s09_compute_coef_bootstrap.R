@@ -116,4 +116,3 @@ qs::qsave(
     file = file.path("out", "tmp", "s09_frm_coef_bootstrap.qs")
 )
 
-
