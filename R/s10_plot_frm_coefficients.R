@@ -71,11 +71,11 @@ plot_coef  <- function(var) {
     std_dt <- data.table::setDT(reshape2::melt(std))
 
     # Update names.
-    names(std_dt) <- c("Y", "X", "Z")
+    names(std_dt) <- c("X", "Y", "Z")
 
     # Extract intercept std.
-    intercept_std <- std_dt[X == "intercept", ]
-    intercept_std <- intercept_std[, .(X = Y, SD = Z)]
+    intercept_std <- std_dt[Y == "intercept", ]
+    intercept_std <- intercept_std[, .(X = X, SD = Z)]
     intercept_std[, X := round(as.numeric(as.character(X)), 3L)]
 
     # Merge with intercept.
@@ -135,8 +135,8 @@ plot_coef  <- function(var) {
     surface_fit[, TYPE := "Regression coefficient"]
 
     # Extract surface std.
-    surface_std <- std_dt[X != "intercept", ]
-    surface_std <- surface_std[, X := as.numeric(as.character(X)) ]
+    surface_std <- std_dt[Y != "intercept", ]
+    surface_std <- surface_std[, Y := as.numeric(as.character(Y)) ]
     surface_std[, TYPE := "Standard error"]
 
     # Combine both table.
