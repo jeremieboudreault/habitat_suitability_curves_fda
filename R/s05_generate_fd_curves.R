@@ -153,12 +153,6 @@ hab_var_range[2L, 4L] <- 300L
 # Check final result.
 hab_var_range
 
-# Save for traceability.
-qs::qsave(
-    x    = hab_var_range,
-    file = file.path("out", "tmp", "s05_hab_var_range.qs")
-)
-
 
 # Generate functional curves ---------------------------------------------------
 
@@ -347,6 +341,19 @@ dev.off()
 # Exports ----------------------------------------------------------------------
 
 
+# Habitat variables.
+qs::qsave(
+    x    = hab,
+    file = file.path("out", "tmp", "s05_hab_var.qs")
+)
+
+# Habitat variables range.
+qs::qsave(
+    x    = hab_var_range,
+    file = file.path("out", "tmp", "s05_hab_var_range.qs")
+)
+
+# Functional curves.
 qs::qsave(
     x    = fd_curves,
     file = file.path("out", "tmp", "s05_fd_curves_dt.qs")
