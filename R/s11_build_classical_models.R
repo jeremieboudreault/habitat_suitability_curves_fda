@@ -71,12 +71,12 @@ hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
     # Set y_hat as the HSC curves.
     y_hat <- Reduce(
         f     = function(x1, x2) rbind(x1, kde$Y),
-        x     = seq_len(n_sites),
+        x     = seq_len(n_sites - 1L),
         init  = rbind(kde$Y)
     )
 
     # Extract y_obs from the fitted curves.
-    y_obs <- fd_curves[[var]]$Y[which(fd_curves[[var]]$RIVER %in% rivers)]
+    y_obs <- fd_curves[[var]]$Y[which(fd_curves[[var]]$RIVER %in% rivers), ]
 
     # Set leave-one-out predictions.
     y_hat_cv <- do.call(rbind, lapply(sites, function(site) {
