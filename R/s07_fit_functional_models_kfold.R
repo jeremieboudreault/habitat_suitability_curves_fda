@@ -41,7 +41,7 @@ fd_curves_list <- qs::qread(
 
 
 # Options for the depth model.
-depth_opts <- .fdboost_opts(mstop_step = 2L, mstop_max = 500L)
+depth_opts <- .fdboost_opts(learning_rate = 0.2)
 
 # Fit FDboost with k-fold cross validation using the options above.
 res_depth <- FDboost_kfold(
@@ -54,7 +54,7 @@ res_depth <- FDboost_kfold(
 
 
 # Options for the D50 model.
-d50_opts <- .fdboost_opts(learning_rate = 1L, mstop_max = 2000L, mstop_step = 10L)
+d50_opts <- .fdboost_opts(learning_rate = 2L, mstop_max = 1000L)
 
 # Fit FDboost with k-fold cross validation using the options above.
 res_d50 <- FDboost_kfold(
@@ -67,7 +67,7 @@ res_d50 <- FDboost_kfold(
 
 
 # Options for the velocity model.
-velocity_opts <- .fdboost_opts(mstop_max = 500L, mstop_step = 2L)
+velocity_opts <- .fdboost_opts(learning_rate = 0.1)
 
 # Fit FDboost with k-fold cross validation using the options above.
 res_velocity <- FDboost_kfold(
