@@ -79,7 +79,7 @@ hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
     y_obs <- fd_curves[[var]]$Y[which(fd_curves[[var]]$RIVER %in% rivers)]
 
     # Set leave-one-out predictions.
-    y_hat_loo <- do.call(rbind, lapply(sites, function(site) {
+    y_hat_cv <- do.call(rbind, lapply(sites, function(site) {
 
         # Fit KDE.
         kde <- fit_kde(
@@ -99,7 +99,7 @@ hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
             x         = kde$X,
             y_obs     = y_obs,
             y_hat     = y_hat,
-            y_hat_loo = y_hat_loo
+            y_hat_cv = y_hat_cv
         )
     )
 
