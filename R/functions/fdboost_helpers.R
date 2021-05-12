@@ -107,8 +107,8 @@ generate_bs_sample <- function(l) {
 
 
 .fdboost_opts <- function(
-        mstop_max     = 1000L,
-        mstop_step    = 5L,
+        mstop_max     = 500L,
+        mstop_step    = 2L,
         learning_rate = 0.1,
         metric        = "fRMSE",
         n_folds       = "loo",
@@ -368,11 +368,11 @@ FDboost_kfold <- function(
 
     # Extract x, y, z values.
     z <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$value
-    rownames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$y
-    colnames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$x
+    colnames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$y
+    rownames(z) <- fit_coef$smterms$`bsignal(X) %O% bbs(s)`$x
 
     # Add proper names to the matrix.
-    names(dimnames(z)) <- c("Y", "X")
+    names(dimnames(z)) <- c("X", "Y")
 
     # Generate a data.frame for plotting.
     z_df <- as.data.table(reshape2::melt(z, value.name = "Z"))
