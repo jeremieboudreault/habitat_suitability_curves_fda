@@ -84,8 +84,11 @@ bs_results <- parallel::parLapply(
                 coef_mat <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$value
 
                 # Add row and column names.
-                rownames(coef_mat) <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$y
-                colnames(coef_mat) <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$x
+                colnames(coef_mat) <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$y
+                rownames(coef_mat) <- coef_fit$smterms$`bsignal(X) %O% bbs(s)`$x
+
+                # Add proper names to the matrix.
+                names(dimnames(coef_mat)) <- c("X", "Y")
 
                 # Extract intercept.
                 intercept <- coef_fit$offset$value
