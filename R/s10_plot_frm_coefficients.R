@@ -219,7 +219,6 @@ ps <- lapply(names(var_names), plot_coef)
 # Plot.
 ggpubr::ggarrange(plotlist = ps, nrow = 3L)
 
-
 # Save plot.
 ggsave(
     file   = file.path("out", "plots", "fig_8_frm_coef_bs.pdf"),
