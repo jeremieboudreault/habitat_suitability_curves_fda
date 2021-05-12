@@ -107,12 +107,12 @@ generate_bs_sample <- function(l) {
 
 
 .fdboost_opts <- function(
-        mstop_max     = 500L,
-        mstop_step    = 1L,
+        mstop_max     = 1000L,
+        mstop_step    = 5L,
         learning_rate = 0.1,
         metric        = "fRMSE",
         n_folds       = "loo",
-        knots         = 10L,
+        knots         = 20L,
         degree        = 3L,
         differences   = 2L
 ) {
