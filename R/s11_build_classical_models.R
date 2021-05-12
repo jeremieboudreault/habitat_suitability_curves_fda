@@ -130,14 +130,14 @@ local_models_pcr <- lapply(
 names(local_models_pcr) <- names(var_names)
 
 # Regional models.
-reg_models <- lapply(
+regional_models <- lapply(
     X      = names(var_names),
     FUN    = .fit_classical_model,
     rivers = c("SMR", "PCR")
 )
 
 # Add names.
-names(reg_models) <- names(var_names)
+names(regional_models) <- names(var_names)
 
 
 # Plot classical models --------------------------------------------------------
@@ -186,7 +186,7 @@ plot_classical_model <- function(models) {
 
 # Generate plots.
 ps <- lapply(
-    X   = list(local_models_smr, local_models_pcr, reg_models),
+    X   = list(local_models_smr, local_models_pcr, regional_models),
     FUN = plot_classical_model
 )
 
@@ -235,7 +235,7 @@ qs::qsave(
 
 # Regional HSC model.
 qs::qsave(
-    x = reg_models,
-    file = file.path("out", "tmp", "s11_reg_models.qs")
+    x = regional_models,
+    file = file.path("out", "tmp", "s11_regional_models.qs")
 )
 
