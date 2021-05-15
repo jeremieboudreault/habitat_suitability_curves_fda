@@ -168,6 +168,14 @@ frm_results$VELOCITY$full <- .FDboost(
 )
 
 
+# Add "x" values ---------------------------------------------------------------
+
+
+frm_results$DEPTH$full$x <- fd_curves_list$DEPTH$s
+frm_results$D50$full$x <- fd_curves_list$D50$s
+frm_results$VELOCITY$full$x <- fd_curves_list$VELOCITY$s
+
+
 # Exports ----------------------------------------------------------------------
 
 
