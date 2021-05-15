@@ -143,7 +143,7 @@ names(regional_models) <- names(var_names)
 # Plot classical models --------------------------------------------------------
 
 
-plot_classical_model <- function(models) {
+plot_classical_model <- function(models, rivers) {
 
     # Create a data.table with the relevant data.
     model_dt <- data.table::data.table(
@@ -155,6 +155,9 @@ plot_classical_model <- function(models) {
         )
     )
 
+    # Update <VAR> of hab.
+    hab[, VAR := factor(var_names[VARIABLE],  levels = ul(var_names))]
+
     # Plot models.
     ggplot(
         data    = model_dt,
@@ -163,18 +166,42 @@ plot_classical_model <- function(models) {
             y = Y
         )
     ) +
+    geom_histogram(
+        data    = hab[RIVER %in% rivers, ],
+        mapping = aes(
+            x    = VALUE,
+            y    = ..density..,
+            fill = "Distribution of selected habitat characteristics"
+        ),
+        color    = "grey90",
+        lwd      = 0.3,
+        position = "dodge",
+        bins     = 12L,
+        alpha    = 0.8
+    ) +
     geom_line(
-        color = "#257B97",
+        mapping = aes(
+            color = "Habitat suitability curve"
+        ),
         lwd   = 1.2
     ) +
     labs(
         title = "",
         y     = NULL,
-        x     = ""
+        x     = "",
+        fill  = "",
+        color = ""
     ) +
     facet_wrap(
         facets   = "VAR",
         scales   = "free"
+    ) +
+    scale_fill_manual(
+        values = "#63B0CD"
+
+    ) +
+    scale_color_manual(
+        values = "#257B97"
     ) +
     custom_theme()
 
@@ -185,9 +212,10 @@ plot_classical_model <- function(models) {
 
 
 # Generate plots.
-ps <- lapply(
-    X   = list(local_models_smr, local_models_pcr, regional_models),
-    FUN = plot_classical_model
+ps <- list(
+    plot_classical_model(local_models_smr, rivers = "SMR"),
+    plot_classical_model(local_models_pcr, rivers = "PCR"),
+    plot_classical_model(regional_models, rivers = c("SMR", "PCR"))
 )
 
 # Add xlab to last plot.
@@ -195,19 +223,21 @@ ps[[3L]] <- ps[[3L]] + xlab("Depth (cm)                                         
 
 # Combine all plots.
 p <- ggpubr::ggarrange(
-    plotlist = ps,
-    nrow     = 3L,
-    labels   = c(
+    plotlist      = ps,
+    nrow          = 3L,
+    labels        = c(
         "a) Local HSC model for SMR",
         "b) Local HSC model for PCR",
         "c) Regional HSC model"
     ),
-    hjust   = -0.2
+    hjust         = -0.2,
+    legend        = "bottom",
+    common.legend = TRUE
 )
 
 # Annotate figure.
 ggpubr::annotate_figure(p,
-    left   = "Habitat suitability curve (HSC)",
+    left   = "Probability density function (PDF)",
 )
 
 # Save plot.
