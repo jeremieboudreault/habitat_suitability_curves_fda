@@ -93,13 +93,17 @@ hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
 
     }))
 
+    # Extract rivers.
+    river <- fd_curves[[var]]$RIVER[which(fd_curves[[var]]$RIVER %in% rivers)]
+
     # Return results for the model.
     return(
         list(
             x         = kde$X,
             y_obs     = y_obs,
             y_hat     = y_hat,
-            y_hat_cv = y_hat_cv
+            y_hat_cv  = y_hat_cv,
+            river     = river
         )
     )
 
