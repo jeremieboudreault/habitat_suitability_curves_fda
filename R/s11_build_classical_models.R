@@ -180,8 +180,9 @@ plot_classical_model <- function(models, rivers) {
         color    = "grey90",
         lwd      = 0.3,
         position = "dodge",
+        boundary = 0L,
         bins     = 12L,
-        alpha    = 0.8
+        alpha    = 0.9
     ) +
     geom_line(
         mapping = aes(

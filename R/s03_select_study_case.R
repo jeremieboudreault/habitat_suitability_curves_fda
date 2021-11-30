@@ -40,17 +40,17 @@ data <- qs::qread(
 
 
 data_per_site <- data[, list(
-    N_FRY_T        = sum(N_FRY_T),
+    N_TOT_FRY_T    = sum(N_FRY_T),
     N_OBS_FRY_T    = sum(N_FRY_T > 0L),
-    N_FRY_M        = sum(N_FRY_M),
+    N_TOT_FRY_M    = sum(N_FRY_M),
     N_OBS_FRY_M    = sum(N_FRY_M > 0L),
-    N_PARR1_M      = sum(N_PARR1_M),
+    N_TOT_PARR1_M  = sum(N_PARR1_M),
     N_OBS_PARR1_M  = sum(N_PARR1_M > 0L),
-    N_PARR_2_M     = sum(N_PARR2_M),
+    N_TOT_PARR2_M = sum(N_PARR2_M),
     N_OBS_PARR2_M  = sum(N_PARR2_M > 0L),
-    N_PARR_M       = sum(N_PARR_M),
+    N_TOT_PARR_M   = sum(N_PARR_M),
     N_OBS_PARR_M   = sum(N_PARR_M > 0L),
-    N_PARR_T       = sum(N_PARR_T),
+    N_TOT_PARR_T   = sum(N_PARR_T),
     N_OBS_PARR_T   = sum(N_PARR_T > 0L)
 ), by = c("RIVER", "SITE")]
 
@@ -61,7 +61,7 @@ data_per_site <- data[, list(
 # Extract columns names starting with N_OBS.
 cnames <- names(data_per_site)
 cnames <- cnames[
-    substr(cnames, 1L, 5L) == "N_OBS" &
+    substr(cnames, 1L, 5L) == "N_TOT" &
     substr(cnames, nchar(cnames), nchar(cnames)) == "M"
 ]
 
@@ -81,6 +81,12 @@ res <- dtlapply(
 
 # Plot results -----------------------------------------------------------------
 
+
+# Convert names to factor.
+res$VAR <- factor(
+    x      = res$VAR,
+    levels = rev(c("N_TOT_FRY_M", "N_TOT_PARR_M", "N_TOT_PARR1_M", "N_TOT_PARR2_M"))
+)
 
 # Plot.
 ggplot(
@@ -109,7 +115,7 @@ labs(
 custom_theme() +
 theme(
     panel.grid   = element_blank(),
-    panel.border =element_blank()
+    panel.border = element_blank()
 )
 
 # Save the plot.
@@ -127,7 +133,7 @@ ggsave(
 threshold <- 4L
 
 # Selected variable.
-var_selected <- "N_PARR_M"
+var_selected <- "N_TOT_PARR_M"
 
 
 # Subset the study case --------------------------------------------------------

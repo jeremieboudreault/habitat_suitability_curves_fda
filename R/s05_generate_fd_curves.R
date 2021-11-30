@@ -80,6 +80,76 @@ hab_select[, TYPE := "SELECTED"]
 hab <- data.table::rbindlist(list(hab_avail, hab_select))
 
 
+# Create a table with characteristics ------------------------------------------
+
+
+# Calculate number of sites.
+hab[, .N, by = c("RIVER", "SITE_INTERNAL")][, .N, by = "RIVER"]
+
+# Calculate mean physical measurements for SMR and PCR.
+phy_mean_river <- data.table::dcast.data.table(
+    data      = hab[, mean(VALUE), by = c("RIVER", "VARIABLE", "TYPE")],
+    formula   = RIVER ~ TYPE + VARIABLE
+)
+
+# Calculate mean physical measurements for both rivers.
+phy_mean_reg <- data.table::dcast.data.table(
+    data      = hab[, mean(VALUE), by = c("VARIABLE", "TYPE")],
+    formula   = . ~ TYPE + VARIABLE
+)[, RIVER := "REG"]
+
+# Combine tables of mean.
+phy_mean <- data.table::rbindlist(
+    l         = list(phy_mean_river[c(2L, 1L)], phy_mean_reg),
+    use.names = TRUE,
+    fill      = TRUE
+)
+
+# Calculate std of physical measurements for SMR and PCR.
+phy_sd_river <- data.table::dcast.data.table(
+    data      = hab[, sd(VALUE), by = c("RIVER", "VARIABLE", "TYPE")],
+    formula   = RIVER ~ TYPE + VARIABLE
+)
+
+# Calculate mean physical measurements for both rivers.
+phy_sd_reg <- data.table::dcast.data.table(
+    data      = hab[, sd(VALUE), by = c("VARIABLE", "TYPE")],
+    formula   = . ~ TYPE + VARIABLE
+)[, RIVER := "REG"]
+
+# Combine tables of std.
+phy_sd <- data.table::rbindlist(
+    l         = list(phy_sd_river[c(2L, 1L)], phy_sd_reg),
+    use.names = TRUE,
+    fill      = TRUE
+)
+
+# Calculate biological measurement physical measurements for SMR and PCR.
+bio_sub <- hab[TYPE == "AVAILABLE", .(Y = sum(Y)), by = c("SITE_INTERNAL", "RIVER")]
+
+# Calculate mean across all sites.
+bio_mean_river <- bio_sub[, .(MEAN = mean(Y), SD = sd(Y)), by = "RIVER"]
+bio_mean_reg <- bio_sub[, .(MEAN = mean(Y), SD = sd(Y))][, RIVER := "REG"]
+
+# Combine both table.
+bio_mean <- data.table::rbindlist(
+    l         = list(bio_mean_river[c(2L, 1L), ], bio_mean_reg),
+    use.names = TRUE,
+    fill      = TRUE
+)
+
+# Calculate sum across all sites.
+bio_sum_river <- bio_sub[, .(SUM = sum(Y)), by = "RIVER"]
+bio_sum_reg <- bio_sub[, .(SUM = sum(Y))][, RIVER := "REG"]
+
+# Combine both tables.
+bio_sum <- data.table::rbindlist(
+    l         = list(bio_sum_river[c(2L, 1L), ], bio_sum_reg),
+    use.names = TRUE,
+    fill      = TRUE
+)
+
+
 # Plot global histograms of availability / selection ---------------------------
 
 
