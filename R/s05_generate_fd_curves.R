@@ -57,18 +57,11 @@ hab_avail[, TYPE := "AVAILABLE"]
 
 # Melt "data" when Y > 0 for all variables.
 hab_select <- data.table::melt.data.table(
-    data          = data[Y > 0],
+    data          = data[Y > 0, ],
     measure.var   = names(var_names),
     variable.name = "VARIABLE",
     value.name    = "VALUE"
 )
-
-# Duplicate values when multiple fishes were observed.
-irows <- unlist(lapply(
-    X   = 1:nrow(hab_select),
-    FUN = function(w) rep(w, times = hab_select$Y[w])
-))
-hab_select <- hab_select[irows, ]
 
 # Add the <TYPE>.
 hab_select[, TYPE := "SELECTED"]
