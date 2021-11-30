@@ -167,7 +167,10 @@ facet_wrap(
     nrow     = 2L,
     scales   = "free_y",
     as.table = FALSE,
-    labeller = labeller(RIVER = unlist(riv_names))
+    labeller = labeller(RIVER = unlist(list(
+        SMR = "a) Sainte-Marguerite River",
+        PCR = "b) Petite-Cascapedia River")
+    ))
 ) +
 custom_theme()
 
