@@ -137,7 +137,7 @@ custom_theme()
 
 # Save plot.
 ggsave(
-    file   = file.path("out", "plots", "fig_7_early_stopping.pdf"),
+    file   = file.path("out", "plots", "fig_6_early_stopping.pdf"),
     width  = 9L,
     height = 3L
 )
