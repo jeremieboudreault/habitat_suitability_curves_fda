@@ -103,7 +103,7 @@ fit_pref <- function(avail, selec, var) {
     pref <- fit_kde(
         x       = pref_val,
         range   = hab_range[[var]],
-        adjust  = adjust_list[[var]] + adjust_pref,
+        adjust  = adjust_list[[var]] + adjust_pref
     )
 
     # Convert to 0 to 1.
