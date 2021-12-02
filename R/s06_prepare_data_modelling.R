@@ -44,7 +44,7 @@ data <- qs::qread(
 
 # Y(s).
 fd_curves_y <- data.table::dcast.data.table(
-    data      = fd_curves[TYPE == "SELECTED", ],
+    data      = fd_curves[TYPE == "PREFERENCE", ],
     formula   = X + VARIABLE ~ SITE_INTERNAL,
     value.var = "Y"
 )
