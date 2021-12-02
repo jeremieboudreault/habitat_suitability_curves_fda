@@ -37,8 +37,14 @@ var_names_u <- list(
 
 # Habitat type names.
 hab_names <- list(
-    AVAILABLE = "Available",
-    SELECTED  = "Selected"
+    AVAILABLE  = "Available",
+    SELECTED   = "Selected",
+    PREFERENCE = "Preference"
+)
+
+# Colors for available / selected.
+hab_colors <- c(
+    blues9[c(4L, 8L)], "#000000"
 )
 
 # Metric names.
@@ -57,8 +63,9 @@ metric_names <- list(
 adjust_list <- list(
     DEPTH    = 1.5,
     D50      = 1.7,
-    VELOCITY = 1.5
+    VELOCITY = 1.7
 )
+
 
 # Number of values for coefficients.
 n_val_coef <- 100L
