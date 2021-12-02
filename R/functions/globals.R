@@ -65,7 +65,14 @@ adjust_list <- list(
     D50      = 1.7,
     VELOCITY = 1.7
 )
+adjust_pref <- 0.3
 
+# Class interval for preference curves.
+class_list <- list(
+    DEPTH    = 5,
+    D50      = 10,
+    VELOCITY = 0.05
+)
 
 # Number of values for coefficients.
 n_val_coef <- 100L
