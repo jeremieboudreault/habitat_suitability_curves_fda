@@ -221,7 +221,7 @@ ggpubr::ggarrange(plotlist = ps, nrow = 3L)
 
 # Save plot.
 ggsave(
-    file   = file.path("out", "plots", "fig_8_frm_coef_bs.pdf"),
+    file   = file.path("out", "plots", "fig_7_frm_coef_bs.pdf"),
     width  = 9L,
     height = 8L
 )
