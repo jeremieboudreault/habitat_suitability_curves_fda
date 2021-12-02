@@ -143,57 +143,6 @@ bio_sum <- data.table::rbindlist(
 )
 
 
-# Plot global histograms of availability / selection ---------------------------
-
-
-# Plot.
-ggplot(
-    data    = hab,
-    mapping = aes(
-        x = VALUE
-    )
-) +
-geom_histogram(
-    mapping = aes(
-        fill = TYPE,
-        y    = ..density..
-    ),
-    color    = "grey90",
-    lwd      = 0.5,
-    position = "dodge",
-    bins     = 8L
-) +
-facet_wrap(
-    facets = ~ VARIABLE,
-    nrow   = 1L,
-    ncol   = 3L,
-    scales = "free",
-    labeller = labeller(VARIABLE = unlist(var_names))
-) +
-labs(
-    title = NULL,
-    y     = "Probability density function (PDF)",
-    x     = "Depth (cm)                                                   D50 (mm)                                                    Velocity (m/s)",
-    fill  = ""
-) +
-theme(
-    legend.position = "bottom"
-)  +
-scale_fill_manual(
-    values = c("#9B9B93", "#63B0CD"),
-    breaks = names(hab_names),
-    labels = ul(hab_names)
-) +
-custom_theme()
-
-# Save plot.
-ggsave(
-    file   = file.path("out", "plots", "fig_4_histograms_global.pdf"),
-    width  = 9L,
-    height = 4L
-)
-
-
 # Range of the habitat variables  ----------------------------------------------
 
 
@@ -217,6 +166,87 @@ hab_var_range[2L, 4L] <- 300L
 hab_var_range
 
 
+# Compute preference values ----------------------------------------------------
+
+
+# Note : Because small differences in site-specific KDE for availability and
+#        selection can generate huge difference in the resulting preference
+#        curve, we rather developed smooth continuous of preference curve using
+#        another method than the direct division. The results are, however,
+#        similar to those obtained by dividing the selected KDE y the available
+#        KDE, but the results are much smoother.
+
+# Extract all sites to compute preference.
+site_frame <- unique(hab[, .(RIVER, SITE_ORIGINAL, SITE_NEW, SITE_INTERNAL, VARIABLE)])
+
+# Loop over all site and return a data.table.
+pref_table <- dtlapply(
+    X   = 1:nrow(site_frame),
+    FUN = function(w) {
+
+        # Extract site w.
+        site_frame_sub <- site_frame[w, ]
+
+        # Extract internal site and variable.
+        site_sub <- site_frame_sub$SITE_INTERNAL
+        var_sub <- site_frame_sub$VARIABLE
+
+        # Extract habitat information.
+        hab_sub <- hab[SITE_INTERNAL ==  site_sub & VARIABLE == var_sub, ]
+
+        # First we convert habitat values to categories with very narrow range.
+        if (var_sub == "DEPTH") class <- 5L
+        if (var_sub == "VELOCITY") class <- 0.05
+        if (var_sub == "D50") class <- 10
+        hab_sub[, VALUE_CLASS := round(VALUE/class) * class]
+
+        # Create class of available and selected.
+        avail_tbl <- as.data.table(table(hab_sub[TYPE == "AVAILABLE", VALUE_CLASS]))
+        select_tbl <- as.data.table(table(hab_sub[TYPE == "SELECTED", VALUE_CLASS]))
+
+        # Update columsn names.
+        names(avail_tbl) <- c("VALUE", "N_AVAIL")
+        names(select_tbl) <- c("VALUE", "N_SELE")
+
+        # Merge both table.
+        pref_tbl <- select_tbl[avail_tbl, on = "VALUE"]
+        pref_tbl[is.na(N_SELE), N_SELE := 0]
+
+        # Compute frequency.
+        pref_tbl[, F_AVAIL := N_AVAIL / sum(N_AVAIL)]
+        pref_tbl[, F_SELE  := N_SELE  / sum(N_SELE)]
+        pref_tbl[, PREF    := F_SELE  / F_AVAIL]
+
+        # We want to transfer the preference values to fit a KDE.
+        mult <- find_lcm(pref_tbl$PREF)
+
+        # Convert to values.
+        pref_tbl[, N_PSEUDO_PREF := round(PREF * mult, 0)]
+
+        # Convert to values.
+        pref_val <- as.numeric(unlist(sapply(
+            X   = 1:nrow(pref_tbl),
+            FUN = function(w) rep(pref_tbl$VALUE[w], length.out = pref_tbl$N_PSEUDO_PREF[w])
+        )))
+
+        # Return a data.table.
+        data.table(
+            site_frame_sub,
+            VALUE  = pref_val,
+            TYPE   = "PREFERENCE",
+            PARCEL = 0,
+            Y      = 1L
+        )
+
+    }
+)
+
+# Combine pref and habitat table.
+hab <- data.table::rbindlist(
+    l = list(hab, pref_table), use.names = TRUE
+)
+
+
 # Generate functional curves ---------------------------------------------------
 
 
@@ -224,7 +254,7 @@ hab_var_range
 tbl <- data.table::setDT(expand.grid(
     SITE_INTERNAL = unique(hab$SITE_INTERNAL),
     VARIABLE      = names(var_names),
-    TYPE          = names(hab_names)
+    TYPE          = c(names(hab_names), "PREFERENCE")
 ))
 
 # Loop over all possible values.
@@ -243,10 +273,15 @@ fd_curves <- dtlapply(
                         VARIABLE       == var  &
                         TYPE           == type, VALUE],
             range   = hab_var_range[, var, with = FALSE],
-            adjust  = adjust_list[[var]],
-            npoints = 2^7,
+            adjust  = adjust_list[[var]] + (0.3 * (type == "PREFERENCE")),
+            npoints = 2^9,
             scale   = FALSE
         )
+
+        # Adjust between 0 and 1.
+        if (type == "PREFERENCE") {
+            fit[, Y := Y / max(Y)]
+        }
 
         # Add relevant information.
         fit[, `:=`(SITE_INTERNAL = site, VARIABLE = var, TYPE = type)]
@@ -256,6 +291,9 @@ fd_curves <- dtlapply(
 
     }
 )
+
+# Drop preference "pseudo" habitat.
+hab <- hab[TYPE != "PREFERENCE", ]
 
 
 # Labels for plotting ----------------------------------------------------------
@@ -278,33 +316,71 @@ hab[,       LABEL := factor(ul(x_labels[SITE_INTERNAL]), ul(x_labels))]
 plot_kde_hist <- function(sites) {
 
     # Generate the tree plots for all habitat habitat variables.
-    p <- lapply(names(var_names), function(var) {
-        ggplot(
-            data    = fd_curves[
-                SITE_INTERNAL %in% sites &
-                    VARIABLE == var,
-                ],
+    p_all <- lapply(names(var_names), function(var) {
+
+        p <- lapply(sites, function(site) {
+
+        # Extract sub data to plot.
+        fd_curves_sub <- fd_curves[
+            SITE_INTERNAL == site &
+            VARIABLE      == var
+        ]
+        hab_sub <- hab[
+            SITE_INTERNAL == site &
+            VARIABLE      == var,
+        ]
+
+        # Extract range.
+        rng <- range(hab_sub$VALUE)
+        rng[1] <- max(0, rng[1] * 0.8)
+        rng[2] <- rng[2] * 1.5
+
+        # Create the plot.
+        p <- ggplot(
+            data    = fd_curves_sub,
             mapping = aes(x = X)
         ) +
         geom_histogram(
-            data = hab[SITE_INTERNAL %in% sites & VARIABLE == var, ],
+            data = hab_sub,
             mapping = aes(
                 x    = VALUE,
                 y    = ..density..,
                 fill = TYPE
             ),
-            color    = "grey90",
-            lwd      = 0.1,
-            position = "dodge",
-            bins     = 10L
+            color       = "grey90",
+            lwd         = 0.2,
+            position    = "dodge",
+            bins        = 10L,
+            show.legend = FALSE
+        ) +
+        scale_x_continuous(
+            limits = rng
+        )
+
+        # Extract maximum values of
+        scale_fac <- max(
+            fd_curves_sub[TYPE %in% c("AVAILABLE", "SELECTED"), max(Y)],
+            layer_scales(p)$y$range$range[2L]
+        )
+
+        # Update plot with lines and everything.
+        p <- p + geom_line(
+            data    = fd_curves_sub[TYPE %in% c("AVAILABLE", "SELECTED")],
+            mapping = aes(
+                x        = X,
+                y        = Y,
+                color    = TYPE,
+                linetype = TYPE
+            )
         ) +
         geom_line(
+            data    = fd_curves_sub[TYPE %in% c("PREFERENCE")],
             mapping = aes(
-                y     = Y,
-                color = TYPE
-            ),
-            lwd         = 1L,
-            show.legend = FALSE
+                x        = X,
+                y        = Y * scale_fac,
+                color    = TYPE,
+                linetype = TYPE
+            )
         ) +
         facet_wrap(
             facets   = ~ LABEL,
@@ -313,45 +389,89 @@ plot_kde_hist <- function(sites) {
             scales   = "free"
         ) +
         labs(
-            title = paste0(letters[which(var == names(var_names))], ") ",
-                           var_names[[var]]),
-            fill  = "",
-            x     = var_names_u[[var]],
+            color    = "",
+            linetype = "",
+            x     = NULL,
             y     = NULL
         ) +
         scale_color_manual(
-            values = c("#282822", "#257B97"),
+            values = hab_colors,
             breaks = names(hab_names),
             label  = ul(hab_names)
         ) +
         scale_fill_manual(
-            values = c("#9B9B93", "#63B0CD"),
+            values = hab_colors[1:2],
+            breaks = names(hab_names)[1:2],
+        ) +
+        scale_y_continuous(
+            sec.axis = sec_axis(
+                trans  = ~.*1/scale_fac,
+                breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1))
+        ) +
+        scale_linetype_manual(
+            values = c(1L, 1L, 3L),
             breaks = names(hab_names),
             label  = ul(hab_names)
         ) +
         custom_theme() +
-        theme(plot.title = element_text(hjust = 0))
+        theme(
+            axis.ticks.y.right = element_line(color = hab_colors[3L]),
+            axis.text.y.right  = element_text(color = hab_colors[3L]),
+            axis.title.y.right = element_text(color = hab_colors[3L]),
+            axis.ticks.y.left  = element_line(color = hab_colors[2L]),
+            axis.text.y.left   = element_text(color = hab_colors[2L]),
+            axis.title.y.left  = element_text(color = hab_colors[2L]),
+            plot.title        = element_text(hjust = 0)
+        )
+
+        # Add title and labels.
+        if (site == sites[1]) {
+            p <- p + ggtitle(
+                paste0(
+                    letters[which(var == names(var_names))], ") ",
+                   var_names[[var]])
+            ) + xlab("")
+        } else if (site == sites[2L]) {
+            p <- p + ggtitle("") + xlab(var_names_u[[var]])
+        } else {
+            p <- p + ggtitle("") + xlab("")
+        }
+
+        # Return p.
+        return(p)
+
     })
 
-    # Align the third graph with the other.
-    p[[3L]] <- p[[3L]] + ylab("")
+    return(p)
 
-    # Generate the plot.
-    p_all <- ggpubr::ggarrange(
-        plotlist      = p,
+    })
+
+    # Combine all plots.
+    p_full <- ggpubr::ggarrange(
+        plotlist      = unlist(p_all, recursive = FALSE),
+        ncol          = length(sites),
         nrow          = 3L,
         legend        = "bottom",
         common.legend = TRUE
     )
 
     # Add y_axis.
-    p_all <- ggpubr::annotate_figure(
-        p    = p_all,
-        left = "Probability density function (PDF)"
+    p_full <- ggpubr::annotate_figure(
+        p    = p_full,
+        left  = text_grob(
+            "Probability density function (PDF)",
+            color = hab_colors[2L],
+            rot   = 90,
+        ),
+        right = text_grob(
+            "Habitat suitability curve (HSC)",
+            color = hab_colors[3L],
+            rot = 270
+        )
     )
 
     # Print plot.
-    print(p_all)
+    print(p_full)
 
     # Return null.
     return(invisible(NULL))
@@ -363,17 +483,18 @@ plot_kde_hist <- function(sites) {
 
 
 # Select sites.
-sites <- c(5L, 14L, 22L, 33L)
+sites <- c(5L, 14L, 22L)
 
 # Plot curves.
 plot_kde_hist(sites)
 
 # Save plot for further use.
 ggsave(
-    file   = file.path("out", "plots", "fig_5_kde_curves_overview.pdf"),
+    file   = file.path("out", "plots", "fig_4_kde_curves_overview.pdf"),
     width  = 8L,
     height = 7L
 )
+
 
 # Plot all curves --------------------------------------------------------------
 
@@ -381,13 +502,13 @@ ggsave(
 # Create subsets of 4 sites for plotting.
 sites <- unique(data$SITE_INTERNAL)
 sites_subset <- lapply(
-    X   = seq_len(ceiling(length(sites)/4L)),
-    FUN = function(w) { seq.int(w * 4 - 3L, w * 4L) }
+    X   = seq_len(ceiling(length(sites)/3L)),
+    FUN = function(w) { seq.int(w * 3 -2L, w * 3L) }
 )
 
 # Create pdf to save all the graphs.
 pdf(
-    file   = file.path("out", "plots", "fig_6_kde_curves_all.pdf"),
+    file   = file.path("out", "plots", "fig_5_kde_curves_all.pdf"),
     width  = 8L,
     height = 7L
 )
