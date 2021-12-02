@@ -45,34 +45,45 @@ fd_curves <- qs::qread(
     file = file.path("out", "tmp", "s06_fd_curves_list.qs")
 )
 
-# Subset only the selected values.
-hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
-
 
 # Fit classical HSC model ------------------------------------------------------
 
 
 .fit_classical_model <- function(var, rivers) {
 
-    # Extract habitat variables.
-    hab_sub <- hab[VARIABLE == var & RIVER %in% rivers, ]
-
     # Number of sites.
     sites <- sort(unique(hab_sub$SITE_INTERNAL))
     n_sites <- length(sites)
 
-    # Fit KDE.
-    kde <- fit_kde(
-        x       = hab_sub$VALUE,
+    # Extract habitat variables.
+    hab_sub <- hab[VARIABLE == var & RIVER %in% rivers, ]
+
+    # Fit KDE (avail.)
+    kde_avail <- fit_kde(
+        x       = hab_sub[TYPE == "AVAILABLE", VALUE],
         range   = hab_range[[var]],
         adjust  = adjust_list[[var]],
     )
 
+    # Fit KDE (select.)
+    kde_selec <- fit_kde(
+        x       = hab_sub[TYPE == "SELECTED", VALUE],
+        range   = hab_range[[var]],
+        adjust  = adjust_list[[var]],
+    )
+
+    # Fit Pref function.
+    pref <- fit_pref(
+        avail = hab_sub[TYPE == "AVAILABLE", VALUE],
+        selec = hab_sub[TYPE == "SELECTED", VALUE],
+        var   = var
+    )
+
     # Set y_hat as the HSC curves.
     y_hat <- Reduce(
-        f     = function(x1, x2) rbind(x1, kde$Y),
+        f     = function(x1, x2) rbind(x1, pref$Y),
         x     = seq_len(n_sites - 1L),
-        init  = rbind(kde$Y)
+        init  = rbind(pref$Y)
     )
 
     # Extract y_obs from the fitted curves.
@@ -81,15 +92,15 @@ hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
     # Set leave-one-out predictions.
     y_hat_cv <- do.call(rbind, lapply(sites, function(site) {
 
-        # Fit KDE.
-        kde <- fit_kde(
-            x       = hab_sub[SITE_INTERNAL != site, VALUE],
-            range   = hab_range[[var]],
-            adjust  = adjust_list[[var]],
+        # Fit Preference.
+        pref <- fit_pref(
+            avail    = hab_sub[SITE_INTERNAL != site & TYPE == "AVAILABLE", VALUE],
+            selec    = hab_sub[SITE_INTERNAL != site & TYPE == "SELECTED", VALUE],
+            var      = var
         )
 
-        # Save KDE as the estimate for this site.
-        return(kde$Y)
+        # Save Preference function as the estimate for this site.
+        return(pref$Y)
 
     }))
 
@@ -99,7 +110,9 @@ hab <- hab[TYPE == "SELECTED", ][, -c("TYPE"), with = FALSE]
     # Return results for the model.
     return(
         list(
-            x         = kde$X,
+            x         = pref$X,
+            avail     = kde_avail$Y,
+            selec     = kde_selec$Y,
             y_obs     = y_obs,
             y_hat     = y_hat,
             y_hat_cv  = y_hat_cv,
