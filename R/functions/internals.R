@@ -61,3 +61,18 @@ fit_kde <- function(x, range, npoints = 2^7, adjust = 1L, scale = FALSE) {
 
 }
 
+
+# Find LCM ---------------------------------------------------------------------
+
+
+find_lcm <- function(x) {
+    test_val <- 1:100
+    for (test in test_val) {
+        x_test <- x * test
+        if (all(x_test - as.integer(x_test) == 0)) {
+            return(test)
+        }
+    }
+    warning("No LCM found in 1:10. Returning 30.")
+    return(30L)
+}
