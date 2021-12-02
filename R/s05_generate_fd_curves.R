@@ -274,7 +274,7 @@ fd_curves <- dtlapply(
                         TYPE           == type, VALUE],
             range   = hab_var_range[, var, with = FALSE],
             adjust  = adjust_list[[var]] + (0.3 * (type == "PREFERENCE")),
-            npoints = 2^9,
+            npoints = 2^7,
             scale   = FALSE
         )
 
