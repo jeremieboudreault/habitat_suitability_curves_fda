@@ -51,12 +51,12 @@ fd_curves <- qs::qread(
 
 .fit_classical_model <- function(var, rivers) {
 
+    # Extract habitat variables.
+    hab_sub <- hab[VARIABLE == var & RIVER %in% rivers, ]
+
     # Number of sites.
     sites <- sort(unique(hab_sub$SITE_INTERNAL))
     n_sites <- length(sites)
-
-    # Extract habitat variables.
-    hab_sub <- hab[VARIABLE == var & RIVER %in% rivers, ]
 
     # Fit KDE (avail.)
     kde_avail <- fit_kde(
@@ -111,12 +111,12 @@ fd_curves <- qs::qread(
     return(
         list(
             x         = pref$X,
-            avail     = kde_avail$Y,
-            selec     = kde_selec$Y,
             y_obs     = y_obs,
             y_hat     = y_hat,
             y_hat_cv  = y_hat_cv,
-            river     = river
+            river     = river,
+            avail     = kde_avail$Y,
+            selec     = kde_selec$Y
         )
     )
 
