@@ -254,7 +254,7 @@ hab <- data.table::rbindlist(
 tbl <- data.table::setDT(expand.grid(
     SITE_INTERNAL = unique(hab$SITE_INTERNAL),
     VARIABLE      = names(var_names),
-    TYPE          = c(names(hab_names), "PREFERENCE")
+    TYPE          = names(hab_names)
 ))
 
 # Loop over all possible values.
