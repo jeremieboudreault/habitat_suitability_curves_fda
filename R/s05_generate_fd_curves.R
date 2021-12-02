@@ -195,9 +195,7 @@ pref_table <- dtlapply(
         hab_sub <- hab[SITE_INTERNAL ==  site_sub & VARIABLE == var_sub, ]
 
         # First we convert habitat values to categories with very narrow range.
-        if (var_sub == "DEPTH") class <- 5L
-        if (var_sub == "VELOCITY") class <- 0.05
-        if (var_sub == "D50") class <- 10
+        class <- class_list[var_sub]
         hab_sub[, VALUE_CLASS := round(VALUE/class) * class]
 
         # Create class of available and selected.
@@ -273,7 +271,7 @@ fd_curves <- dtlapply(
                         VARIABLE       == var  &
                         TYPE           == type, VALUE],
             range   = hab_var_range[, var, with = FALSE],
-            adjust  = adjust_list[[var]] + (0.3 * (type == "PREFERENCE")),
+            adjust  = adjust_list[[var]] + (adjust_pref * (type == "PREFERENCE")),
             npoints = 2^7,
             scale   = FALSE
         )
