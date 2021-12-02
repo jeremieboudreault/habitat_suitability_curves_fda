@@ -128,8 +128,8 @@ fd_curves <- qs::qread(
 
 # Local models - SMR.
 local_models_smr <- lapply(
-    X   = names(var_names),
-    FUN = .fit_classical_model,
+    X      = names(var_names),
+    FUN    = .fit_classical_model,
     rivers = c("SMR")
 )
 
@@ -244,9 +244,9 @@ p <- ggpubr::ggarrange(
     plotlist      = ps,
     nrow          = 3L,
     labels        = c(
-        "a) Local HSC model for SMR",
-        "b) Local HSC model for PCR",
-        "c) Regional HSC model"
+        "a) Traditional HSC - Sainte-Marguerite River (HSC-SM)",
+        "b) Traditional HSC - Petite-Cascapedia River (HSC-PC)",
+        "c) Traditional HSC - Regional (HSC-REG)"
     ),
     hjust         = -0.2,
     legend        = "bottom",
@@ -260,7 +260,7 @@ ggpubr::annotate_figure(p,
 
 # Save plot.
 ggsave(
-    file   = file.path("out", "plots", "fig_9_classical_models.pdf"),
+    file   = file.path("out", "plots", "fig_8_classical_models.pdf"),
     width  = 9L,
     height = 8L
 )
