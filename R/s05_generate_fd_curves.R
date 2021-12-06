@@ -18,6 +18,7 @@
 library(data.table)
 library(ggplot2)
 library(ggforce)
+library(ggpubr)
 
 
 # Functions --------------------------------------------------------------------
@@ -193,8 +194,8 @@ hab_var_range
 #        selection can generate huge differences in the resulting preference
 #        curve, we rather developed smooth continuous of preference curve using
 #        another method than the direct division. The results are, however,
-#        similar to those obtained by dividing the selected KDE y the available
-#        KDE, but the results are much smoother.
+#        similar to those obtained by dividing the selected KDE with the
+#        available KDE, but the results are much smoother and realistic.
 
 # Extract all sites to compute preference.
 site_frame <- unique(hab[, .(RIVER, SITE_ORIGINAL, SITE_NEW, SITE_INTERNAL, VARIABLE)])
@@ -215,7 +216,7 @@ pref_table <- dtlapply(
         hab_sub <- hab[SITE_INTERNAL ==  site_sub & VARIABLE == var_sub, ]
 
         # First we convert habitat values to categories with very narrow range.
-        class <- class_list[var_sub]
+        class <- class_list[[var_sub]]
         hab_sub[, VALUE_CLASS := round(VALUE/class) * class]
 
         # Create class of available and selected.
@@ -349,9 +350,7 @@ plot_kde_hist <- function(sites) {
         ]
 
         # Extract range.
-        rng <- range(hab_sub$VALUE)
-        rng[1] <- max(0, rng[1] * 0.8)
-        rng[2] <- rng[2] * 1.5
+        rng <- unlist(hab_var_range[, var, with = FALSE])
 
         # Create the plot.
         p <- ggplot(
