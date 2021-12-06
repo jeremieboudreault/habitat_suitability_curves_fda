@@ -127,7 +127,7 @@ plot_coef  <- function(var) {
     # Add PDF to ylab if the second plot.
     if (var == "D50") {
         plot_intercept <- plot_intercept +
-            ylab("Probability density function (PDF)")
+            ylab("Intercept functon")
     }
 
     # Extract surface coefficients.
@@ -143,7 +143,9 @@ plot_coef  <- function(var) {
     surface <- rbind(surface_fit, surface_std)
 
     # Generate colors for the plot.
-    colfun <- grDevices::colorRampPalette(rev(RColorBrewer::brewer.pal(9L, "RdBu")))
+    colfun <- grDevices::colorRampPalette(
+        rev(RColorBrewer::brewer.pal(9L, "RdBu"))[2:8]
+    )
 
     # Plot surface.
     plot_surface <-   ggplot(
@@ -178,8 +180,8 @@ plot_coef  <- function(var) {
     ) +
     labs(
         title    = "",
-        y        = paste0(var_names_u[[var]], " (selected)"),
-        x        = paste0(var_names_u[[var]], " (available)"),
+        y        = paste0(var_names_u[[var]], " (HSC)"),
+        x        = paste0(var_names_u[[var]], " (KDE of availability)"),
         fill      = ""
     ) +
     facet_wrap(
