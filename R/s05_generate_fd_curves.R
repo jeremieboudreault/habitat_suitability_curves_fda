@@ -500,7 +500,7 @@ plot_kde_hist <- function(sites) {
 
 
 # Select sites.
-sites <- c(5L, 14L, 22L)
+sites <- c(8L, 14L, 26L)
 
 # Plot curves.
 plot_kde_hist(sites)
