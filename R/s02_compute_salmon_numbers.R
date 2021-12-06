@@ -143,7 +143,7 @@ scale_x_continuous(
 geom_vline(
     data    = lengths_lim,
     mapping = aes(xintercept = VAL),
-    color   = "red",
+    color   = "black",
     lwd     = 0.3,
     lty     = 2L
 ) +
