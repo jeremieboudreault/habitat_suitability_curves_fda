@@ -17,6 +17,7 @@
 
 library(data.table)
 library(ggplot2)
+library(ggpubr)
 
 
 # Functions --------------------------------------------------------------------
@@ -160,68 +161,195 @@ names(regional_models) <- names(var_names)
 # Plot classical models --------------------------------------------------------
 
 
-plot_classical_model <- function(models, rivers) {
+plot_classical_model <- function(models) {
 
-    # Create a data.table with the relevant data.
-    model_dt <- data.table::data.table(
-        X   = ul(lapply(models, function(w) w$x)),
-        Y   = ul(lapply(models, function(w) w$y_hat[1L, ])),
-        VAR = factor(
-            x = rep(var_names, sapply(models, function(w) length(w$x))),
-            levels = ul(var_names)
+    # Loop on each of the supplied models.
+    p_all <- lapply(models, function(model) {
+
+    # Loop on each habitat variables.
+    p <- lapply(names(var_names), FUN = function(var) {
+
+        # Subset the model
+        model_sub <- model[[var]]
+
+        # Extract rivers.
+        rivers <- unique(model_sub$river)
+
+        # Create a data.table with the relevant data.
+        fd_curves_sub <- data.table::data.table(
+            X    = c(model_sub$x, model_sub$x, model_sub$x),
+            Y    = c(model_sub$avail, model_sub$selec, model_sub$y_hat[1L, ]),
+            TYPE = c(
+                rep("AVAILABLE", length(model_sub$x)),
+                rep("SELECTED", length(model_sub$x)),
+                rep("PREFERENCE", length(model_sub$x))
+            ),
+            VARIABLE  = var
+        )
+
+        # Subset data for the plot.
+        hab_sub <- hab[
+            RIVER %in% rivers &
+            VARIABLE == var,
+        ]
+
+        # Extract range.
+        rng <- unlist(hab_range[, var, with = FALSE])
+
+        # Plot models.
+        p <- ggplot(
+            data    = fd_curves_sub,
+            mapping = aes(x = X)
+        ) +
+        geom_histogram(
+            data    = hab_sub,
+            mapping = aes(
+                x    = VALUE,
+                y    = ..density..,
+                fill = TYPE
+            ),
+            color       = "grey90",
+            lwd         = 0.2,
+            position    = "dodge",
+            bins        = 8L,
+            show.legend = FALSE
+        ) +
+        scale_x_continuous(
+            limits = rng
+        )
+
+        # Extract maximum value of Y.
+        scale_fac <- max(
+            fd_curves_sub[TYPE %in% c("AVAILABLE", "SELECTED"), max(Y)],
+            layer_scales(p)$y$range$range[2L]
+        )
+
+        # Update plot with lines and everything.
+        p <- p + geom_line(
+            data    = fd_curves_sub[TYPE %in% c("AVAILABLE", "SELECTED")],
+            mapping = aes(
+                x        = X,
+                y        = Y,
+                color    = TYPE,
+                linetype = TYPE
+            )
+        ) +
+        geom_line(
+            data    = fd_curves_sub[TYPE %in% c("PREFERENCE")],
+            mapping = aes(
+                x        = X,
+                y        = Y * scale_fac,
+                color    = TYPE,
+                linetype = TYPE
+            )
+        ) +
+        facet_wrap(
+            facets   = "VARIABLE",
+            scales   = "free",
+            labeller = labeller(VARIABLE = unlist(var_names))
+        ) +
+        labs(
+            color    = "",
+            linetype = "",
+            x     = NULL,
+            y     = NULL
+        ) +
+        scale_color_manual(
+            values = hab_colors,
+            breaks = names(hab_names),
+            label  = ul(hab_names)
+        ) +
+        scale_fill_manual(
+            values = hab_colors[1:2],
+            breaks = names(hab_names)[1:2],
+        ) +
+        scale_y_continuous(
+            sec.axis = sec_axis(
+                trans  = ~.*1/scale_fac,
+                breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1))
+        ) +
+        scale_linetype_manual(
+            values = c(1L, 1L, 3L),
+            breaks = names(hab_names),
+            label  = ul(hab_names)
+        ) +
+        custom_theme() +
+        theme(
+            axis.ticks.y.right = element_line(color = hab_colors[3L]),
+            axis.text.y.right  = element_text(color = hab_colors[3L]),
+            axis.title.y.right = element_text(color = hab_colors[3L]),
+            axis.ticks.y.left  = element_line(color = hab_colors[2L]),
+            axis.text.y.left   = element_text(color = hab_colors[2L]),
+            axis.title.y.left  = element_text(color = hab_colors[2L]),
+            plot.title        = element_text(hjust = 0)
+        )
+
+        # Add title.
+        if (length(rivers) == 1L) {
+            p <- p + xlab("")
+        } else {
+            p <- p + xlab(var_names_u[[var]])
+        }
+
+        # Add x labels.
+        if (var == "DEPTH" & rivers[1L] == "SMR" & length(rivers) == 1L) {
+            p <- p + ggtitle(
+                "a) HSC-SM"
+            )
+        } else if (var == "DEPTH" & rivers[1L] == "PCR" & length(rivers) == 1L) {
+            p <- p + ggtitle(
+                "b) HSC-PC"
+            )
+        } else if (var == "DEPTH" & length(rivers) == 2L) {
+            p <- p + ggtitle(
+                "c) HSC-REG"
+            )
+        } else {
+            p <- p + ggtitle("")
+        }
+
+        # Return plot.
+        return(p)
+
+    # Close the first loop.
+    })
+
+    # Return p.
+    return(p)
+
+    # Close the second loop
+    })
+
+    # Combine all plots.
+    p_full <- ggpubr::ggarrange(
+        plotlist      = unlist(p_all, recursive = FALSE),
+        ncol          = length(var_names),
+        nrow          = length(models),
+        legend        = "bottom",
+        common.legend = TRUE
+    )
+
+    # Add y_axis.
+    p_full <- ggpubr::annotate_figure(
+        p    = p_full,
+        left  = text_grob(
+            "Probability density function (PDF)",
+            color = hab_colors[2L],
+            rot   = 90,
+        ),
+        right = text_grob(
+            "Habitat suitability curve (HSC)",
+            color = hab_colors[3L],
+            rot = 270
         )
     )
 
-    # Update <VAR> of hab.
-    hab[, VAR := factor(var_names[VARIABLE],  levels = ul(var_names))]
+    # Print plot.
+    print(p_full)
 
-    # Plot models.
-    ggplot(
-        data    = model_dt,
-        mapping = aes(
-            x = X,
-            y = Y
-        )
-    ) +
-    geom_histogram(
-        data    = hab[RIVER %in% rivers, ],
-        mapping = aes(
-            x    = VALUE,
-            y    = ..density..,
-            fill = "Distribution of selected habitat characteristics"
-        ),
-        color    = "grey90",
-        lwd      = 0.3,
-        position = "dodge",
-        boundary = 0L,
-        bins     = 12L,
-        alpha    = 0.9
-    ) +
-    geom_line(
-        mapping = aes(
-            color = "Habitat suitability curve"
-        ),
-        lwd   = 1.2
-    ) +
-    labs(
-        title = "",
-        y     = NULL,
-        x     = "",
-        fill  = "",
-        color = ""
-    ) +
-    facet_wrap(
-        facets   = "VAR",
-        scales   = "free"
-    ) +
-    scale_fill_manual(
-        values = "#63B0CD"
+    # Return null.
+    return(invisible(NULL))
 
-    ) +
-    scale_color_manual(
-        values = "#257B97"
-    ) +
-    custom_theme()
 
 }
 
@@ -229,33 +357,13 @@ plot_classical_model <- function(models, rivers) {
 # Plot all models --------------------------------------------------------------
 
 
-# Generate plots.
-ps <- list(
-    plot_classical_model(local_models_smr, rivers = "SMR"),
-    plot_classical_model(local_models_pcr, rivers = "PCR"),
-    plot_classical_model(regional_models, rivers = c("SMR", "PCR"))
-)
-
-# Add xlab to last plot.
-ps[[3L]] <- ps[[3L]] + xlab("Depth (cm)                                                  D50 (mm)                                                Velocity (m/s)")
-
 # Combine all plots.
-p <- ggpubr::ggarrange(
-    plotlist      = ps,
-    nrow          = 3L,
-    labels        = c(
-        "a) Traditional HSC - Sainte-Marguerite River (HSC-SM)",
-        "b) Traditional HSC - Petite-Cascapedia River (HSC-PC)",
-        "c) Traditional HSC - Regional (HSC-REG)"
-    ),
-    hjust         = -0.2,
-    legend        = "bottom",
-    common.legend = TRUE
-)
-
-# Annotate figure.
-ggpubr::annotate_figure(p,
-    left   = "Probability density function (PDF)",
+plot_classical_model(
+    models = list(
+        local_models_smr,
+        local_models_pcr,
+        regional_models
+    )
 )
 
 # Save plot.
