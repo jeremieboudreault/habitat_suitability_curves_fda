@@ -143,24 +143,44 @@ bio_sum <- data.table::rbindlist(
 )
 
 
+# Limit the values of the upper tail prior to fit KDE --------------------------
+
+
+# Note : We want to avoid wigly upper tails of the KDE, so we limit the maximum
+# value of the distribution to the 99% quantile of the habitat distribution,
+# with little or no effect on the overall results.
+
+# Depth.
+hab[VARIABLE == "DEPTH", quantile(VALUE, 0.99)]  # 84
+hab[VARIABLE == "DEPTH" & VALUE > 84, VALUE := 84]
+
+# D50.
+hab[VARIABLE == "D50", quantile(VALUE, 0.99)] # 190
+hab[VARIABLE == "D50" & VALUE > 190, VALUE := 190]
+
+# Velocity.
+hab[VARIABLE == "VELOCITY", quantile(VALUE, 0.99)]  # 1.42
+hab[VARIABLE == "VELOCITY" & VALUE > 1.42, VALUE := 1.42]
+
+
 # Range of the habitat variables  ----------------------------------------------
 
 
 # Get the range of the three habitat characteristics.
 hab_var_range <- data.table::data.table(
     LIMITTYPE = c("lower", "upper"),
-    DEPTH     = get_range(data$DEPTH,    liminf = 0L, factor = 1L),
-    VELOCITY  = get_range(data$VELOCITY, liminf = 0L, factor = 1L),
-    D50       = get_range(data$D50,      liminf = 0L, factor = 1L)
+    DEPTH     = get_range(hab[VARIABLE == "DEPTH", VALUE],    liminf = 0L, factor = 1L),
+    VELOCITY  = get_range(hab[VARIABLE == "VELOCITY", VALUE], liminf = 0L, factor = 1L),
+    D50       = get_range(hab[VARIABLE == "D50", VALUE],      liminf = 0L, factor = 1L)
 )
 
 # Check results.
 hab_var_range
 
 # Manual adjustment for this specific dataset
-hab_var_range[2L, 2L] <- 100L
-hab_var_range[2L, 3L] <- 1.75
-hab_var_range[2L, 4L] <- 300L
+hab_var_range[2L, 2L] <- 85
+hab_var_range[2L, 3L] <- 1.50
+hab_var_range[2L, 4L] <- 200L
 
 # Check final result.
 hab_var_range
@@ -170,7 +190,7 @@ hab_var_range
 
 
 # Note : Because small differences in site-specific KDE for availability and
-#        selection can generate huge difference in the resulting preference
+#        selection can generate huge differences in the resulting preference
 #        curve, we rather developed smooth continuous of preference curve using
 #        another method than the direct division. The results are, however,
 #        similar to those obtained by dividing the selected KDE y the available
