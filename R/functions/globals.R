@@ -39,7 +39,7 @@ var_names_u <- list(
 hab_names <- list(
     AVAILABLE  = "Available",
     SELECTED   = "Selected",
-    PREFERENCE = "Preference"
+    PREFERENCE = "Habitat suitability curve"
 )
 
 # Colors for available / selected.
@@ -71,7 +71,7 @@ adjust_pref <- 0.3
 class_list <- list(
     DEPTH    = 5,
     D50      = 10,
-    VELOCITY = 0.05
+    VELOCITY = 0.075
 )
 
 # Number of values for coefficients.
