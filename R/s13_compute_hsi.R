@@ -180,3 +180,25 @@ hab_dcast[, HSI_REG := HSC_REG_DEPTH * HSC_REG_D50 * HSC_REG_VELOCITY]
 # Compute fish density.
 hab_dcast[, FISH := Y / 4]
 
+
+# Check model adequation -------------------------------------------------------
+
+
+# Note : Square of the correlation is equivalent to the R2.
+
+# Correlation - On all sites.
+hab_dcast[, cor(FISH, HSI_FRM)] ^ 2
+hab_dcast[, cor(FISH, HSI_REG)] ^ 2
+
+# Correlation - On SM River.
+hab_dcast[RIVER == "SMR", cor(FISH, HSI_FRM)] ^ 2
+hab_dcast[RIVER == "SMR", cor(FISH, HSI_REG)] ^ 2
+hab_dcast[RIVER == "SMR", cor(FISH, HSI_SM)]  ^ 2
+hab_dcast[RIVER == "SMR", cor(FISH, HSI_PC)]  ^ 2
+
+# Correlation - On PC River.
+hab_dcast[RIVER == "PCR", cor(FISH, HSI_FRM)] ^ 2
+hab_dcast[RIVER == "PCR", cor(FISH, HSI_REG)] ^ 2
+hab_dcast[RIVER == "PCR", cor(FISH, HSI_SM)]  ^ 2
+hab_dcast[RIVER == "PCR", cor(FISH, HSI_PC)]  ^ 2
+
