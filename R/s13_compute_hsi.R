@@ -143,3 +143,27 @@ score_hsc <- function(i, model, var) {
 
 }
 
+
+# Score all HSC ----------------------------------------------------------------
+
+
+# Loop over each line of the dataset.
+for (i in 1:nrow(hab_dcast)) {
+
+    # Score all variables.
+    for (var in names(var_names)) {
+
+        # Score all models.
+        for (model in c("FRM", "REG", "SM", "PC")) {
+
+            # Scoring function.
+            score_hsc(
+                i     = i,
+                model = model,
+                var   = var
+            )
+
+        }
+    }
+}
+
