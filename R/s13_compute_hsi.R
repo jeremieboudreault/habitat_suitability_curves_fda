@@ -101,3 +101,45 @@ hab_dcast <- data.table::dcast.data.table(
     value.var = "VALUE"
 )
 
+
+# Function to score an HSC -----------------------------------------------------
+
+
+score_hsc <- function(i, model, var) {
+
+    # Extract relevant information.
+    site_i <- hab_dcast[i, SITE_INTERNAL]
+
+    # Extract the "x" and "hsc" values.
+    if (model == "FRM") {
+        x   <- frm_tiny_models[[var]]$x
+        hsc <- frm_tiny_models[[var]]$y_hat[site_i, ]
+    } else if (model == "REG") {
+        x   <- regional_models[[var]]$x
+        hsc <- regional_models[[var]]$y_hat[1L, ]
+    } else if (model == "SM") {
+        x   <- local_models_smr[[var]]$x
+        hsc <- local_models_smr[[var]]$y_hat[1L, ]
+    } else if (model == "PC") {
+        x   <- local_models_pcr[[var]]$x
+        hsc <- local_models_pcr[[var]]$y_hat[1L, ]
+    }
+
+    # Approximate value.
+    hsc_val <- approx(
+        x      = x,
+        y      = hsc,
+        xout   = hab_dcast[i, var, with = FALSE],
+        method = "linear"
+    )$y
+
+    # Update data table.
+    data.table::set(
+        x     = hab_dcast,
+        i     = i,
+        j     = paste0("HSC_", model, "_", var),
+        value = hsc_val
+    )
+
+}
+
