@@ -88,3 +88,16 @@ frm_tiny_models <- lapply(frm_models, function(model) {
     )
 
 })
+
+
+
+# Create a table for habitat variable ------------------------------------------
+
+
+# Dcast data.table to have one column per habitat variable.
+hab_dcast <- data.table::dcast.data.table(
+    data      = hab[TYPE == "AVAILABLE", ],
+    formula   = SITE_INTERNAL + RIVER + PARCEL + Y ~ VARIABLE,
+    value.var = "VALUE"
+)
+
