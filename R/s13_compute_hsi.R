@@ -167,3 +167,16 @@ for (i in 1:nrow(hab_dcast)) {
     }
 }
 
+
+# Computation of HSI -----------------------------------------------------------
+
+
+# Compute HSI by classical multiplication.
+hab_dcast[, HSI_FRM := HSC_FRM_DEPTH * HSC_FRM_D50 * HSC_FRM_VELOCITY]
+hab_dcast[, HSI_SM  := HSC_SM_DEPTH  * HSC_SM_D50  * HSC_SM_VELOCITY]
+hab_dcast[, HSI_PC  := HSC_PC_DEPTH  * HSC_PC_D50  * HSC_PC_VELOCITY]
+hab_dcast[, HSI_REG := HSC_REG_DEPTH * HSC_REG_D50 * HSC_REG_VELOCITY]
+
+# Compute fish density.
+hab_dcast[, FISH := Y / 4]
+
