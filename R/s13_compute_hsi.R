@@ -186,19 +186,61 @@ hab_dcast[, FISH := Y / 4]
 
 # Note : Square of the correlation is equivalent to the R2.
 
-# Correlation - On all sites.
-hab_dcast[, cor(FISH, HSI_FRM)] ^ 2
-hab_dcast[, cor(FISH, HSI_REG)] ^ 2
+# R2 - On all sites.
+r2_frm_all <- hab_dcast[, cor(FISH, HSI_FRM)] ^ 2
+r2_reg_all <- hab_dcast[, cor(FISH, HSI_REG)] ^ 2
 
-# Correlation - On SM River.
-hab_dcast[RIVER == "SMR", cor(FISH, HSI_FRM)] ^ 2
-hab_dcast[RIVER == "SMR", cor(FISH, HSI_REG)] ^ 2
-hab_dcast[RIVER == "SMR", cor(FISH, HSI_SM)]  ^ 2
-hab_dcast[RIVER == "SMR", cor(FISH, HSI_PC)]  ^ 2
+# R2 - On SM River.
+r2_frm_sm <- hab_dcast[RIVER == "SMR", cor(FISH, HSI_FRM)] ^ 2
+r2_reg_sm <- hab_dcast[RIVER == "SMR", cor(FISH, HSI_REG)] ^ 2
+r2_sm_sm  <- hab_dcast[RIVER == "SMR", cor(FISH, HSI_SM)]  ^ 2
+r2_pc_sm  <- hab_dcast[RIVER == "SMR", cor(FISH, HSI_PC)]  ^ 2
 
-# Correlation - On PC River.
-hab_dcast[RIVER == "PCR", cor(FISH, HSI_FRM)] ^ 2
-hab_dcast[RIVER == "PCR", cor(FISH, HSI_REG)] ^ 2
-hab_dcast[RIVER == "PCR", cor(FISH, HSI_SM)]  ^ 2
-hab_dcast[RIVER == "PCR", cor(FISH, HSI_PC)]  ^ 2
+# R2 - On PC River.
+r2_frm_pc <- hab_dcast[RIVER == "PCR", cor(FISH, HSI_FRM)] ^ 2
+r2_reg_pc <- hab_dcast[RIVER == "PCR", cor(FISH, HSI_REG)] ^ 2
+r2_sm_pc  <- hab_dcast[RIVER == "PCR", cor(FISH, HSI_SM)]  ^ 2
+r2_pc_pc  <- hab_dcast[RIVER == "PCR", cor(FISH, HSI_PC)]  ^ 2
+
+
+# Combine in a table -----------------------------------------------------------
+
+
+results <- data.table::data.table(
+    model = c(
+        "SMR_on_SMR",
+        "PCR_on_SMR",
+        "REG_on_SMR",
+        "FRM_on_SMR",
+        "PCR_on_PCR",
+        "SMR_on_PCR",
+        "REG_on_PCR",
+        "FRM_on_PCR",
+        "REG_on_REG",
+        "FRM_on_REG"
+    ),
+    r2_HSI = c(
+        round(r2_sm_sm,   3L),
+        round(r2_pc_sm,   3L),
+        round(r2_reg_sm,  3L),
+        round(r2_frm_sm,  3L),
+        round(r2_sm_pc,   3L),
+        round(r2_pc_pc,   3L),
+        round(r2_reg_pc,  3L),
+        round(r2_frm_pc,  3L),
+        round(r2_reg_all, 3L),
+        round(r2_frm_all, 3L)
+    )
+)
+
+
+# Export results ---------------------------------------------------------------
+
+
+data.table::fwrite(
+    x    = results,
+    file = file.path("out", "tables", "table_4_hsi_R2.csv"),
+    sep  = ";",
+    dec  = "."
+)
 
