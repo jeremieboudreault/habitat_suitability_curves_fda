@@ -16,19 +16,19 @@
 
 # Step 1.
 message("Step 1 :: Cleaning field data.")
-source(file.path("R", "s01_clean_field_data.R"))
+#source(file.path("R", "s01_clean_field_data.R"))
 
 # Step 2.
 message("Step 2 :: Compte salmon numbers.")
-source(file.path("R", "s02_compute_salmon_numbers.R"))
+#source(file.path("R", "s02_compute_salmon_numbers.R"))
 
 # Step 3.
 message("Step 3 :: Select study case.")
-source(file.path("R", "s03_select_study_case.R"))
+#source(file.path("R", "s03_select_study_case.R"))
 
 # Step 4.
-message("Step 10 :: Map studied sites.")
-source(file.path("R", "s04_map_studied_sites.R"))
+message("Step 4 :: Map studied sites.")
+#source(file.path("R", "s04_map_studied_sites.R"))
 
 
 # Prepare data for modelling ---------------------------------------------------
@@ -72,7 +72,7 @@ source(file.path("R", "s11_build_classical_models.R"))
 
 # Step 12.
 message("Step 12 :: Asses models performance.")
-source(file.path("R", "s12_asses_models_performance.R"))
+source(file.path("R", "s12_assess_models_performance.R"))
 
 # Step 13.
 message("Step 13 :: Compute HSI.")
