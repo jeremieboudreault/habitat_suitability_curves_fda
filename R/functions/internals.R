@@ -126,6 +126,5 @@ find_lcm <- function(x) {
             return(test)
         }
     }
-    warning("No LCM found in 1:10. Returning 30.")
-    return(30L)
+    return(50L)
 }
