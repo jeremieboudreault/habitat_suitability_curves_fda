@@ -5,7 +5,7 @@ A new look at habitat suitability curves through FDA 👓
 + A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
 + This project is part of my master studies at [Institut National de la Recherche Scientifique](http://inrs.ca)
 + All scripts and data are made freely available here under the [Creative Common License ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-+ Any questions should be sent to __Jeremie.Boudreault [at] ete.inrs [dot] ca__
++ Any questions should be sent to [first name].[second name] [at] inrs [dot] ca__
 
 
 Data
@@ -16,6 +16,7 @@ Data consists of a __field survey__ that have been conducted during summer 2017 
 
 + `data/field-data/*` : contains the two raw `xlsx` files filled after each day of field work.
 + `data/gps/*` : locations of the studied sites for the two rivers.
++ `data/hydro/*` : hydrological data on the two studied rivers.
 
 
 R scripts
@@ -36,6 +37,6 @@ Scripts are all from Jeremie Boudreault. They make the use of the R package `FDb
 + `s10_plot_frm_coefficients.R`: plots intercept and coefficients surfaces from fitted FRM.
 + `s11_build_classical_models.R`: build classical local and regional models of HSC.
 + `s12_assess_models_performance.R`: calculate some goodness-of-fit metrics for the fitted models. 
-
++ `s13_compute_hsi.R`: compute HSI and check correlation with fish density.
 
 ___Enjoy !___ ✌🏻
