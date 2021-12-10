@@ -127,7 +127,7 @@ plot_coef  <- function(var) {
     # Add PDF to ylab if the second plot.
     if (var == "D50") {
         plot_intercept <- plot_intercept +
-            ylab("Intercept functon")
+            ylab("Intercept function")
     }
 
     # Extract surface coefficients.
