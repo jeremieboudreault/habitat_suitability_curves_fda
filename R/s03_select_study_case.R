@@ -133,14 +133,15 @@ ggsave(
 threshold <- 4L
 
 # Selected variable.
-var_selected <- "N_TOT_PARR_M"
+var_summ_selected <- "N_TOT_PARR_M"
+var_selected <- "N_PARR_M"
 
 
 # Subset the study case --------------------------------------------------------
 
 
 # Extract the selected sites that fit the criteria.
-sites_selected <- data_per_site[get(var_selected) >= threshold, .(RIVER, SITE)]
+sites_selected <- data_per_site[get(var_summ_selected) >= threshold, .(RIVER, SITE)]
 
 # Add a new definition <SITE_INTERNAL> of the site for internal purposes.
 sites_selected[, SITE_INTERNAL := 1:.N]
