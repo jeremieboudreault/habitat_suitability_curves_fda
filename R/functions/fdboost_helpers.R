@@ -46,14 +46,6 @@ generate_folds <- function(n_obs, n_folds) {
 
 calc_fun_metric <- function(y_hat, y_obs, metric = "fRMSE") {
 
-    # Calculate the overall mean.
-    y_obs_site_mean <- matrix(
-        data  = rowMeans(y_obs),
-        nrow  = nrow(y_obs),
-        ncol  = ncol(y_obs),
-        byrow = FALSE
-    )
-
     # Calculate the functional mean.
     y_obs_col_mean <- matrix(
         data  = colMeans(y_obs),
@@ -65,7 +57,7 @@ calc_fun_metric <- function(y_hat, y_obs, metric = "fRMSE") {
     # Tradiditonal R square (R2).
     if (metric == "R2") {
         return(
-            1L - sum((y_obs - y_hat)^2) / sum((y_obs - y_obs_site_mean)^2)
+            1L - sum((y_obs - y_hat)^2) / sum((y_obs - mean(y_obs))^2)
         )
     }
 
