@@ -370,11 +370,73 @@ data.table::fwrite(
 )
 
 
-# Calculate functional R2 ------------------------------------------------------
+# Calculate funR2 on the SMR ---------------------------------------------------
 
 
-# Calculate performance of FRM model on SMR - Training.
-frm_on_smr_fR2 <- round(sapply(names(var_names), function(w) {
+# Calculate funR2 performance of SMR on SMR - Training
+smr_on_smr_funR2 <- round(sapply(names(var_names), function(w) {
+    y_obs <- local_models_smr[[w]]$y_obs
+    y_hat <- local_models_smr[[w]]$y_hat
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of SMR on SMR - CV
+smr_on_smr_funR2_cv <- round(sapply(names(var_names), function(w) {
+    y_obs <- local_models_smr[[w]]$y_obs
+    y_hat <- local_models_smr[[w]]$y_hat_cv
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of PCR on SMR
+pcr_on_smr_funR2 <- round(sapply(names(var_names), function(w) {
+    y_obs <- local_models_smr[[w]]$y_obs
+    y_hat  = matrix(
+        data  = local_models_pcr[[w]]$y_hat[1L, ],
+        nrow  = nrow(y_obs),
+        ncol  = ncol(y_obs),
+        byrow = TRUE
+    )
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of regional model on SMR - Training.
+reg_on_smr_funR2 <- round(sapply(names(var_names), function(w) {
+    riv_index <- which(regional_models[[w]]$river == "SMR")
+    y_obs <- regional_models[[w]]$y_obs[riv_index, ]
+    y_hat <- regional_models[[w]]$y_hat[riv_index, ]
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of regional model on SMR - CV.
+reg_on_smr_funR2_cv <- round(sapply(names(var_names), function(w) {
+    riv_index <- which(regional_models[[w]]$river == "SMR")
+    y_obs <- regional_models[[w]]$y_obs[riv_index, ]
+    y_hat <- regional_models[[w]]$y_hat_cv[riv_index, ]
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of FRM model on SMR - Training.
+frm_on_smr_funR2 <- round(sapply(names(var_names), function(w) {
     riv_index <- which(frm_tiny_models[[w]]$river == "SMR")
     y_obs <- frm_tiny_models[[w]]$y_obs[riv_index, ]
     y_hat <- frm_tiny_models[[w]]$y_hat[riv_index, ]
@@ -385,8 +447,8 @@ frm_on_smr_fR2 <- round(sapply(names(var_names), function(w) {
     )
 }), 3L)
 
-# Calculate performance of FRM model on SMR - CV
-frm_on_smr_fR2_cv <- round(sapply(names(var_names), function(w) {
+# Calculate funR2 performance of FRM model on SMR - CV.
+frm_on_smr_funR2_cv <- round(sapply(names(var_names), function(w) {
     riv_index <- which(frm_tiny_models[[w]]$river == "SMR")
     y_obs <- frm_tiny_models[[w]]$y_obs[riv_index, ]
     y_hat <- frm_tiny_models[[w]]$y_hat_cv[riv_index, ]
@@ -398,8 +460,73 @@ frm_on_smr_fR2_cv <- round(sapply(names(var_names), function(w) {
 }), 3L)
 
 
-# Calculate performance of FRM model on PCR - Training.
-frm_on_pcr_fR2 <- round(sapply(names(var_names), function(w) {
+# Calculate funR2 on the PCR ---------------------------------------------------
+
+
+# Calculate funR2 performance of PCR on PCR - Training
+pcr_on_pcr_funR2 <- round(sapply(names(var_names), function(w) {
+    y_obs <- local_models_pcr[[w]]$y_obs
+    y_hat <- local_models_pcr[[w]]$y_hat
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of PCR on PCR - CV
+pcr_on_pcr_funR2_cv <- round(sapply(names(var_names), function(w) {
+    y_obs <- local_models_pcr[[w]]$y_obs
+    y_hat <- local_models_pcr[[w]]$y_hat_cv
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of SMR on PCR
+smr_on_pcr_funR2 <- round(sapply(names(var_names), function(w) {
+    y_obs <- local_models_pcr[[w]]$y_obs
+    y_hat  = matrix(
+        data  = local_models_smr[[w]]$y_hat[1L, ],
+        nrow  = nrow(y_obs),
+        ncol  = ncol(y_obs),
+        byrow = TRUE
+    )
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of regional model on PCR - Training.
+reg_on_pcr_funR2 <- round(sapply(names(var_names), function(w) {
+    riv_index <- which(regional_models[[w]]$river == "PCR")
+    y_obs <- regional_models[[w]]$y_obs[riv_index, ]
+    y_hat <- regional_models[[w]]$y_hat[riv_index, ]
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of regional model on PCR - CV.
+reg_on_pcr_funR2_cv <- round(sapply(names(var_names), function(w) {
+    riv_index <- which(regional_models[[w]]$river == "PCR")
+    y_obs <- regional_models[[w]]$y_obs[riv_index, ]
+    y_hat <- regional_models[[w]]$y_hat_cv[riv_index, ]
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of FRM model on PCR - Training.
+frm_on_pcr_funR2 <- round(sapply(names(var_names), function(w) {
     riv_index <- which(frm_tiny_models[[w]]$river == "PCR")
     y_obs <- frm_tiny_models[[w]]$y_obs[riv_index, ]
     y_hat <- frm_tiny_models[[w]]$y_hat[riv_index, ]
@@ -410,8 +537,8 @@ frm_on_pcr_fR2 <- round(sapply(names(var_names), function(w) {
     )
 }), 3L)
 
-# Calculate performance of FRM model on PCR - CV
-frm_on_pcr_fR2_cv <- round(sapply(names(var_names), function(w) {
+# Calculate performance of FRM model on PCR - CV.
+frm_on_pcr_funR2_cv <- round(sapply(names(var_names), function(w) {
     riv_index <- which(frm_tiny_models[[w]]$river == "PCR")
     y_obs <- frm_tiny_models[[w]]$y_obs[riv_index, ]
     y_hat <- frm_tiny_models[[w]]$y_hat_cv[riv_index, ]
@@ -422,8 +549,35 @@ frm_on_pcr_fR2_cv <- round(sapply(names(var_names), function(w) {
     )
 }), 3L)
 
-# Calculate performance of FRM model on REG - Training.
-frm_on_reg_fR2 <- round(sapply(names(var_names), function(w) {
+
+
+# Calculate funR2 on SMR + PCR -------------------------------------------------
+
+
+# Calculate funR2 performance of REG on SMR + PCR - Training
+reg_on_reg_funR2 <- round(sapply(names(var_names), function(w) {
+    y_obs <- regional_models[[w]]$y_obs
+    y_hat <- regional_models[[w]]$y_hat
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of REG on SMR + PCR - CV
+reg_on_reg_funR2_cv <- round(sapply(names(var_names), function(w) {
+    y_obs <- regional_models[[w]]$y_obs
+    y_hat <- regional_models[[w]]$y_hat_cv
+    calc_fun_metric(
+        y_obs  = y_obs,
+        y_hat  = y_hat,
+        metric = "fR2"
+    )
+}), 3L)
+
+# Calculate funR2 performance of FRM on SMR + PCR- Training
+frm_on_reg_funR2 <- round(sapply(names(var_names), function(w) {
     y_obs <- frm_tiny_models[[w]]$y_obs
     y_hat <- frm_tiny_models[[w]]$y_hat
     calc_fun_metric(
@@ -433,8 +587,8 @@ frm_on_reg_fR2 <- round(sapply(names(var_names), function(w) {
     )
 }), 3L)
 
-# Calculate performance of FRM model on REG - CV.
-frm_on_reg_fR2_cv <- round(sapply(names(var_names), function(w) {
+# Calculate funR2 performance of FRM on SMR + PCR - CV
+frm_on_reg_funR2_cv <- round(sapply(names(var_names), function(w) {
     y_obs <- frm_tiny_models[[w]]$y_obs
     y_hat <- frm_tiny_models[[w]]$y_hat_cv
     calc_fun_metric(
@@ -448,27 +602,44 @@ frm_on_reg_fR2_cv <- round(sapply(names(var_names), function(w) {
 # Merge all funR2 results in a table -------------------------------------------
 
 
+# Create a vector of three NAs to fill empty cells in table.
+nas <- rep(NA, 3L)
+
 # Create a matrix with the results.
-table_fR2 <- matrix(
+table_funR2 <- matrix(
     data = c(
-        frm_on_smr_fR2, frm_on_smr_fR2_cv,
-        frm_on_pcr_fR2, frm_on_pcr_fR2_cv,
-        frm_on_reg_fR2, frm_on_reg_fR2_cv
+        smr_on_smr_funR2, smr_on_smr_funR2_cv,
+        pcr_on_smr_funR2, nas,
+        reg_on_smr_funR2, reg_on_pcr_funR2_cv,
+        frm_on_smr_funR2, frm_on_smr_funR2_cv,
+        pcr_on_pcr_funR2, pcr_on_pcr_funR2_cv,
+        smr_on_pcr_funR2, nas,
+        reg_on_pcr_funR2, reg_on_pcr_funR2_cv,
+        frm_on_pcr_funR2, frm_on_pcr_funR2_cv,
+        reg_on_reg_funR2, reg_on_reg_funR2_cv,
+        frm_on_reg_funR2, frm_on_reg_funR2_cv
     ),
     ncol  = 6L,
     byrow = TRUE
 )
 
 # Add columns names.
-colnames(table_fR2) <- c(
+colnames(table_funR2) <- c(
     "Depth-Train", "D50-Train", "Velocity-Train",
     "Depth-CV",    "D50-CV",    "Velocity-CV"
 )
 
 # Add row names.
-rownames(table_fR2) <- c(
+rownames(table_funR2) <- c(
+    "SMR_on_SMR",
+    "PCR_on_SMR",
+    "REG_on_SMR",
     "FRM_on_SMR",
+    "PCR_on_PCR",
+    "SMR_on_PCR",
+    "REG_on_PCR",
     "FRM_on_PCR",
+    "REG_on_REG",
     "FRM_on_REG"
 )
 
@@ -477,7 +648,7 @@ rownames(table_fR2) <- c(
 
 
 data.table::fwrite(
-    x    = as.data.table(table_fR2, keep.rownames = TRUE),
+    x    = as.data.table(table_funR2, keep.rownames = TRUE),
     file = file.path("out", "tables", "table_3_performance_funR2.csv"),
     sep  = ";",
     dec  = "."
