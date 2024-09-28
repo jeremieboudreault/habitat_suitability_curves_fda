@@ -1,12 +1,13 @@
-A new look at habitat suitability curves through FDA 👓
+A new look at habitat suitability curves through FDA
 ================================================================================
 
 
 + A scientific research by __Jeremie Boudreault__, André St-Hilaire, Normand Bergeron and Fateh Chebana
 + This project is part of my master studies at [Institut National de la Recherche Scientifique](http://inrs.ca)
 + All scripts and data are made freely available here under the [Creative Common License ![](https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-+ Any questions should be sent to __Jeremie.Boudreault [at] ete.inrs [dot] ca__
++ Any questions should be sent to __Jeremie.Boudreault [at] inrs [dot] ca__
 
+The research [A new look at habitat suitability curves through functional data analysis](https://www.sciencedirect.com/science/article/abs/pii/S030438002200031X?via%3Dihub) was published in *Ecological Modelling* in 2022.
 
 Data
 --------------------------------------------------------------------------------
